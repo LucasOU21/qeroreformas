@@ -1,0 +1,9 @@
+---
+const {options} = Astro.props;
+---
+
+{
+    options && options.map((o: any)=>(
+        <option value={o.precio} data-nombre={o.id} data-unidad={o.tipoUnidad}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{o.nombre}</option>
+    ))
+}

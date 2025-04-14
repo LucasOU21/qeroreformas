@@ -1,0 +1,32 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/misc/ContactSection.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle: string = Astro.currentLocale === "en" ? `Contact | ${SITE.title}` : `Contacto | ${SITE.title}`;
+---
+
+<!--Utilizing MainLayout for the outer layout of the page, and defining meta for SEO purposes-->
+<MainLayout
+  title={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://qeroreformas.com/contact",
+    "url": "https://qeroreformas.com/contact",
+    "name": "Contáctanos | Qero Reformas",
+    "description":
+      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "url": "https://qeroreformas.com",
+      "name": "Qero Reformas",
+      "description":
+        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+    },
+    "inLanguage": "es-ES"
+  }}
+>
+  <ContactSection />
+</MainLayout>

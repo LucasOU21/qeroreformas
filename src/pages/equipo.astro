@@ -1,0 +1,86 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro";
+import placeholder from "@/images/equip-placeholder.jpg";
+
+import { SITE } from "@data/constants";
+import Image from "astro/components/Image.astro";
+
+const title: string =
+  Astro.preferredLocale === "en" ? "Team" : "Nuestro Equipo";
+
+const pageTitle: string =
+  Astro.preferredLocale === "en"
+    ? "Team | Qero Reformas"
+    : `Equipo | ${SITE.title}`;
+---
+
+<MainLayout
+  title={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://qeroreformas.com/products",
+    url: "https://qeroreformas.com/products",
+    name: "Equipo | Qero Reformas",
+    description:
+      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://qeroreformas.com",
+      name: "Qero Reformas",
+      description:
+        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+    },
+    inLanguage: "es-ES",
+  }}
+>
+  <div
+    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  >
+    <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
+      <div class="flex items-center gap-12">
+        <h1
+          class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
+        >
+          {title}
+        </h1>
+      </div>
+    </div>
+
+    <section
+      class="max-w-4xl mx-auto flex flex-col sm:flex-row sm:flex-wrap gap-2 md:gap-4 xl:gap-6 items-center justify-center"
+    >
+      <div
+        class="max-w-sm rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+      >
+        <Image class="rounded-t-lg" src={placeholder} alt="equipo" />
+        <div class="p-5">
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            Person 1
+          </h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio explicabo molestiae, nam neque quia fugiat in sint quidem ab officiis aliquam vitae eligendi dicta dolore laudantium? Dolor reprehenderit dolorem earum.
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="max-w-sm rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+      >
+        <Image class="rounded-t-lg" src={placeholder} alt="equipo" />
+        <div class="p-5">
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            Person 2
+          </h5>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio officia aliquam iste distinctio, dignissimos excepturi, suscipit a porro ab voluptate maiores error et recusandae temporibus, corrupti sint est eveniet pariatur.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>

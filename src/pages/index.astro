@@ -1,0 +1,223 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+
+import HeroSection from "@components/sections/landing/HeroSection.astro";
+import FeaturesGeneral from "@components/sections/features/FeaturesGeneral.astro";
+import FeaturesNavs from "@components/sections/features/FeaturesNavs.astro";
+// import AnnouncementBanner from "@components/ui/banners/AnnouncementBanner.astro";
+// import HeroSectionAlt from "@components/sections/landing/HeroSectionAlt.astro";
+// import ClientsSection from "@components/sections/landing/ClientsSection.astro";
+// import FAQ from "@components/sections/misc/FAQ.astro";
+// import TestimonialsSection from "@components/sections/testimonials/TestimonialsSection.astro";
+// import PricingSection from "@components/sections/pricing/PricingSection.astro";
+
+import heroImage from "@images/hero-image.png";
+import featureImage from "@images/features-image.png";
+import indexFondo from "@images/indexFondo.jpg";
+// import alter from '@images/montaje-muebles.jpg';
+
+import features from "@data/features.json";
+import general from '@/utils/general.ts';
+import { Image } from "astro:assets";
+// import pricing from "@data/pricing.json";
+
+// import { partnersData } from "@/data_files/constants";
+// import Image from "astro/components/Image.astro";
+
+// const avatarSrcs: Array<string> = [
+//   "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+//   "https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+//   "https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80",
+//   "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80",
+// ];
+
+// export const prerender = false;
+
+---
+
+<style>
+  .index-background {
+    object-fit: cover;
+  }
+</style>
+
+<MainLayout>
+  <!-- <AnnouncementBanner
+    btnId="dismiss-button"
+    btnTitle="Calculadora Online - Arma tu presupuesto 📈"
+    url="/calculadora"
+  /> -->
+
+  <Image class="absolute top-0 left-0 w-full h-dvh index-background z-[-1]" src={indexFondo} alt="Qero reformas y decoración, tu mejor elección" />
+
+  <HeroSection
+    title=`<span
+        class=" text-primary-500 dark:text-secondary-500">Qero</span><br> Reformas y Decoración`
+    subTitle="¿Cuánto cuesta montar tu cocina? Usa nuestra calculadora gratuita"
+    primaryBtn="Calcular mi Presupuesto"
+    primaryBtnURL="/calculadora"
+    withReview={false}
+    rating=`<span class="font-bold">4.8</span> / 5`
+    starCount={4}
+    reviews=`From Over <span class="font-bold">12.8k</span> Reviews`
+    src={heroImage}
+    alt="Qero reformas y decoración, tu mejor elección"
+    />
+    <!-- avatars={avatarSrcs} -->
+
+  <FeaturesGeneral
+  title="¿Por qué elegirnos?"
+  subTitle="En Qero Reformas y Decoración sabemos que tu hogar es un espacio único, y nuestro objetivo es transformarlo en un lugar que refleje tu estilo y necesidades. Nuestro compromiso con la calidad, la atención al detalle y la satisfacción del cliente nos convierte en la opción ideal para reformas de cocina, montaje de muebles y servicios integrales. Además, te ayudamos a ahorrar mientras obtienes los mejores resultados. A continuación, te contamos por qué somos tu mejor elección."
+  src={featureImage}
+  alt="Qero reformas y decoración, tu mejor elección"
+  features={features}
+/>
+
+  <FeaturesNavs
+    title=`Elegir a <span class="text-primary-500 dark:text-secondary-500">Qero Reformas y Decoración</span> significa  profesionalismo, calidad y ahorro.`
+    tabs={general.featuresNavs}
+  />
+
+  <!-- <TestimonialsSection
+    title="Fast-Track Your Projects"
+    subTitle="At ScrewFast, we ensure a swift start with instant account setup. Experience the speed of construction redefined."
+    ;
+    testimonials={[
+      {
+        content:
+          "ScrewFast dramatically boosted our project efficiency. Setup was instant, and their rapid response times are phenomenal. Truly a game-changer in hardware and construction support!",
+        author: "Samantha Ruiz",
+        role: "Chief Operating Officer | ConstructIt Inc.",
+        avatarSrc:
+          "https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5?q=80&w=1453&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
+      },
+    ]}
+    statistics={[
+      {
+        count: "70k+",
+        description:
+          "customers equipped — from DIY to major construction firms",
+      },
+      {
+        count: "35%",
+        description:
+          "uptick in project efficiency with ScrewFast tools and services",
+      },
+      {
+        count: "15.3%",
+        description:
+          "reduction in maintenance costs reported by long-term clients",
+      },
+      {
+        count: "2x",
+        description: "quicker assembly using innovative fastening solutions",
+      },
+    ]}
+  /> -->
+
+  <!-- <PricingSection pricing={pricing} /> -->
+  
+  <!-- <ClientsSection
+  title="La confianza de nuestros clientes"
+  subTitle="Experimente la fiabilidad elegida por los gigantes del sector."
+  partners={partnersData}
+  /> -->
+
+  <!-- <HeroSectionAlt
+    title="Let's Build Together"
+    subTitle="ScrewFast is an open-source template, meticulously crafted with Astro, Tailwind CSS, and Preline UI frameworks."
+    url="https://github.com/mearashadowfax/ScrewFast"
+  /> -->
+
+</MainLayout>
+
+<!-- Alternativa de pasarela de imágenes -->
+<!-- <div class="my-16 sm:mt-20 -mx-4 sm:-mx-6 lg:-mx-8 max-w-full">
+  <div class="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+    <div class="relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800 rotate-2">
+      <Image
+      src={alter}
+      alt="alter"
+      class="inset-0 h-full w-full object-cover"
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+      width={3744}
+      height={5616}
+      sizes="(min-width: 640px) 18rem, 11rem"
+      style="color: transparent;"
+ />
+    </div>
+    <div class="relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800 -rotate-2">
+      <Image
+      src={alter}
+      alt="alter"
+      class="inset-0 h-full w-full object-cover"
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+      width={3744}
+      height={5616}
+      sizes="(min-width: 640px) 18rem, 11rem"
+      style="color: transparent;"
+ />
+    </div><div class="relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800 rotate-2">
+      <Image
+      src={alter}
+      alt="alter"
+      class="inset-0 h-full w-full object-cover"
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+      width={3744}
+      height={5616}
+      sizes="(min-width: 640px) 18rem, 11rem"
+      style="color: transparent;"
+ />
+    </div>
+    <div class="relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800 rotate-2">
+      <Image
+      src={alter}
+      alt="alter"
+      class="inset-0 h-full w-full object-cover"
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+      width={3744}
+      height={5616}
+      sizes="(min-width: 640px) 18rem, 11rem"
+      style="color: transparent;"
+ />
+    </div>
+    <div class="relative aspect-9/10 w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl dark:bg-zinc-800 -rotate-2">
+      <Image
+      src={alter}
+      alt="alter"
+      class="inset-0 h-full w-full object-cover"
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+      width={3744}
+      height={5616}
+      sizes="(min-width: 640px) 18rem, 11rem"
+      style="color: transparent;"
+ />
+    </div>
+  </div>
+</div> -->
+
+<script>
+  // Detectar el tema actual
+  // const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // Alternativamente, verifica si el cuerpo tiene una clase 'dark'
+  // const bodyClass = document.body.classList.contains('dark');
+
+  // Determinar el tema final
+  // const currentTheme = bodyClass ? 'dark' : (isDarkTheme ? 'dark' : 'light');
+
+  // Almacenar el tema en una variable
+  // const themeVariable = currentTheme;
+
+</script>

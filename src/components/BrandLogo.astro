@@ -1,0 +1,14 @@
+---
+import { Image } from "astro:assets";
+import qeroLogo from "@images/logos/logo.png";
+import qeroLogoBlack from "@images/logos/logo_negro.png";
+
+---
+<div class="block dark:hidden">
+  <Image src={qeroLogoBlack} alt="Qero Logo" {...Astro.props} id="qeroLogo"/>
+</div>
+<div class="hidden dark:block">
+  <Image src={qeroLogo} alt="Qero Logo" {...Astro.props} id="qeroLogo"/>
+</div>
+
+

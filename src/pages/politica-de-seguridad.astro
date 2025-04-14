@@ -1,0 +1,108 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/misc/ContactSection.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle: string =
+  Astro.currentLocale === "en"
+    ? `Legal Disclaimer | ${SITE.title}`
+    : `Aviso Legal | ${SITE.title}`;
+---
+
+<!--Utilizing MainLayout for the outer layout of the page, and defining meta for SEO purposes-->
+<MainLayout
+  title={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://qeroreformas.com/contact",
+    url: "https://qeroreformas.com/contact",
+    name: "Aviso Legal | Qero Reformas",
+    description:
+      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://qeroreformas.com",
+      name: "Qero Reformas",
+      description:
+        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+    },
+    inLanguage: "es-ES",
+  }}
+>
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-12 dark:text-white">
+    <div class="mx-auto max-w-2xl lg:max-w-5xl">
+      <h2 class="text-pretty text-4xl font-bold">3. Política de Privacidad</h2>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Responsable del tratamiento de los datos
+      </h3>
+      <p class="mt-2 text-sm md:text-base">
+        De acuerdo con el Reglamento General de Protección de Datos (RGPD), informamos que:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base">
+          <strong>● Responsable:</strong> [Tu Nombre Completo o Nombre Comercial]</li>
+        <li class="text-sm sm:text-base"><strong>● DNI/NIE:</strong> [Tu Número de Identificación]</li>
+        <li class="text-sm sm:text-base"><strong>● Dirección:</strong> [Tu Dirección]</li>
+        <li class="text-sm sm:text-base"><strong>● Correo Electrónico:</strong> [Tu Email]</li>
+        <li class="text-sm sm:text-base"><strong>● Teléfono:</strong> [Tu Número de Contacto]</li>
+      </ul>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Qué datos recopilamos y con qué finalidad
+      </h3>
+      <p class="mt-2 text-sm md:text-base">
+        Los datos personales que recopilamos a través de los formularios de contacto, presupuestos o suscripciones incluyen:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base">
+          <strong>● Nombre y apellidos</strong> (para personalizar la comunicación).</li>
+        <li class="text-sm sm:text-base"><strong>● Correo electrónico</strong> (para responder consultas o enviar información).</li>
+        <li class="text-sm sm:text-base"><strong>● Teléfono</strong> (para contactar en relación a presupuestos).</li>
+        <li class="text-sm sm:text-base"><strong>● Dirección</strong> (si se requiere para realizar presupuestos personalizados).</li>
+      </ul>
+      <p class="mt-4 text-sm sm:text-base">
+        La finalidad del tratamiento de estos datos es:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base">
+          <strong>1.</strong> Gestionar consultas y solicitudes de presupuestos.</li>
+        <li class="text-sm sm:text-base"><strong>2.</strong> Enviar información relevante sobre nuestros servicios (solo si se da consentimiento).</li>
+        <li class="text-sm sm:text-base"><strong>3.</strong> Cumplir con obligaciones legales.</li>
+      </ul>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Base legal para el tratamiento de datos
+      </h3>
+      <p class="mt-2 text-sm sm:text-base">
+        El tratamiento de datos se basa en el <strong>consentimiento del usuario</strong>, quien acepta expresamente la política de privacidad al enviar un formulario.
+      </p>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Tiempo de conservación de los datos
+      </h3>
+      <p class="mt-2 text-sm sm:text-base">
+        Los datos se conservarán mientras dure la relación comercial o hasta que el usuario solicite su eliminación.
+      </p>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Derechos de los usuarios
+      </h3>
+      <p class="mt-2 text-sm sm:text-base">
+        Cualquier usuario tiene derecho a:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base"><strong>●</strong> Acceder a sus datos.</li>
+        <li class="text-sm sm:text-base"><strong>●</strong> Rectificar datos incorrectos.</li>
+        <li class="text-sm sm:text-base"><strong>●</strong> Solicitar la eliminación de sus datos.</li>
+        <li class="text-sm sm:text-base"><strong>●</strong> Oponerse al tratamiento de sus datos.</li>
+      </ul>
+      <p class="mt-2 text-sm sm:text-base">
+        Para ejercer estos derechos, puedes enviar un correo a <strong>[Tu Email]</strong> con el asunto "Protección de Datos".
+      </p>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Con quién compartimos los datos
+      </h3>
+      <p class="mt-2 text-sm sm:text-base">
+        No compartimos datos personales con terceros, salvo obligación legal o proveedores de servicios externos (por ejemplo, Google Analytics para análisis).
+      </p>
+    </div>
+  </section>
+</MainLayout>

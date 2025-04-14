@@ -1,0 +1,164 @@
+---
+// Import the necessary dependencies
+import FooterSocialLink from "@components/ui/links/FooterSocialLink.astro";
+// import EmailFooterInput from "@components/ui/forms/input/EmailFooterInput.astro";
+import Icon from "@components/ui/icons/Icon.astro";
+import { SITE } from "@data/constants";
+import BrandLogo from "@components/BrandLogo.astro";
+
+import esStrings from "@utils/navigation.ts";
+import enStrings from "@/utils/en/navigation";
+
+// Select the correct translation based on the page's lang prop:
+const strings = Astro.currentLocale === "en" ? enStrings : esStrings;
+
+// Define the variables that will be used in this component
+const sectionThreeTitle: string = Astro.currentLocale === "en" ? "Contact us" : "Ponte en contacto";
+const sectionThreeContent: string = Astro.currentLocale === "en" ? "Stay up to date with the latest news and exclusive offers." :
+  "Manténgase al día con las últimas novedades y ofertas exclusivas.";
+const crafted: string = Astro.currentLocale === "en" ? "Crafted by" : "Elaborado por";
+---
+
+<footer class="w-full bg-neutral-300 dark:bg-neutral-900">
+  <div
+    class="mx-auto w-full max-w-[85rem] px-6 pt-4 lg:px-10 lg:pt-6 2xl:max-w-screen-2xl"
+  >
+    <div class="flex flex-row md:flex-row items-start justify-between gap-12">
+      <div class="col-span-full">
+        <!-- Brand Logo -->
+        <BrandLogo class="h-auto w-32" />
+        <!-- <p class="block text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl lg:leading-tight">Qero Reformas</p> -->
+      </div>
+
+      <div class="col-span-2 md:col-span-2 lg:col-span-2 lg:col-start-4 mx-2 sm:mx-0">
+        <!-- <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
+          {sectionThreeTitle}
+        </h3>
+
+        <form id="formFooter">
+          <EmailFooterInput />
+          <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
+            {sectionThreeContent}
+          </p>
+        </form> -->
+
+      <!-- An array of links for Product and Company sections -->
+      {
+        strings.footerLinks.map((section) => (
+          <div class="col-span-1 md:col-span-2 lg:col-span-1 lg:col-start-1 text-right">
+            <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
+              {section.section}
+            </h3>
+            <ul class="mt-3 grid space-y-3">
+              {section.links.map((link, index) => (
+                <li>
+                  <a
+                    href={link.url}
+                    class="inline-flex gap-x-2 rounded-lg text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:text-neutral-500 focus-visible:ring dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-300 dark:focus:outline-none"
+                  >
+                    {link.name}
+                  </a>
+                  {section.section === "Company" && index === 2 ? (
+                    <span class="ms-1 inline rounded-lg bg-orange-500 px-2 py-1 text-xs font-bold text-neutral-50">
+                      We're hiring!
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+      </div>
+
+    </div>
+
+    <div class="grid gap-y-2 sm:flex sm:items-center sm:justify-between sm:gap-y-0 py-4">
+      <div class="text-center">
+        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/aviso-legal">Aviso Legal</a>
+        <span class="font-bold text-lg mx-1 md:mx-4 dark:text-rose-300"> · </span>
+        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/politica-de-seguridad">Política de seguridad</a>
+        <span class="font-bold text-lg mx-1 md:mx-4 dark:text-rose-300"> · </span>
+        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/politica-de-cookies">Política de cookies</a>
+      </div>
+      <div class="flex items-center justify-center my-2 md:my-0">
+        <p class="text-sm text-neutral-600 dark:text-neutral-400 ">
+          © <span id="current-year"></span> {SITE.title}. {crafted}
+          <a
+            class="rounded-lg font-medium underline underline-offset-2 outline-none ring-zinc-500 transition duration-300 hover:text-neutral-700 hover:decoration-dashed focus:outline-none focus-visible:ring dark:ring-zinc-200 dark:hover:text-neutral-300"
+            href="https://www.linkedin.com/in/mauricio-aguirreo/"
+            target="_blank"
+            rel="noopener noreferrer">MauricioA</a
+          >.
+        </p>
+      </div>
+
+      <!-- Social Brands 
+      <div class="flex justify-center md:justify-end items-center gap-x-3 my-3">
+        <FooterSocialLink url={strings.socialLinks.facebook}>
+          <Icon name="facebookFooter" />
+        </FooterSocialLink>
+
+        <FooterSocialLink url={strings.socialLinks.instagram}>
+          <Icon name="instagramFooter" />
+        </FooterSocialLink>
+
+        <FooterSocialLink url={strings.socialLinks.tiktok}>
+          <Icon name="tiktokFooter" />
+        </FooterSocialLink>
+
+        <FooterSocialLink url={strings.socialLinks.x}
+          ><Icon name="xFooter" /></FooterSocialLink
+        >
+
+        <FooterSocialLink url={strings.socialLinks.github}
+          ><Icon name="githubFooter" />
+        </FooterSocialLink>
+
+        <FooterSocialLink url={strings.socialLinks.google}
+          ><Icon name="googleFooter" />
+        </FooterSocialLink>
+
+        <FooterSocialLink url={strings.socialLinks.slack}
+          ><Icon name="slackFooter" />
+        </FooterSocialLink>
+      </div>-->
+
+
+    </div>
+
+    <script>
+      const year = new Date().getFullYear();
+      const element = document.getElementById("current-year");
+      element!.innerText = year.toString();
+    </script>
+  </div>
+</footer>
+
+<script is:inline>
+  // const formFooter = document.getElementById("formFooter");
+
+  // formFooter.addEventListener("submit", function (e) {
+  //   e.preventDefault();
+  //   const formData = new FormData(this);
+  //   const data = Object.fromEntries(formData.entries());
+
+  //   let templateParams = {
+  //     nombre: "Sin Especificar",
+  //     apellido: "",
+  //     telefono: "Sin especificar",
+  //     email: data.email,
+  //     message: "Enviado desde la web: qeroreformas.com",
+  //   };
+
+  //   emailjs.send("service_uf0bunm","template_ptjbynb", templateParams).then(
+  //     function (response) {
+  //       alert("Se ha enviado el mensaje satisfactoriamente, ¡Gracias por su preferencia!");
+  //       console.log("Correo enviado", response);
+  //     },
+  //     function (error) {
+  //       console.error("Error", error);
+  //     }
+  //   );
+  // });
+</script>

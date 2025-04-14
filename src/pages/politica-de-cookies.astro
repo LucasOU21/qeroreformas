@@ -1,0 +1,74 @@
+---
+// Import the necessary components
+import MainLayout from "@/layouts/MainLayout.astro";
+import ContactSection from "@components/sections/misc/ContactSection.astro";
+import { SITE } from "@data/constants";
+
+const pageTitle: string =
+  Astro.currentLocale === "en"
+    ? `Legal Disclaimer | ${SITE.title}`
+    : `Aviso Legal | ${SITE.title}`;
+---
+
+<!--Utilizing MainLayout for the outer layout of the page, and defining meta for SEO purposes-->
+<MainLayout
+  title={pageTitle}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://qeroreformas.com/contact",
+    url: "https://qeroreformas.com/contact",
+    name: "Aviso Legal | Qero Reformas",
+    description:
+      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+    isPartOf: {
+      "@type": "WebSite",
+      url: "https://qeroreformas.com",
+      name: "Qero Reformas",
+      description:
+        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+    },
+    inLanguage: "es-ES",
+  }}
+>
+  <section
+    class="mx-auto max-w-[85rem] px-4 py-10  sm:px-6 lg:px-8 lg:py-12 dark:text-white"
+  >
+    <div class="mx-auto max-w-2xl lg:max-w-5xl">
+      <h2 class="text-pretty text-4xl font-bold">2. Política de Cookies</h2>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Tipos de cookies utilizadas en este sitio web
+      </h3>
+      <p class="mt-2 text-sm md:text-base">
+        Utilizamos cookies propias y de terceros con las siguientes finalidades:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base">
+          <strong>1. Cookies técnicas:</strong> Necesarias para el funcionamiento de la web.</li>
+        <li class="text-sm sm:text-base"><strong>2. Cookies de análisis:</strong> Para medir el tráfico y comportamiento de los usuarios (Google Analytics).</li>
+        <li class="text-sm sm:text-base">
+          <strong>3. Cookies de publicidad:</strong> Para mostrar anuncios personalizados (Facebook Ads, Google Ads).
+        </li>
+      </ul>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Gestión de cookies
+      </h3>
+      <p class="mt-4 text-sm sm:text-base">
+        Al acceder a la web, se mostrará un banner que permite aceptar, rechazar o configurar las cookies. Puedes cambiar tu configuración en cualquier momento desde la sección "Configuración de Cookies".
+      </p>
+      <h3 class="mt-4 text-pretty text-base font-bold md:text-xl">
+        Cómo desactivar las cookies
+      </h3>
+      <p class="mt-2 text-sm sm:text-base">
+        Puedes eliminar o bloquear las cookies desde la configuración de tu navegador:
+      </p>
+      <ul class="mt-4">
+        <li class="text-sm sm:text-base">
+          <strong>● Google Chrome:</strong> <a class="underline text-blue-600 dark:text-blue-300" href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank">Enlace de ayuda</a></li>
+        <li class="text-sm sm:text-base"><strong>● Mozilla Firefox:</strong> <a class="underline text-blue-600 dark:text-blue-300" href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies" target="_blank">Enlace de ayuda</a></li>
+        <li class="text-sm sm:text-base">
+          <strong>● Microsoft Edge:</strong> <a class="underline text-blue-600 dark:text-blue-300" href="https://support.microsoft.com/es-es/windows/administrar-cookies-en-microsoft-edge-ver-permitir-bloquear-eliminar-y-usar-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">Enlace de ayuda</a></li>
+      </ul>
+    </div>
+  </section>
+</MainLayout>
