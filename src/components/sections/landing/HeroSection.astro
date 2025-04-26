@@ -1,10 +1,6 @@
 ---
 // Import the necessary dependencies
-// import { Image } from "astro:assets";
-import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
-import SecondaryCTA from "@components/ui/buttons/SecondaryCTA.astro";
-import ReviewComponent from "@components/ui/blocks/ReviewComponent.astro";
-
+import { Image } from "astro:assets";
 
 // Define props from Astro
 const {
@@ -41,59 +37,122 @@ interface Props {
 }
 ---
 
-<!-- Defining a grid container that holds all the content -->
-<section
-  class="m-auto grid max-w-[85rem] min-h-[85vh] gap-4 px-4 py-14 sm:px-6 md:grid-cols-4 md:items-center md:gap-8 lg:px-8 2xl:max-w-full"
->
-  <!-- Title and description -->
-  <div class="w-fit sm:w-max h-fit rounded-[36px] border border-yellow-100/40 bg-yellow-50/60 px-8 py-4 sm:py-2 backdrop-blur-lg dark:border-neutral-700/40 dark:bg-neutral-800/80 dark:backdrop-blur-md text-center">
-    <!-- Each h1 and p tag renders a portion of the title and subTitle defined above -->
-    <h1
-      class="block text-left text-2xl sm:text-3xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200  lg:text-6xl lg:leading-tight"
-    >
-      <!-- About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments -->
-      <Fragment set:html={title} />
-    </h1>
-    {subTitle &&
-    <p
-      class="mt-3 mx-auto text-xs sm:text-sm leading-relaxed font-bold text-neutral-100 bg-gray-800 rounded-xl px-4 py-2 text-center"
-    >
-      {subTitle}
-    </p>
+<style>
+  .hero-container {
+    position: relative;
+    z-index: 10;
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
   }
-    <p class="mt-3 text-left text-base leading-relaxed text-neutral-800 dark:text-neutral-200 lg:w-4/5 font-semibold">Montaje de cocinas en todo Madrid - Servicios premium y estándar adaptados a tu presupuesto</p>
-    <p class="mt-3 text-left text-base leading-relaxed text-neutral-800 dark:text-neutral-200 lg:w-4/5 font-semibold">💻 Sin necesidad de registrarte - 100% online</p>
-    <p class="mt-3 text-left text-base leading-relaxed text-neutral-800 dark:text-neutral-200 lg:w-4/5 font-semibold">📈 Simulación precisa basada en proyectos reales</p>
-    <p class="mt-3 text-left text-base leading-relaxed text-neutral-800 dark:text-neutral-200 lg:w-4/5 font-semibold">🤑 Ahorra tiempo y obtén una referencia clara de inversión</p>
-    <!-- Action Button Section: This section includes two CTAs with their own styles and URL -->
-    <div class="mt-7 grid w-full gap-3 sm:inline-flex sm:justify-center">
-      {primaryBtn && 
-      <PrimaryCTA title={primaryBtn} url={primaryBtnURL} addBtnClass="text-lg shadow-md my-3"/>
-      }
-      {secondaryBtn && 
-      <SecondaryCTA title={secondaryBtn} url={secondaryBtnURL} />
-      }
-    </div>
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .hero-content {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 3.5rem;
+    border-radius: 1.25rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    animation: fadeInUp 1.2s ease-out forwards;
+    margin-top: 3rem;
+  }
+  
+  .hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: #f8f8f8;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    animation: fadeIn 1.5s ease-out forwards;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .hero-subtitle-text {
+    color: #f0f0f0;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  
+  .hero-point {
+    color: #f8f8f8;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    animation: fadeIn 1.6s ease-out forwards;
+  }
+  
+  .calculate-button {
+    margin-top: 2rem;
+    background-color: var(--secondary-color, #daa520);
+    color: black;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    border-radius: 0.6rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 1.8s ease-out forwards;
+  }
+  
+  .calculate-button:hover {
+    background-color: #c99516;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+</style>
 
-    <!-- Review Section: This section presents avatars, review ratings and the number of reviews -->
-    { withReview ? (
-    <ReviewComponent avatars={avatars} starCount={starCount} rating={rating} reviews={reviews} />
-    ) : "" }
-
+<section class="hero-container">
+  <div class="hero-content">
+    <h1 class="hero-title" set:html={title}></h1>
+    
+    {subTitle && 
+      <p class="hero-subtitle-text">
+        {subTitle}
+      </p>
+    }
+    
+    <p class="hero-point">Diseño personalizado. Calidad excepcional.</p>
+    
+    {primaryBtn && primaryBtnURL && 
+      <a href={primaryBtnURL}>
+        <button class="calculate-button">{primaryBtn}</button>
+      </a>
+    }
   </div>
-  <!-- Hero Image Section -->
-  <!-- <div class="flex w-full">
-      <div class="top-12 overflow-hidden">
-	{src && alt &&
-	<Image
-        src={src}
-        alt={alt}
-        class="h-full w-full rounded-xl object-scale-down object-center"
-        draggable={"false"}
-        loading={"eager"}
-        format={"avif"}
-	 />
-	}
-    </div>
-  </div> -->
 </section>
+
+<script>
+  // Set CSS variable for secondary color
+  document.documentElement.style.setProperty('--secondary-color', '#daa520');
+</script>
