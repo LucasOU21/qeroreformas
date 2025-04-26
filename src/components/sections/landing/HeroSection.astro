@@ -41,118 +41,195 @@ interface Props {
   .hero-container {
     position: relative;
     z-index: 10;
-    min-height: 70vh;
+    min-height: 85vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     padding-top: 3rem;
   }
   
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
   @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
   
   .hero-content {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 3.5rem;
-    border-radius: 1.25rem;
-    max-width: 60rem;
-    margin-left: auto;
-    margin-right: auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 3.5rem 2.5rem;
+    border-radius: 2px;
+    max-width: 35rem;
+    margin-left: 10%;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    animation: fadeInUp 1.2s ease-out forwards;
-    margin-top: 3rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s ease-out forwards;
+    float: left;
   }
   
-  .hero-title {
-    font-size: 4.5rem;
-    font-weight: 800;
-    color: #f8f8f8;
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-    letter-spacing: -0.5px;
-    animation: fadeIn 1.5s ease-out forwards;
+  .brand-name {
     font-family: 'Montserrat', sans-serif;
-  }
-  
-  .hero-subtitle-text {
-    color: #f0f0f0;
-    margin-bottom: 1.5rem;
-    font-size: 1.25rem;
-    font-weight: 500;
-  }
-  
-  .hero-point {
-    color: #f8f8f8;
-    margin-bottom: 1rem;
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 1.5;
-    animation: fadeIn 1.6s ease-out forwards;
-  }
-  
-  .calculate-button {
-    margin-top: 2rem;
-    background-color: var(--secondary-color, #daa520);
-    color: black;
+    font-size: 4rem;
     font-weight: 700;
-    padding: 1rem 2.5rem;
-    border-radius: 0.6rem;
-    border: none;
-    cursor: pointer;
-    font-size: 1.25rem;
-    transition: all 0.3s ease;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    animation: fadeIn 1.8s ease-out forwards;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-align: center;
   }
   
-  .calculate-button:hover {
-    background-color: #c99516;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  .brand-highlight {
+    color: #daa520;
+    font-weight: 800;
+  }
+  
+  .brand-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  
+  .tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+    width: 100%;
+    line-height: 1.6;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+  
+  .cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .primary-button {
+    background-color: transparent;
+    color: #daa520;
+    border: 1px solid #daa520;
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .primary-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #daa520;
+    transition: width 0.3s ease;
+    z-index: -1;
+  }
+  
+  .primary-button:hover {
+    color: #000;
+  }
+  
+  .primary-button:hover::before {
+    width: 100%;
+  }
+  
+  .call-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 300;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .call-button svg {
+    width: 3rem;
+    height: 3rem;
+    background: #daa520;
+    padding: 0.75rem;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    margin-bottom: 0.5rem;
+  }
+  
+  .call-button:hover {
+    color: #daa520;
+  }
+  
+  .call-button:hover svg {
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    .hero-content {
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+      float: none;
+      max-width: 90%;
+    }
+    
+    .brand-name {
+      font-size: 3rem;
+    }
+    
+    .brand-subtitle {
+      font-size: 1.2rem;
+    }
+    
+    .tagline {
+      font-size: 1rem;
+    }
   }
 </style>
 
 <section class="hero-container">
   <div class="hero-content">
-    <h1 class="hero-title" set:html={title}></h1>
+    <h1 class="brand-name">
+      <span class="brand-highlight">Kalia</span> Reformas<br />y Decoración
+    </h1>
     
-    {subTitle && 
-      <p class="hero-subtitle-text">
-        {subTitle}
-      </p>
-    }
+    <p class="brand-subtitle">
+      Espacios excepcionales
+    </p>
     
-    <p class="hero-point">Diseño personalizado. Calidad excepcional.</p>
+    <p class="tagline">
+      Diseño personalizado • Calidad excepcional • Precio inmejorable
+    </p>
     
-    {primaryBtn && primaryBtnURL && 
-      <a href={primaryBtnURL}>
-        <button class="calculate-button">{primaryBtn}</button>
+    <div class="cta-container">
+      {primaryBtn && primaryBtnURL && 
+        <a href={primaryBtnURL} class="primary-button">
+          {primaryBtn}
+        </a>
+      }
+      
+      <a href="tel:603370840" class="call-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+        </svg>
+        603 37 08 40
       </a>
-    }
+    </div>
   </div>
 </section>
-
-<script>
-  // Set CSS variable for secondary color
-  document.documentElement.style.setProperty('--secondary-color', '#daa520');
-</script>

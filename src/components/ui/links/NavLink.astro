@@ -19,7 +19,7 @@ If URL is '/' (home page), assign ID as 'home'
   id={url === "/" ? "home" : url.replace("/", "")}
   href={url}
   data-astro-prefetch
-  class="rounded-lg text-base font-medium text-neutral-600 outline-none ring-zinc-500 hover:text-neutral-500 focus-visible:ring dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-500 dark:focus:outline-none md:py-3 md:text-sm 2xl:text-base"
+  class="relative px-3 py-2 rounded-lg text-base font-medium text-neutral-600 outline-none ring-zinc-500 hover:text-primary-500 hover:bg-neutral-100/50 dark:hover:bg-neutral-800/50 transition-all duration-300 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-500 dark:after:bg-secondary-500 after:transition-all after:duration-300 hover:after:w-full focus-visible:ring dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-secondary-500 dark:focus:outline-none md:py-3 md:text-sm 2xl:text-base"
 >
   {name}
 </a>
@@ -45,7 +45,13 @@ If URL is '/' (home page), assign ID as 'home'
         "hover:text-neutral-500",
         "dark:hover:text-neutral-500"
       );
-      nav.classList.add("text-primary-500", "dark:text-secondary-500");
+      nav.classList.add(
+        "text-primary-500", 
+        "dark:text-secondary-500",
+        "after:w-full",
+        "bg-neutral-100/50",
+        "dark:bg-neutral-800/50"
+      );
       nav.setAttribute("aria-current", "page");
     }
   });
