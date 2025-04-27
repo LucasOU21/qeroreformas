@@ -41,11 +41,18 @@ interface Props {
   .hero-container {
     position: relative;
     z-index: 10;
-    min-height: 85vh;
+    min-height: 100vh;
+    width: 100%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
-    padding-top: 3rem;
+    padding: 0;
+    margin: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('/images/hero-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
   }
   
   @keyframes fadeIn {
@@ -54,17 +61,21 @@ interface Props {
   }
   
   .hero-content {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.45);
     backdrop-filter: blur(10px);
     padding: 3.5rem 2.5rem;
-    border-radius: 2px;
-    max-width: 35rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 40rem;
     margin-left: 10%;
+    margin-top: 2rem;
     text-align: center;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: fadeIn 1s ease-out forwards;
-    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
   .brand-name {
@@ -88,7 +99,7 @@ interface Props {
     font-size: 1.25rem;
     font-weight: 300;
     letter-spacing: 2px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     text-align: center;
@@ -96,11 +107,11 @@ interface Props {
   
   .tagline {
     font-family: 'Inter', sans-serif;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2rem;
-    width: 100%;
+    max-width: 90%;
     line-height: 1.6;
     white-space: normal;
     word-wrap: break-word;
@@ -113,14 +124,16 @@ interface Props {
     gap: 1.5rem;
     margin-top: 1rem;
     width: 100%;
+    max-width: 400px;
   }
   
   .primary-button {
     background-color: transparent;
     color: #daa520;
     border: 1px solid #daa520;
+    border-radius: 8px;
     padding: 0.875rem 2rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -130,6 +143,9 @@ interface Props {
     overflow: hidden;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 300px;
   }
   
   .primary-button::before {
@@ -183,10 +199,9 @@ interface Props {
   
   @media (max-width: 768px) {
     .hero-content {
-      margin: 0 auto;
+      width: 90%;
       padding: 2.5rem 1.5rem;
-      float: none;
-      max-width: 90%;
+      margin: 5rem auto 0;
     }
     
     .brand-name {
