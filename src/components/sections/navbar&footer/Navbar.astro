@@ -3,19 +3,19 @@
 import ThemeIcon from "@components/ThemeIcon.astro";
 ---
 
-<header id="navbar" class="absolute top-6 left-0 right-0 z-50">
+<header id="navbar" class="absolute top-2 left-0 right-0 z-50">
   <div class="navbar-container mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between bg-black/60 backdrop-blur-md rounded-xl px-6 py-4">
-      <!-- Logo -->
-      <div class="flex-shrink-0">
+  <div class="flex items-center justify-between bg-black/25 backdrop-blur-sm rounded-xl px-6 py-4">
+      <!-- Logo - increased size but constrained with overflow hidden -->
+      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden">
         <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
-          <img 
-            src="/images/logos/kalia-logo.png" 
-            alt="Kalia Logo" 
-            width="80" 
-            height="80" 
-            class="h-10 w-auto"
-          />
+          <div class="flex-shrink-0 py-6">
+            <img 
+              src="src/images/logos/KaliaLogo-300x300.png" 
+              alt="Kalia Logo" 
+              class="w-auto h-60 -mt-4"
+            />
+          </div>
         </a>
       </div>
 
@@ -24,10 +24,10 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-8">
           <a href="/" class="nav-link">Inicio</a>
-          <a href="/servicios" class="nav-link">Servicios</a>
+          <a href="/services" class="nav-link">Servicios</a>
           <a href="/nosotros" class="nav-link">Nosotros</a>
+          <a href="/equipo" class="nav-link">Equipo</a>
           <a href="/blog" class="nav-link">Blog</a>
-          <a href="/contacto" class="nav-link">Contacto</a>
         </nav>
 
         <!-- Theme Toggle -->

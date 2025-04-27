@@ -6,8 +6,8 @@ main:
   id: 2
   content: |
     Ofrecemos montaje de muebles con precisión y rapidez, realizado por expertos capacitados para todo tipo de mobiliario. Aseguramos un trabajo limpio, eficiente y con garantía para tu total tranquilidad.
-  imgCard: "@/images/diseno-muebles-card.jpg"
-  imgMain: "@/images/diseno-muebles-card.jpg"
+  imgCard: "@/images/realEstanteria1.jpg"
+  imgMain: "@/images/realEstanteria1.jpg"
   imgAlt: "Servicio Profesional de Diseños de Muebles a Medida"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -25,15 +25,15 @@ longDescription:
 descriptionList:
   - title: "Armarios a medida"
     subTitle:
-      - parrafo: "✔ Creamos armarios vestidor, optimizando el almacenamiento con un diseño elegante."
-      - parrafo: "✔ Fabricamos armarios escoberos a medida, ideales para lavanderías y espacios reducidos." 
-      - parrafo: "✔ Diseñamos armarios exteriores resistentes a la intemperie." 
+      - parrafo: "Creamos armarios vestidor, optimizando el almacenamiento con un diseño elegante."
+      - parrafo: "Fabricamos armarios escoberos a medida, ideales para lavanderías y espacios reducidos." 
+      - parrafo: "Diseñamos armarios exteriores resistentes a la intemperie." 
   - title: "Cocina a medida"
     subTitle: 
-      - parrafo: "✔ Especialistas en muebles altos y bajos de cocina, armarios de cocina  y almacenamiento funcional."
+      - parrafo: "Especialistas en muebles altos y bajos de cocina, armarios de cocina  y almacenamiento funcional."
   - title: "Recibidores y Almacenamiento Vertical"
     subTitle: 
-      - parrafo: "✔️ Creación de recibidores modernos y muebles columna de repisas, ideales para maximizar el almacenamiento en entradas y pasillos."
+      - parrafo: "Creación de recibidores modernos y muebles columna de repisas, ideales para maximizar el almacenamiento en entradas y pasillos."
 specificationsLeft:
   - title: "Armarios"
     subTitle: "@/images/armario-disenio.jpg"

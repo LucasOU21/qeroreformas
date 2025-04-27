@@ -40,8 +40,13 @@ interface Props {
           <!-- About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments -->
           <Fragment set:html={title} />
         </h2>
+        
         <!-- Tab navigation - use the attribute 'first' in the first TabNav for the component to work -->
-        <nav class="mt-5 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2" aria-label="Tabs" role="tablist">
+        <nav 
+          class="mt-8 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2" 
+          aria-label="Tabs" 
+          role="tablist"
+        >
           {
             tabs.map((tab, index) => (
               <TabNav
@@ -81,14 +86,53 @@ interface Props {
     </div>
 
     <div class="absolute inset-0 grid h-full w-full grid-cols-12">
-      <!-- Decorative background and sizing -->
-      <div class="col-span-full h-5/6 w-full rounded-xl bg-neutral-100 dark:bg-white/[.075] sm:h-3/4 lg:col-span-7 lg:col-start-5 lg:h-full" >
+      <!-- Decorative background with updated color scheme -->
+      <div 
+        class="col-span-full h-5/6 w-full rounded-xl bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-neutral-800 dark:to-neutral-900 dark:bg-opacity-70 sm:h-3/4 lg:col-span-7 lg:col-start-5 lg:h-full" 
+      >
       </div>
     </div>
   </div>
 </section>
+
 <!--Import the necessary Tabs plugin-->
 <!--https://preline.co/plugins/html/tabs.html-->
 <script>
   import "@preline/tabs/index.js";
 </script>
+
+<style>
+  nav[role="tablist"] {
+    display: grid;
+    gap: 1rem;
+  }
+
+  /* Make active tabs more prominent with gold accent */
+  :global(.hs-tab-active) {
+    border-color: #daa520 !important;
+    box-shadow: 0 4px 12px rgba(218, 165, 32, 0.15) !important;
+  }
+
+  :global(.dark .hs-tab-active) {
+    border-color: #daa520 !important;
+    background-color: rgba(218, 165, 32, 0.1) !important;
+  }
+
+  /* Improve tab hover states */
+  :global([data-hs-tab]:hover:not(.hs-tab-active)) {
+    background-color: rgba(218, 165, 32, 0.05);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Enhance image appearance */
+  :global(.tab-image) {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+  }
+
+  :global(.dark .tab-image) {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+</style>

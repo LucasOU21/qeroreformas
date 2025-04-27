@@ -6,8 +6,8 @@ main:
   id: 3
   content: |
     Nos encargamos del montaje e instalación de muebles de cocina Ikea, Leroy Merlin y otros fabricantes.
-  imgCard: "@/images/instalacion-cocina-electro.jpg"
-  imgMain: "@/images/instalacion-cocina-electro.jpg"
+  imgCard: "@/images/realKitchen1.jpg"
+  imgMain: "@/images/realKitchen1.jpg"
   imgAlt: "Instalación de Cocinas y Electrodomésticos"
 tabs:
   - id: "tabs-with-card-item-1"
