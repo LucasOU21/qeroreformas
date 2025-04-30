@@ -23,7 +23,7 @@ const services: CollectionEntry<"products">[] = (
 // Define variables for page content
 const title: string = Astro.preferredLocale === "en" ? "Services" : "Servicios";
 
-const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Reformas" : `Servicios | ${SITE.title}`;
+const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Kalia Reformas" : `Servicios | ${SITE.title}`;
 ---
 
 <MainLayout
@@ -31,21 +31,21 @@ const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Refo
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/services",
-    "url": "https://qeroreformas.com/services",
-    "name": "Servicios | Qero Reformas",
+    "@id": "https://kaliareformas.com/services",
+    "url": "https://kaliareformas.com/services",
+    "name": "Servicios | Kalia Reformas",
     "description": "Explora nuestros servicios de reforma, diseño y montaje para tu hogar. Ofrecemos soluciones personalizadas con calidad y profesionalismo.",
     "isPartOf": {
       "@type": "WebSite",
-      "url": "https://qeroreformas.com",
-      "name": "Qero Reformas",
-      "description": "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo."
+      "url": "https://kaliareformas.com",
+      "name": "Kalia Reformas",
+      "description": "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo."
     },
     "inLanguage": "es-ES"
   }}
 >
   <div
-    class="mx-auto max-w-[85rem] px-4 py-10 mt-20 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+    class="mx-auto max-w-[85rem] px-4 py-10 pt-28 sm:px-6 lg:px-8 lg:py-14 lg:pt-32 2xl:max-w-full"
   >
     <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
       <div class="flex items-center gap-12">
@@ -102,12 +102,5 @@ const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Refo
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-  }
-  
-  /* Ensure proper spacing with navbar */
-  @media (max-width: 640px) {
-    div:first-child {
-      margin-top: 6rem;
-    }
   }
 </style>

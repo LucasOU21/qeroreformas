@@ -1,50 +1,102 @@
+---
+// src/components/ThemeIcon.astro
+---
 
-<!-- Dark Theme Toggle Button --><!-- This button is shown when the light theme is active, and when clicked, it switches the theme to dark -->
 <button
+  id="theme-toggle"
+  class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-transparent text-center text-sm font-medium text-neutral-500 transition hover:bg-neutral-100 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:text-neutral-400 dark:hover:bg-neutral-800"
   type="button"
-  id="darkmodeToggle"
-  aria-label="Dark Theme Toggle"
-  class="hs-dark-mode group flex h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:bg-neutral-200 hover:text-orange-400 hs-dark-mode-active:hidden dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-orange-300 dark:focus:outline-none"
-  data-hs-theme-click-value="dark"
+  aria-label="Toggle between Dark and Light mode"
 >
-  <!-- The SVG displayed shows an abstract icon that represents the moon (dark theme) -->
-  <svg
-    class="h-4 w-4 flex-shrink-0"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    ><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
-  >
-  <!-- Light Theme Toggle Button -->
-  <!-- This button is hidden by default and only appears when the dark theme is active, when clicked, it switches to the light theme -->
+  <span class="dark:hidden">
+    <svg
+      class="h-5 w-5 flex-shrink-0"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+    </svg>
+  </span>
+  <span class="hidden dark:inline">
+    <svg
+      class="h-5 w-5 flex-shrink-0"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2" />
+      <path d="M12 20v2" />
+      <path d="m4.93 4.93 1.41 1.41" />
+      <path d="m17.66 17.66 1.41 1.41" />
+      <path d="M2 12h2" />
+      <path d="M20 12h2" />
+      <path d="m6.34 17.66-1.41 1.41" />
+      <path d="m19.07 4.93-1.41 1.41" />
+    </svg>
+  </span>
 </button>
-<button
-  type="button"
-  aria-label="Light Theme Toggle"
-  class="hs-dark-mode group hidden h-8 w-8 items-center justify-center rounded-full font-medium text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:text-orange-400 hs-dark-mode-active:flex dark:text-neutral-400 dark:ring-zinc-200 dark:hover:bg-neutral-700 dark:hover:text-orange-300 dark:focus:outline-none"
-  data-hs-theme-click-value="light"
->
-  <!-- The SVG displayed shows a standard sun icon that stands for the light theme -->
-  <svg
-    class="h-4 w-4 flex-shrink-0"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    ><circle cx="12" cy="12" r="4"></circle><path d="M12 8a2 2 0 1 0 4 4"
-    ></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path
-      d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"
-    ></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path
-      d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"
-    ></path></svg
-  >
-</button>
+
+<script>
+  // Theme toggle functionality with improved iOS compatibility
+  document.addEventListener("DOMContentLoaded", function() {
+    const html = document.documentElement;
+    const themeToggle = document.getElementById("theme-toggle");
+    
+    // Function to set theme
+    function setTheme(theme) {
+      if (theme === "dark") {
+        html.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        html.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+    }
+    
+    // Check for saved user preference, first in localStorage, then in system setting
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+    
+    // Toggle theme when button is clicked
+    themeToggle?.addEventListener("click", function() {
+      if (html.classList.contains("dark")) {
+        setTheme("light");
+      } else {
+        setTheme("dark");
+      }
+    });
+    
+    // Listen for changes in system preference
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      // Only update if the user hasn't manually set a preference
+      if (!localStorage.getItem("theme")) {
+        if (e.matches) {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+      }
+    });
+  });
+</script>

@@ -1,66 +1,125 @@
 ---
-// Import all required components and utilities
+// Import the Image component from Astro
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
-import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
-import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+import { formatDate } from "@utils/utils";
+import klingerImage from "@images/blog/Klinger.jpg";
 
-const { blogEntry, recentBlogLocale = "" } = Astro.props;
+// Importar directamente las imágenes de blog
+import post1Image from "@images/blog/post-1.jpg";
+import post2Image from "@images/blog/post-2.jpg";
+import post3Image from "@images/blog/post-3.jpg";
 
-interface Props {
-  blogEntry: CollectionEntry<"blog">;
-  recentBlogLocale?: string;
+// Función para determinar qué imagen usar basada en el ID del blog
+function getBlogImage(blogId) {
+  const id = blogId.split('/')[1];
+  switch(id) {
+    case "encimera-en-los-disenos-de-cocina":
+      return post1Image;
+    case "estilos-de-cocina-disenos-que-inspiran":
+      return post2Image;
+    case "tendencias-en-suelos-laminados-y-tarimas-flotantes":
+      return post3Image;
+    default:
+      return post1Image; // Imagen por defecto
+  }
 }
+
+// Define interface for component props
+interface Props {
+  blogEntry: any;
+  recentBlogLocale?: string; // Optional locale parameter for multilingual support
+}
+
+// Get the component props
+const { blogEntry, recentBlogLocale }: Props = Astro.props;
+
+// Extract the blog post ID considering the locale if provided
+const blogID = recentBlogLocale
+  ? `/${recentBlogLocale}/blog/${blogEntry.id.split("/")[1]}`
+  : `/blog/${blogEntry.id.split("/")[1]}`;
+
+// Get the correct image for this blog post
+const blogImage = getBlogImage(blogEntry.id);
+
+// Set the author to Klinger Mallqui for all blogs
+const author = "Klinger Mallqui";
 ---
 
-<!-- Root container, which is divided into 2 grid column layout for larger screens -->
-<div class="grid gap-8 grid-cols-1 sm:grid-cols-2 sm:items-center">
-  <!-- Container for the blog post's cover image -->
-  <div class="sm:order-2">
-    <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
+<style>
+  /* Estilo para asegurar que el texto aparezca encima de la imagen en móviles */
+  @media (max-width: 768px) {
+    .mobile-text-first {
+      display: flex;
+      flex-direction: column !important;
+    }
+    
+    .mobile-text-first .text-content {
+      order: 1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .mobile-text-first .image-content {
+      order: 2;
+    }
+  }
+</style>
+
+<div class="group rounded-xl transition duration-300">
+  <div class="mobile-text-first grid gap-8 md:grid-cols-2">
+    <!--Image column-->
+    <div class="relative image-content">
+      <a class="absolute inset-0 z-10" href={blogID}></a>
       <Image
-        class="absolute start-0 top-0 size-full rounded-xl object-cover"
-        src={blogEntry.data.cardImage}
+        src={blogImage}
         alt={blogEntry.data.cardImageAlt}
+        class="h-full w-full rounded-xl object-cover"
         draggable={"false"}
-        loading={"eager"}
         format={"jpg"}
       />
-    </div>
-  </div>
-  <!-- Container for the blog post's heading, author avatar, author's role, and read more button -->
-  <div class="sm:order-1">
-    <!-- Blog title which is also a hyperlink to the blog detail page  -->
-    <h2
-      class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight"
-    >
-      <a
-        class="outline-none ring-zinc-500 transition duration-300 hover:text-orange-400 focus-visible:ring dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-50 dark:focus:outline-none"
-        href={recentBlogLocale && recentBlogLocale !== "es" ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^en\//, '')}/` : `/blog/${blogEntry.id.replace(/^es\//, '')}/`}
+      <!--Category badge-->
+      <span
+        class="absolute start-0 top-0 rounded-se-xl rounded-ts-xl bg-neutral-100/80 px-3 py-1.5 text-xs font-medium text-neutral-800 backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200"
       >
-        {blogEntry.data.description}
-      </a>
-    </h2>
-    <!-- Container for the author's avatar and metadata -->
-    <div class="mt-6 flex items-center sm:mt-10">
-      <AvatarBlogLarge blogEntry={blogEntry} />
-
-      <div class="ms-3 sm:ms-4">
-        <p class="font-bold text-neutral-800 dark:text-neutral-200 sm:mb-1">
-          {blogEntry.data.author}
-        </p>
-        <p class="text-xs text-neutral-500">
-          {blogEntry.data.role}
-        </p>
-      </div>
+        {blogEntry.data.category}
+      </span>
     </div>
-    <!-- Read More button which is a link to the blog post detailed page -->
-    <div class="mt-5">
-      <PrimaryCTA
-        url={recentBlogLocale && recentBlogLocale !== "es" ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^en\//, '')}/` : `/blog/${blogEntry.id.replace(/^es\//, '')}/`}
-        title="Leer más"
-        data-astro-prefetch
-      />
+
+    <!--Content column-->
+    <div 
+      class="relative z-10 text-content"
+    >
+      <div class="flex h-full flex-col p-0 sm:p-4 md:p-5">
+        <div class="mb-2">
+          <a
+            href={blogID}
+            class="text-xl font-bold text-neutral-800 decoration-2 hover:underline dark:text-neutral-200"
+          >
+            {blogEntry.data.title}
+          </a>
+          <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+            {blogEntry.data.description}
+          </p>
+        </div>
+        <div class="mt-auto flex items-center gap-x-3">
+          <Image
+            class="h-8 w-8 rounded-full"
+            src={klingerImage}
+            alt="Avatar"
+            width={32}
+            height={32}
+          />
+          <div>
+            <h5
+              class="text-sm font-semibold text-neutral-800 dark:text-neutral-200"
+            >
+              {author}
+            </h5>
+            <span class="block text-xs text-neutral-500">
+              {formatDate(blogEntry.data.pubDate)}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

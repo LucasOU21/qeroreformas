@@ -10,7 +10,7 @@ const title: string =
 
 const pageTitle: string =
   Astro.preferredLocale === "en"
-    ? "Team | Qero Reformas"
+    ? "Team | Kalia Reformas"
     : `Equipo | ${SITE.title}`;
 ---
 
@@ -19,23 +19,23 @@ const pageTitle: string =
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/products",
-    url: "https://qeroreformas.com/products",
-    name: "Equipo | Qero Reformas",
+    "@id": "https://kaliareformas.com/equipo",
+    url: "https://kaliareformas.com/equipo",
+    name: "Equipo | Kalia Reformas y Decoración",
     description:
-      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+      "Conozca a nuestro equipo de profesionales cualificados. En Kalia Reformas y Decoración contamos con especialistas dedicados a hacer realidad tus proyectos con calidad y atención al detalle.",
     isPartOf: {
       "@type": "WebSite",
-      url: "https://qeroreformas.com",
-      name: "Qero Reformas",
+      url: "https://kaliareformas.com",
+      name: "Kalia Reformas y Decoración",
       description:
-        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+        "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
     },
     inLanguage: "es-ES",
   }}
 >
   <div
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+    class="mx-auto max-w-[85rem] px-4 pt-24 pb-10 sm:px-6 lg:px-8 lg:pt-28 lg:pb-14 2xl:max-w-full"
   >
     <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
       <div class="flex items-center gap-12">
@@ -48,39 +48,53 @@ const pageTitle: string =
     </div>
 
     <section
-      class="max-w-4xl mx-auto flex flex-col sm:flex-row sm:flex-wrap gap-2 md:gap-4 xl:gap-6 items-center justify-center"
+      class="max-w-5xl mx-auto flex flex-col sm:flex-row sm:flex-wrap gap-6 md:gap-8 xl:gap-10 items-center justify-center"
     >
+      <!-- Team Member Card 1 -->
       <div
-        class="max-w-sm rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+        class="max-w-sm rounded-xl border border-gray-200 bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
       >
-        <Image class="rounded-t-lg" src={placeholder} alt="equipo" />
-        <div class="p-5">
+        <Image class="rounded-t-xl" src={placeholder} alt="Miembro del equipo Kalia" />
+        <div class="p-6">
           <h5
-            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+            class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
           >
             Person 1
           </h5>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <p class="text-sm text-primary-600 dark:text-primary-400 mb-4">Director de Proyectos</p>
+          <p class="mb-4 font-normal text-gray-700 dark:text-gray-300">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio explicabo molestiae, nam neque quia fugiat in sint quidem ab officiis aliquam vitae eligendi dicta dolore laudantium? Dolor reprehenderit dolorem earum.
           </p>
         </div>
       </div>
 
+      <!-- Team Member Card 2 -->
       <div
-        class="max-w-sm rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+        class="max-w-sm rounded-xl border border-gray-200 bg-white shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:border-gray-700 dark:bg-gray-800"
       >
-        <Image class="rounded-t-lg" src={placeholder} alt="equipo" />
-        <div class="p-5">
+        <Image class="rounded-t-xl" src={placeholder} alt="Miembro del equipo Kalia" />
+        <div class="p-6">
           <h5
-            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+            class="mb-3 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
           >
             Person 2
           </h5>
-          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <p class="text-sm text-primary-600 dark:text-primary-400 mb-4">Diseñadora de Interiores</p>
+          <p class="mb-4 font-normal text-gray-700 dark:text-gray-300">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio officia aliquam iste distinctio, dignissimos excepturi, suscipit a porro ab voluptate maiores error et recusandae temporibus, corrupti sint est eveniet pariatur.
           </p>
         </div>
       </div>
+    </section>
+
+    <!-- Additional Team Description Section -->
+    <section class="mt-16 max-w-4xl mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-6 text-neutral-800 dark:text-neutral-200">Un Equipo Comprometido con la Excelencia</h2>
+      <p class="text-neutral-600 dark:text-neutral-400 mb-8">
+        En Kalia Reformas y Decoración, nuestro equipo está compuesto por profesionales apasionados por el diseño y la calidad.
+        Cada miembro aporta una combinación única de experiencia, creatividad y dedicación a cada proyecto.
+        Estamos comprometidos a hacer realidad tu visión, transformando espacios con atención al detalle y un servicio personalizado.
+      </p>
     </section>
   </div>
 </MainLayout>

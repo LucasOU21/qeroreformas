@@ -4,10 +4,10 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 ---
 
 <header id="navbar" class="absolute top-2 left-0 right-0 z-50">
-  <div class="navbar-container mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between bg-black/25 backdrop-blur-sm rounded-xl px-6 py-4">
-      <!-- Logo - increased size but constrained with overflow hidden -->
-      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden">
+  <div class="navbar-container mx-auto px-2 sm:px-4">
+    <div class="flex items-center justify-between navbar-bg backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 shadow-sm">
+      <!-- Logo - moved more to the left with negative margin -->
+      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden -ml-16">
         <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
           <div class="flex-shrink-0 py-6">
             <img 
@@ -23,11 +23,11 @@ import ThemeIcon from "@components/ThemeIcon.astro";
       <div class="flex items-center space-x-8">
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="/" class="nav-link">Inicio</a>
-          <a href="/services" class="nav-link">Servicios</a>
-          <a href="/nosotros" class="nav-link">Nosotros</a>
-          <a href="/equipo" class="nav-link">Equipo</a>
-          <a href="/blog" class="nav-link">Blog</a>
+          <a href="/" class="nav-link text-nav-light dark:text-nav-dark">Inicio</a>
+          <a href="/services" class="nav-link text-nav-light dark:text-nav-dark">Servicios</a>
+          <a href="/nosotros" class="nav-link text-nav-light dark:text-nav-dark">Nosotros</a>
+          <a href="/equipo" class="nav-link text-nav-light dark:text-nav-dark">Equipo</a>
+          <a href="/blog" class="nav-link text-nav-light dark:text-nav-dark">Blog</a>
         </nav>
 
         <!-- Theme Toggle -->
@@ -39,7 +39,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <button 
           id="mobile-menu-button" 
           type="button" 
-          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-white hover:text-gold-accent" 
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-gold-accent" 
           aria-controls="mobile-menu" 
           aria-expanded="false"
         >
@@ -57,17 +57,18 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     </div>
   </div>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="md:hidden hidden mx-4 mt-2">
-    <div class="px-4 pt-2 pb-6 space-y-2 bg-black/80 backdrop-blur-md rounded-xl">
+  <!-- Mobile menu - Improved design with same color scheme -->
+  <div id="mobile-menu" class="md:hidden hidden mx-2 mt-2">
+    <div class="mobile-menu-container px-5 pt-3 pb-6 space-y-2 rounded-xl shadow-lg">
       <a href="/" class="mobile-nav-link">Inicio</a>
       <a href="/servicios" class="mobile-nav-link">Servicios</a>
       <a href="/nosotros" class="mobile-nav-link">Nosotros</a>
+      <a href="/equipo" class="mobile-nav-link">Equipo</a>
       <a href="/blog" class="mobile-nav-link">Blog</a>
       <a href="/contacto" class="mobile-nav-link">Contacto</a>
       
       <!-- Mobile Theme Toggle -->
-      <div class="py-2 flex justify-center">
+      <div class="py-3 flex justify-center">
         <ThemeIcon />
       </div>
     </div>
@@ -78,17 +79,40 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   /* Gold accent color */
   :root {
     --gold-accent: #daa520;
+    --menu-bg-light: rgba(243, 244, 213, 0.95); /* #F3F4D5 with opacity */
+    --menu-bg-dark: rgba(52, 53, 42, 0.95); /* Dark version of #F3F4D5 */
+    --menu-border-light: rgba(230, 232, 190, 0.5); /* Lighter version of #F3F4D5 */
+    --menu-border-dark: rgba(75, 77, 65, 0.5); /* Darker version of #F3F4D5 */
+    --text-nav-light: #4b5563; /* Gray-600 */
+    --text-nav-dark: #e5e7eb; /* Gray-200 */
+  }
+
+  /* Navbar background custom color */
+  .navbar-bg {
+    background-color: rgba(243, 244, 213, 0.95); /* #F3F4D5 with slight transparency */
+  }
+
+  /* Dark mode navbar background */
+  :global(.dark) .navbar-bg {
+    background-color: rgba(52, 53, 42, 0.95); /* Dark version of #F3F4D5 */
   }
 
   /* Navigation styles */
   .nav-link {
-    color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
     transition: all 0.3s ease;
     position: relative;
+  }
+  
+  .text-nav-light {
+    color: var(--text-nav-light);
+  }
+  
+  .text-nav-dark {
+    color: var(--text-nav-dark);
   }
 
   .nav-link:after {
@@ -110,15 +134,29 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     width: 100%;
   }
 
+  /* Mobile menu container - Light/Dark mode responsive */
+  .mobile-menu-container {
+    background-color: var(--menu-bg-light);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--menu-border-light);
+    transition: all 0.3s ease;
+  }
+
+  /* Dark mode for mobile menu */
+  :global(.dark) .mobile-menu-container {
+    background-color: var(--menu-bg-dark);
+    border-color: var(--menu-border-dark);
+  }
+
   /* Mobile navigation styles */
   .mobile-nav-link {
     display: block;
     padding: 0.75rem 0;
-    color: white;
+    color: #4b5563; /* Gray-600 */
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     transition: color 0.3s ease;
   }
 
@@ -126,9 +164,15 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     color: var(--gold-accent);
   }
 
-  /* Navbar container */
+  /* Dark mode for mobile nav links */
+  :global(.dark) .mobile-nav-link {
+    color: #e5e7eb; /* Gray-200 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Navbar container - extended to be closer to edges */
   .navbar-container {
-    max-width: 1400px;
+    max-width: 1500px;
   }
 </style>
 
@@ -151,6 +195,17 @@ import ThemeIcon from "@components/ThemeIcon.astro";
       closeIcon.classList.toggle('hidden', expanded);
     }
   }
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const isMenuButton = mobileMenuButton?.contains(event.target);
+    const isMenuContent = mobileMenu?.contains(event.target);
+    const isMenuOpen = !mobileMenu?.classList.contains('hidden');
+    
+    if (isMenuOpen && !isMenuButton && !isMenuContent) {
+      toggleMobileMenu();
+    }
+  });
 
   // Event listeners
   mobileMenuButton?.addEventListener('click', toggleMobileMenu);

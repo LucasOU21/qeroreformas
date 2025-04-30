@@ -22,28 +22,28 @@ const { title, subTitle, src, alt, features } = Astro.props;
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12 2xl:max-w-full"
 >
   <!-- Section header with title and subtitle -->
-  <div class="mb-10 text-center lg:mb-14">
+  <div class="mb-8 text-center lg:mb-12">
     <h2
-      class="text-balance text-3xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl"
+      class="text-balance text-2xl font-bold text-neutral-800 dark:text-neutral-100 md:text-3xl lg:text-4xl"
     >
       {title}
     </h2>
     {
       subTitle && (
-        <p class="mx-auto mt-4 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-400">
+        <p class="mx-auto mt-3 max-w-2xl text-pretty text-neutral-600 dark:text-neutral-300 text-base sm:text-lg">
           {subTitle}
         </p>
       )
     }
   </div>
 
-  <!-- Feature image display (if provided) -->
+  <!-- Feature image display (if provided) - optimized for mobile -->
   {
     src && alt && (
-      <div class="relative mb-12 overflow-hidden rounded-xl">
+      <div class="relative mb-10 overflow-hidden rounded-lg md:rounded-xl">
         <Image
           src={src}
           alt={alt}
@@ -56,19 +56,19 @@ const { title, subTitle, src, alt, features } = Astro.props;
     )
   }
 
-  <!-- Features grid -->
-  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+  <!-- Features grid - optimized for mobile -->
+  <div class="grid gap-4 sm:gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
     {
       features &&
         features.map((feature) => (
-          <div class="feature-card group rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600">
-            <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-500">
+          <div class="feature-card group rounded-xl border border-neutral-200 bg-white p-5 sm:p-6 transition-all duration-300 hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/80 dark:hover:border-neutral-600">
+            <div class="mb-4 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400">
               <Icon name={feature.svg} />
             </div>
-            <h3 class="mb-3 text-lg font-semibold text-neutral-800 dark:text-neutral-200">
+            <h3 class="mb-2 text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-100">
               {feature.heading}
             </h3>
-            <p class="text-neutral-600 dark:text-neutral-400">
+            <p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-300">
               {feature.content}
             </p>
           </div>
@@ -82,12 +82,21 @@ const { title, subTitle, src, alt, features } = Astro.props;
     display: flex;
     flex-direction: column;
     height: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
+  /* Improved mobile styling */
   @media (max-width: 640px) {
     .feature-card {
       border-radius: 0.75rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.75rem;
+      padding: 1.25rem;
+    }
+    
+    /* Better contrast for mobile dark mode */
+    :global(.dark) .feature-card {
+      background-color: rgba(30, 41, 59, 0.8); /* slate-800 with opacity */
+      border-color: rgba(71, 85, 105, 0.5); /* slate-600 with opacity */
     }
   }
 </style>

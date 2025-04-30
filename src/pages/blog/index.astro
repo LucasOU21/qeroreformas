@@ -3,64 +3,96 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import CardBlog from "@components/ui/cards/CardBlog.astro";
 import CardBlogRecent from "@components/ui/cards/CardBlogRecent.astro";
-// import CardInsight from "@components/ui/cards/CardInsight.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
-// Get all blogs post in English and sort them based on publish date
-
+// Get all blogs post in Spanish and sort them based on publish date
 const spanishBlogEntries = await getCollection("blog", ({ id }) => {
   return id.startsWith("es/");
 });
-
-// const englishInsightsEntries = await getCollection("insights", ({ id }) => {
-//   return id.startsWith("es/");
-// });
 
 const blogPosts: CollectionEntry<"blog">[] = spanishBlogEntries.sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-// Get all insights posts
-// const insightPosts: CollectionEntry<"insights">[] = englishInsightsEntries;
-
 
 // Define variables for page content
 const title: string =
-  "Qero Transforma: Inspiración, Consejos y Proyectos para tu Hogar";
+  "Kalia Transforma: Inspiración, Consejos y Proyectos para tu Hogar";
 const subTitle: string =
   "Descubre ideas, tendencias y soluciones prácticas para reformar y construir espacios que cuenten tu historia.";
-// const secondTitle: string =
-//   "Perspectivas Qero: Expertos en Reformas y Construcción";
-// const secondSubTitle: string =
-//   "Análisis, datos y reflexiones de nuestros profesionales para ayudarte a tomar decisiones inteligentes en tus proyectos.s";
 
 const pageTitle: string = `Blog | ${SITE.title}`;
 ---
+
+<style>
+  /* Estilo para asegurar que el texto aparezca encima de la imagen en móviles */
+  @media (max-width: 768px) {
+    .mobile-text-first {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .mobile-text-first .text-content {
+      order: 1;
+      margin-bottom: 1rem;
+    }
+    
+    .mobile-text-first .image-content {
+      order: 2;
+    }
+  }
+  
+  /* Extra padding to prevent navbar overlap */
+  section:first-of-type {
+    padding-top: 8rem !important; /* Further increased padding to ensure no overlap */
+  }
+  
+  @media (max-width: 768px) {
+    section:first-of-type {
+      padding-top: 7rem !important; /* More padding on mobile */
+    }
+  }
+  
+  /* Gold color scheme for consistency */
+  :global(a:hover), :global(h3:hover) {
+    color: #daa520 !important;
+  }
+  
+  /* Ensure the blog overlay text is visible and properly styled */
+  :global(.absolute.top-0), :global(.absolute.top-16) {
+    z-index: 20;
+  }
+  
+  /* Add text shadow for better readability */
+  :global(.absolute h3) {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+  }
+</style>
 
 <MainLayout
   title={pageTitle}
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/faqs",
-    url: "https://qeroreformas.com/faqs",
-    name: "Blog | Qero Reformas",
+    "@id": "https://qeroreformas.com/blog",
+    url: "https://qeroreformas.com/blog",
+    name: "Blog | Kalia Reformas",
     description:
-      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+      "Descubre ideas, tendencias y soluciones prácticas para reformar y construir espacios que cuenten tu historia con Kalia Reformas y Decoración.",
     isPartOf: {
       "@type": "WebSite",
       url: "https://qeroreformas.com",
-      name: "Qero Reformas",
+      name: "Kalia Reformas",
       description:
-        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+        "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú.",
     },
     inLanguage: "es-ES",
   }}
 >
   <section
-    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-16 sm:px-6 lg:px-8 2xl:max-w-full"
+    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-32 sm:px-6 lg:px-8 2xl:max-w-full"
   >
     <!--Page header-->
     <div class="mx-auto max-w-3xl text-left sm:text-center">
@@ -84,45 +116,32 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     <!--Blog posts grid-->
     <div class="grid gap-6 lg:grid-cols-2">
       {
-        blogPosts.map((blogEntry, index) => {
-          if (index % 2 === 0 && index !== 0) 
-          return (
-              <section class="col-span-1 lg:col-span-2">
-                <CardBlogRecent blogEntry={blogEntry} />
-              </section>
-            );
-          else
-            return <CardBlog blogEntry={blogEntry} />;  
-        })
+        blogPosts.length > 0 ? (
+          blogPosts.map((blogEntry, index) => {
+            // Verificar que blogEntry no sea undefined y tenga datos
+            if (!blogEntry || !blogEntry.data) {
+              console.error("Blog entry undefined or missing data:", blogEntry);
+              return null;
+            }
+
+            if (index % 2 === 0 && index !== 0) {
+              return (
+                <section class="col-span-1 lg:col-span-2 mobile-text-first">
+                  <CardBlogRecent blogEntry={blogEntry} />
+                </section>
+              );
+            } else {
+              return <CardBlog blogEntry={blogEntry} />;
+            }
+          })
+        ) : (
+          <div class="col-span-2 text-center py-10">
+            <p class="text-lg text-neutral-600 dark:text-neutral-400">
+              No hay entradas de blog disponibles en este momento.
+            </p>
+          </div>
+        )
       }
     </div>
   </section>
-  <!--Most recent blog post-->
-  <!-- <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <CardBlogRecent blogEntry={mostRecentPost} />
-  </section> -->
-  <!--Insights section-->
-  <!-- <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-      <h2
-        class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
-      >
-        {secondTitle}
-      </h2>
-      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
-        {secondSubTitle}
-      </p>
-    </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        insightPosts.map((insightEntry) => (
-          <CardInsight insightEntry={insightEntry} />
-        ))
-      }
-    </div>
-  </section> -->
 </MainLayout>

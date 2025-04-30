@@ -44,6 +44,26 @@ interface Props {
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
     ></script>
 
+    <!-- Theme initialization script to prevent flash of wrong theme -->
+    <script is:inline>
+      // Immediate theme detection and application
+      (function() {
+        // Check for saved theme preference or use device preference
+        const userTheme = localStorage.getItem('theme');
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        
+        // Apply the correct theme immediately
+        document.documentElement.classList.toggle('dark', 
+          userTheme === 'dark' || (!userTheme && systemTheme === 'dark')
+        );
+        
+        // Store the theme if it's from system preference and not already stored
+        if (!userTheme) {
+          localStorage.setItem('theme', systemTheme);
+        }
+      })();
+    </script>
+
     <script type="text/javascript">
       emailjs.init("9kK7aUQ9lNLQhlvfZ");
     </script>
