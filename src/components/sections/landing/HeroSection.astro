@@ -1,76 +1,130 @@
 <style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
   .hero-container {
     position: relative;
     z-index: 10;
-    min-height: 100vh;
-    width: 100%;
+    width: 100vw;               /* Full viewport width */
+    height: 110vh;              /* 110% of viewport height to extend downward */
+    min-height: 110vh;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 3rem 0 0 0; /* Added top padding to create space below navbar */
+    padding: 0;
     margin: 0;
-    background-image: url('/images/hero-background.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    margin-left: calc(-50vw + 50%); /* Extend outside of parent container to full width */
+    margin-right: calc(-50vw + 50%);
     overflow: hidden;
   }
   
-  @keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
+  /* Hide the original background image */
+  :global(.index-background) {
+    display: none !important;
+  }
+  
+  .hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #000;
+  }
+  
+  .hero-content-side {
+    position: relative;
+    width: 50%;
+    height: 110vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    animation: fadeInLeft 1.2s ease-out forwards;
+  }
+  
+  .hero-image-side {
+    position: relative;
+    width: 50%;
+    height: 110vh;
+    overflow: hidden;
+    animation: fadeInRight 1.2s ease-out forwards;
+  }
+  
+  .hero-image-side::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    z-index: 1;
+  }
+  
+  .hero-image-full {
+    width: 100%;
+    height: 110vh;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  @keyframes fadeInLeft {
+    0% { opacity: 0; transform: translateX(-50px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  @keyframes fadeInRight {
+    0% { opacity: 0; transform: translateX(50px); }
+    100% { opacity: 1; transform: translateX(0); }
   }
   
   .hero-content {
-    background: rgba(0, 0, 0, 0.30);
+    background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(3px);
     padding: 3.5rem 2.5rem;
     border-radius: 12px;
-    width: 100%;
+    width: 90%;
     max-width: 40rem;
-    margin-left: 10%;
-    margin-top: 2rem;
     text-align: center;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    animation: fadeIn 1s ease-out forwards;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   
   .brand-name {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Georgia', serif;
     font-size: 4rem;
     font-weight: 700;
     letter-spacing: -1px;
     line-height: 1;
     margin-bottom: 0.5rem;
-    color: white;
     text-align: center;
+    color: #FFD000; /* Set default color to gold */
   }
   
   .brand-highlight {
-    color: #daa520;
+    color: #FFFFFF; /* White for "Kalia" */
     font-weight: 800;
   }
   
   .brand-subtitle {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.25rem;
     font-weight: 300;
     letter-spacing: 2px;
     margin-bottom: 1.5rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(248, 241, 231, 0.8);
     text-transform: uppercase;
     text-align: center;
   }
   
   .tagline {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     font-weight: 300;
-    color: rgba(255, 255, 255, 0.7);
+    color: rgba(248, 241, 231, 0.7);
     margin-bottom: 2rem;
     line-height: 1.6;
     white-space: nowrap; /* Prevents line breaks within the tagline */
@@ -79,7 +133,7 @@
   
   /* Tagline bullet styling */
   .tagline-bullet {
-    color: #daa520;
+    color: #FFD000;
     margin: 0 0.25rem;
   }
   
@@ -94,13 +148,14 @@
   }
   
   .primary-button {
-    background-color: transparent;
-    color: #daa520;
-    border: 1px solid #daa520;
+    background-color: #FFD000;
+    color: #000000;
+    border: none;
     border-radius: 8px;
     padding: 0.875rem 2rem;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -112,33 +167,21 @@
     justify-content: center;
     width: 100%;
     max-width: 300px;
-  }
-  
-  .primary-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background-color: #daa520;
-    transition: width 0.3s ease;
-    z-index: -1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   .primary-button:hover {
-    color: #000;
-  }
-  
-  .primary-button:hover::before {
-    width: 100%;
+    background-color: #e6bb00;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
   
   .call-button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: white;
+    color: #F8F1E7;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     font-weight: 300;
     transition: all 0.3s ease;
@@ -148,7 +191,7 @@
   .call-button svg {
     width: 3rem;
     height: 3rem;
-    background: #daa520;
+    background: #FFD000;
     padding: 0.75rem;
     border-radius: 50%;
     transition: transform 0.3s ease;
@@ -156,23 +199,83 @@
   }
   
   .call-button:hover {
-    color: #daa520;
+    color: #FFD000;
   }
   
   .call-button:hover svg {
     transform: scale(1.1);
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
+    .hero-content {
+      padding: 2.5rem 2rem;
+    }
+    
+    .brand-name {
+      font-size: 3.5rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
     .hero-container {
-      padding-top: 5rem; /* Adjusted for mobile */
-      min-height: 85vh; /* Reduced height on mobile to prevent overlap */
+      flex-direction: column;
+      height: auto;
+      min-height: 110vh;
+    }
+    
+    .hero-content-side, 
+    .hero-image-side {
+      width: 100%;
+      height: 55vh;
+    }
+    
+    .hero-content-side {
+      order: 2;
+      padding: 2rem 0;
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+    
+    .hero-image-side {
+      order: 1;
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+    
+    .hero-image-full {
+      height: 55vh;
     }
     
     .hero-content {
-      width: 85%;
+      max-width: 90%;
+    }
+    
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-container {
+      min-height: 110vh;
+    }
+    
+    .hero-content-side, 
+    .hero-image-side {
+      height: auto;
+    }
+    
+    .hero-image-side {
+      height: 45vh;
+    }
+    
+    .hero-image-full {
+      height: 100%;
+    }
+    
+    .hero-content {
       padding: 2rem 1.5rem;
-      margin: 1rem auto 1rem;
+      width: 95%;
+      margin: 1rem 0;
     }
     
     .brand-name {
@@ -213,34 +316,42 @@
 </style>
 
 <section class="hero-container">
-  <div class="hero-content">
-    <h1 class="brand-name">
-      <span class="brand-highlight">Kalia</br> Reformas<br />y Decoración
-    </h1>
-    
-    <p class="brand-subtitle">
-      Espacios excepcionales
-    </p>
-    
-    <p class="tagline">
-      <span>Diseño personalizado</span>
-      <span class="tagline-bullet">•</span>
-      <span>Calidad excepcional</span>
-      <span class="tagline-bullet">•</span>
-      <span>Precio inmejorable</span>
-    </p>
-    
-    <div class="cta-container">
-      <a href="/calculadora" class="primary-button">
-        CALCULAR PRESUPUESTO
-      </a>
+  <div class="hero-background"></div>
+  
+  <div class="hero-content-side">
+    <div class="hero-content">
+      <h1 class="brand-name">
+        <span class="brand-highlight">Kalia</span></br> Reformas<br />y Decoración
+      </h1>
       
-      <a href="tel:603370840" class="call-button">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-        </svg>
-        603 37 08 40
-      </a>
+      <p class="brand-subtitle">
+        Espacios excepcionales
+      </p>
+      
+      <p class="tagline">
+        <span>Diseño personalizado</span>
+        <span class="tagline-bullet">•</span>
+        <span>Calidad excepcional</span>
+        <span class="tagline-bullet">•</span>
+        <span>Precio inmejorable</span>
+      </p>
+      
+      <div class="cta-container">
+        <a href="/calculadora" class="primary-button">
+          CALCULAR PRESUPUESTO
+        </a>
+        
+        <a href="tel:603370840" class="call-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          603 37 08 40
+        </a>
+      </div>
     </div>
+  </div>
+  
+  <div class="hero-image-side">
+    <img src="/src/images/HeroImg1.jpg" alt="Kalia Reformas interior design" class="hero-image-full" />
   </div>
 </section>

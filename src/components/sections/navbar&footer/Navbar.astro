@@ -3,17 +3,17 @@
 import ThemeIcon from "@components/ThemeIcon.astro";
 ---
 
-<header id="navbar" class="absolute top-2 left-0 right-0 z-50">
-  <div class="navbar-container mx-auto px-2 sm:px-4">
-    <div class="flex items-center justify-between navbar-bg backdrop-blur-sm rounded-xl px-4 sm:px-6 py-3 shadow-sm">
+<header id="navbar" class="absolute top-2 left-0 right-0 z-50 w-screen">
+  <div class="navbar-container w-full max-w-none px-4 sm:px-8 lg:px-12">
+    <div class="flex items-center justify-between navbar-bg backdrop-blur-sm px-4 sm:px-8 py-2 shadow-sm rounded-xl mx-2 sm:mx-4">
       <!-- Logo - moved more to the left with negative margin -->
-      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden -ml-16">
+      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden -ml-6 sm:-ml-15">
         <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
-          <div class="flex-shrink-0 py-6">
+          <div class="flex-shrink-0 py-4">
             <img 
               src="/src/images/logos/KaliaLogo-300x300.png" 
               alt="Kalia Logo" 
-              class="w-auto h-60 -mt-4"
+              class="w-auto h-48 -mt-2"
             />
           </div>
         </a>
@@ -23,11 +23,30 @@ import ThemeIcon from "@components/ThemeIcon.astro";
       <div class="flex items-center space-x-8">
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-8">
-          <a href="/" class="nav-link text-nav-light dark:text-nav-dark">Inicio</a>
-          <a href="/services" class="nav-link text-nav-light dark:text-nav-dark">Servicios</a>
-          <a href="/nosotros" class="nav-link text-nav-light dark:text-nav-dark">Nosotros</a>
-   <!-- <a href="/equipo" class="nav-link text-nav-light dark:text-nav-dark">Equipo</a> -->
-          <a href="/blog" class="nav-link text-nav-light dark:text-nav-dark">Blog</a>
+          <a href="/" class="nav-link text-sm">Inicio</a>
+          <!-- Services dropdown menu -->
+          <div class="relative group">
+            <a href="/services" class="nav-link text-sm flex items-center group-hover:text-[#FFD000] dark:group-hover:text-[#FFD000]">
+              Servicios
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top scale-95 group-hover:scale-100">
+              <div class="py-1 rounded-md bg-white dark:bg-gray-800 shadow-xs">
+                <a href="/services/montaje-de-muebles" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Montaje de Muebles</a>
+                <a href="/services/diseno-de-muebles" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Diseño de Muebles</a>
+                <a href="/services/intalacion-cocinas-electrodomesticos" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Cocinas y Electrodomésticos</a>
+                <a href="/services/reformas-de-vivienda" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Reformas de Vivienda</a>
+                <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Puertas, Tarima y Rodapiés</a>
+                <a href="/services/servicios-de-acabados" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Servicios de Acabados</a>
+                <a href="/services/manitas" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Manitas</a>
+              </div>
+            </div>
+          </div>
+          <a href="/nosotros" class="nav-link text-sm">Nosotros</a>
+          <!-- <a href="/equipo" class="nav-link text-sm">Equipo</a> -->
+          <a href="/blog" class="nav-link text-sm">Blog</a>
         </nav>
 
         <!-- Theme Toggle - Desktop only -->
@@ -39,17 +58,17 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <button 
           id="mobile-menu-button" 
           type="button" 
-          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gold-accent" 
+          class="md:hidden inline-flex items-center justify-center p-1.5 rounded-md text-gray-700 hover:text-[#FFD000]" 
           aria-controls="mobile-menu" 
           aria-expanded="false"
         >
           <span class="sr-only">Abrir menú principal</span>
           <!-- Hamburger icon -->
-          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg class="block h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
           <!-- X icon -->
-          <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <svg class="hidden h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
@@ -59,62 +78,81 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 
   <!-- Mobile menu - Always Light Mode -->
   <div id="mobile-menu" class="md:hidden hidden mx-2 mt-2">
-    <div class="mobile-menu-container px-5 pt-3 pb-6 space-y-2 rounded-xl shadow-lg">
+    <div class="mobile-menu-container px-5 pt-2 pb-4 space-y-1.5 rounded-xl shadow-lg mx-2 sm:mx-4">
       <a href="/" class="mobile-nav-link">Inicio</a>
       <a href="/services" class="mobile-nav-link">Servicios</a>
+      <!-- Mobile Submenu for Services -->
+      <div class="pl-4 space-y-1 hidden" id="mobile-services-submenu">
+        <a href="/services/montaje-de-muebles" class="mobile-nav-link text-sm pl-4 bg-gray-50">Montaje de Muebles</a>
+        <a href="/services/diseno-de-muebles" class="mobile-nav-link text-sm pl-4 bg-gray-50">Diseño de Muebles</a>
+        <a href="/services/intalacion-cocinas-electrodomesticos" class="mobile-nav-link text-sm pl-4 bg-gray-50">Cocinas y Electrodomésticos</a>
+        <a href="/services/reformas-de-vivienda" class="mobile-nav-link text-sm pl-4 bg-gray-50">Reformas de Vivienda</a>
+        <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="mobile-nav-link text-sm pl-4 bg-gray-50">Puertas, Tarima y Rodapiés</a>
+        <a href="/services/servicios-de-acabados" class="mobile-nav-link text-sm pl-4 bg-gray-50">Servicios de Acabados</a>
+        <a href="/services/manitas" class="mobile-nav-link text-sm pl-4 bg-gray-50">Manitas</a>
+      </div>
       <a href="/nosotros" class="mobile-nav-link">Nosotros</a>
-    <!-- <a href="/equipo" class="mobile-nav-link">Equipo</a> -->
+      <!-- <a href="/equipo" class="mobile-nav-link">Equipo</a> -->
       <a href="/blog" class="mobile-nav-link">Blog</a>
     </div>
   </div>
 </header>
 
 <style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
   /* Gold accent color */
   :root {
-    --gold-accent: #daa520;
-    --menu-bg-light: rgba(226, 226, 224, 0.95); /* #E2E2E0 with opacity */
-    --text-nav-light: #181b20; /* Gray-600 */
-    --text-nav-dark: #e5e7eb; /* Gray-200 */
+    --gold-accent: #FFD000;
+    --menu-bg-light: #FFFFFF; /* Pure white */
+    --text-color-light: #000000; /* Black text */
+    --text-color-dark: #F8F1E7; /* Beige text */
   }
 
+  /* Make navbar full width */
+  #navbar {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+  }
+  
   /* Navbar background custom color */
   .navbar-bg {
-    background-color: rgba(226, 226, 224, 0.95); /* #E2E2E0 with slight transparency */
+    background-color: #FFFFFF; /* Pure white for light mode */
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   /* Dark mode navbar background - desktop only */
   @media (min-width: 768px) {
     :global(.dark) .navbar-bg {
-      background-color: rgba(52, 53, 42, 0.95); 
+      background-color: #000000; /* Midnight black for dark mode */
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
   }
 
   /* Navigation styles */
   .nav-link {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     letter-spacing: 0.3px;
     transition: all 0.3s ease;
     position: relative;
+    color: var(--text-color-light);
   }
   
-  .text-nav-light {
-    color: var(--text-nav-light);
-  }
-  
-  .text-nav-dark {
-    color: var(--text-nav-dark);
+  :global(.dark) .nav-link {
+    color: var(--text-color-dark);
   }
 
   .nav-link:after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: -2px;
     left: 0;
     width: 0;
-    height: 2px;
+    height: 1.5px;
     background-color: var(--gold-accent);
     transition: width 0.3s ease;
   }
@@ -131,29 +169,41 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   .mobile-menu-container {
     background-color: var(--menu-bg-light);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(226, 226, 224, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
   }
 
   /* Mobile navigation styles - Always Light Mode */
   .mobile-nav-link {
     display: block;
-    padding: 0.75rem 0;
-    color: #4b5563; /* Gray-600 */
-    font-family: 'Inter', sans-serif;
+    padding: 0.65rem 0;
+    color: var(--text-color-light);
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: color 0.3s ease;
   }
 
   .mobile-nav-link:hover {
     color: var(--gold-accent);
   }
+  
+  /* Mobile submenu transition */
+  #mobile-services-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+  
+  #mobile-services-submenu.expanded {
+    max-height: 500px; /* Set a large enough value to accommodate all items */
+  }
 
-  /* Navbar container - extended to be closer to edges */
+  /* Navbar container - extended to be full width */
   .navbar-container {
-    max-width: 1500px;
+    width: 100%;
+    max-width: none;
   }
 </style>
 
@@ -163,6 +213,8 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   const mobileMenu = document.getElementById('mobile-menu');
   const hamburgerIcon = mobileMenuButton?.querySelector('svg:nth-child(1)');
   const closeIcon = mobileMenuButton?.querySelector('svg:nth-child(2)');
+  const mobileServicesLink = document.querySelector('.mobile-nav-link[href="/services"]');
+  const mobileServicesSubmenu = document.getElementById('mobile-services-submenu');
 
   // Toggle mobile menu
   function toggleMobileMenu() {
@@ -177,10 +229,36 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     }
   }
 
+  // Toggle services submenu on mobile
+  if (mobileServicesLink) {
+    mobileServicesLink.addEventListener('click', function(e) {
+      // Prevent navigating to the services page
+      e.preventDefault();
+      
+      // Toggle the visibility of the submenu
+      if (mobileServicesSubmenu) {
+        // Toggle both classes for animation and visibility
+        mobileServicesSubmenu.classList.toggle('hidden');
+        
+        // Wait a tiny bit to allow the display change, then animate height
+        setTimeout(() => {
+          mobileServicesSubmenu.classList.toggle('expanded');
+        }, 10);
+        
+        // Add dropdown indicator
+        const hasExpanded = mobileServicesSubmenu.classList.contains('expanded');
+        this.innerHTML = `Servicios ${hasExpanded ? '▼' : '▶'}`;
+      }
+    });
+    
+    // Initialize with arrow indicator
+    mobileServicesLink.innerHTML = 'Servicios ▶';
+  }
+
   // Close mobile menu when clicking outside
   document.addEventListener('click', function(event) {
-    const isMenuButton = mobileMenuButton?.contains(event.target);
-    const isMenuContent = mobileMenu?.contains(event.target);
+    const isMenuButton = mobileMenuButton?.contains(event.target as Node);
+    const isMenuContent = mobileMenu?.contains(event.target as Node);
     const isMenuOpen = !mobileMenu?.classList.contains('hidden');
     
     if (isMenuOpen && !isMenuButton && !isMenuContent) {

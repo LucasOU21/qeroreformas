@@ -27,13 +27,13 @@ const { title, subTitle, src, alt, features } = Astro.props;
   <!-- Section header with title and subtitle -->
   <div class="mb-8 text-center lg:mb-12">
     <h2
-      class="text-balance text-2xl font-bold text-neutral-800 dark:text-neutral-100 md:text-3xl lg:text-4xl"
+      class="text-balance text-2xl font-bold text-[#000000] dark:text-[#F8F1E7] md:text-3xl lg:text-4xl font-georgia"
     >
       {title}
     </h2>
     {
       subTitle && (
-        <p class="mx-auto mt-3 max-w-2xl text-pretty text-neutral-800 dark:text-neutral-200 text-base sm:text-lg">
+        <p class="mx-auto mt-3 max-w-2xl text-pretty text-[#000000] dark:text-[#F8F1E7] text-base sm:text-lg font-poppins">
           {subTitle}
         </p>
       )
@@ -61,14 +61,14 @@ const { title, subTitle, src, alt, features } = Astro.props;
     {
       features &&
         features.map((feature) => (
-          <div class="feature-card group rounded-xl border border-neutral-200 bg-white p-5 sm:p-6 transition-all duration-300 hover:border-neutral-300 hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/80 dark:hover:border-neutral-600">
-            <div class="mb-4 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-yellow-50 text-yellow-600 dark:bg-yellow-900/20 dark:text-yellow-400">
+          <div class="feature-card group rounded-xl border border-neutral-200 bg-[#F8F1E7] p-5 sm:p-6 transition-all duration-300 hover:border-[#FFD000] hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/80 dark:hover:border-[#FFD000]">
+            <div class="mb-4 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-[#FFD000]/20 text-[#FFD000] dark:bg-[#FFD000]/10 dark:text-[#FFD000]">
               <Icon name={feature.svg} />
             </div>
-            <h3 class="mb-2 text-base sm:text-lg font-semibold text-neutral-800 dark:text-neutral-100">
+            <h3 class="mb-2 text-base sm:text-lg font-semibold text-[#000000] dark:text-[#F8F1E7] font-georgia">
               {feature.heading}
             </h3>
-            <p class="text-sm sm:text-base text-neutral-800 dark:text-neutral-200">
+            <p class="text-sm sm:text-base text-[#000000] dark:text-[#F8F1E7] font-poppins">
               {feature.content}
             </p>
           </div>
@@ -78,6 +78,17 @@ const { title, subTitle, src, alt, features } = Astro.props;
 </section>
 
 <style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  .font-georgia {
+    font-family: 'Georgia', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+  
   .feature-card {
     display: flex;
     flex-direction: column;
