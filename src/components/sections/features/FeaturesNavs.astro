@@ -134,5 +134,46 @@ interface Props {
 
   :global(.dark .tab-image) {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  
   }
+
+  /* 
+ * Add these styles to your FeatureNav.astro component
+ * or to a global CSS file to properly hide it on mobile
+ */
+
+/* Hide FeatureNav on mobile devices but show on larger screens */
+.feature-nav {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .feature-nav {
+    display: block;
+  }
+}
+
+/* If you need to override any existing mobile styles */
+@media (max-width: 767px) {
+  .feature-nav,
+  nav[class*="feature"],
+  [id*="feature-nav"],
+  [class*="feature-nav"] {
+    display: none !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    pointer-events: none !important;
+  }
+
+  /* This removes any space that might be reserved for the nav */
+  .feature-nav-container {
+    display: none !important;
+    height: 0 !important;
+  }
+}
 </style>

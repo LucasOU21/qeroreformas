@@ -72,10 +72,15 @@
     font-weight: 300;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 2rem;
-    max-width: 90%;
     line-height: 1.6;
-    white-space: normal;
-    word-wrap: break-word;
+    white-space: nowrap; /* Prevents line breaks within the tagline */
+    display: inline-block; /* Keeps the tagline text together */
+  }
+  
+  /* Tagline bullet styling */
+  .tagline-bullet {
+    color: #daa520;
+    margin: 0 0.25rem;
   }
   
   .cta-container {
@@ -161,24 +166,48 @@
   @media (max-width: 768px) {
     .hero-container {
       padding-top: 5rem; /* Adjusted for mobile */
+      min-height: 85vh; /* Reduced height on mobile to prevent overlap */
     }
     
     .hero-content {
-      width: 90%;
-      padding: 2.5rem 1.5rem;
-      margin: 5rem auto 0;
+      width: 85%;
+      padding: 2rem 1.5rem;
+      margin: 1rem auto 1rem;
     }
     
     .brand-name {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
     
     .brand-subtitle {
-      font-size: 1.2rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
     }
     
     .tagline {
-      font-size: 1rem;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      /* Allow wrapping on small screens but with controlled breaks */
+      white-space: normal;
+      max-width: 100%;
+    }
+    
+    .cta-container {
+      gap: 1rem;
+    }
+    
+    .primary-button {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .call-button {
+      font-size: 0.9rem;
+    }
+    
+    .call-button svg {
+      width: 2.5rem;
+      height: 2.5rem;
     }
   }
 </style>
@@ -194,7 +223,11 @@
     </p>
     
     <p class="tagline">
-      Diseño personalizado • Calidad excepcional • Precio inmejorable
+      <span>Diseño personalizado</span>
+      <span class="tagline-bullet">•</span>
+      <span>Calidad excepcional</span>
+      <span class="tagline-bullet">•</span>
+      <span>Precio inmejorable</span>
     </p>
     
     <div class="cta-container">

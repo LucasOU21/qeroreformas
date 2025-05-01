@@ -1,5 +1,5 @@
 ---
-// src/components/Navbar.astro
+// src/components/sections/navbar&footer/Navbar.astro
 import ThemeIcon from "@components/ThemeIcon.astro";
 ---
 
@@ -11,7 +11,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
           <div class="flex-shrink-0 py-6">
             <img 
-              src="src/images/logos/KaliaLogo-300x300.png" 
+              src="/src/images/logos/KaliaLogo-300x300.png" 
               alt="Kalia Logo" 
               class="w-auto h-60 -mt-4"
             />
@@ -26,11 +26,11 @@ import ThemeIcon from "@components/ThemeIcon.astro";
           <a href="/" class="nav-link text-nav-light dark:text-nav-dark">Inicio</a>
           <a href="/services" class="nav-link text-nav-light dark:text-nav-dark">Servicios</a>
           <a href="/nosotros" class="nav-link text-nav-light dark:text-nav-dark">Nosotros</a>
-          <a href="/equipo" class="nav-link text-nav-light dark:text-nav-dark">Equipo</a>
+   <!-- <a href="/equipo" class="nav-link text-nav-light dark:text-nav-dark">Equipo</a> -->
           <a href="/blog" class="nav-link text-nav-light dark:text-nav-dark">Blog</a>
         </nav>
 
-        <!-- Theme Toggle -->
+        <!-- Theme Toggle - Desktop only -->
         <div class="hidden md:block">
           <ThemeIcon />
         </div>
@@ -39,7 +39,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <button 
           id="mobile-menu-button" 
           type="button" 
-          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-gold-accent" 
+          class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gold-accent" 
           aria-controls="mobile-menu" 
           aria-expanded="false"
         >
@@ -57,20 +57,14 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     </div>
   </div>
 
-  <!-- Mobile menu - Improved design with same color scheme -->
+  <!-- Mobile menu - Always Light Mode -->
   <div id="mobile-menu" class="md:hidden hidden mx-2 mt-2">
     <div class="mobile-menu-container px-5 pt-3 pb-6 space-y-2 rounded-xl shadow-lg">
       <a href="/" class="mobile-nav-link">Inicio</a>
-      <a href="/servicios" class="mobile-nav-link">Servicios</a>
+      <a href="/services" class="mobile-nav-link">Servicios</a>
       <a href="/nosotros" class="mobile-nav-link">Nosotros</a>
-      <a href="/equipo" class="mobile-nav-link">Equipo</a>
+    <!-- <a href="/equipo" class="mobile-nav-link">Equipo</a> -->
       <a href="/blog" class="mobile-nav-link">Blog</a>
-      <a href="/contacto" class="mobile-nav-link">Contacto</a>
-      
-      <!-- Mobile Theme Toggle -->
-      <div class="py-3 flex justify-center">
-        <ThemeIcon />
-      </div>
     </div>
   </div>
 </header>
@@ -79,22 +73,21 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   /* Gold accent color */
   :root {
     --gold-accent: #daa520;
-    --menu-bg-light: rgba(243, 244, 213, 0.95); /* #F3F4D5 with opacity */
-    --menu-bg-dark: rgba(52, 53, 42, 0.95); /* Dark version of #F3F4D5 */
-    --menu-border-light: rgba(230, 232, 190, 0.5); /* Lighter version of #F3F4D5 */
-    --menu-border-dark: rgba(75, 77, 65, 0.5); /* Darker version of #F3F4D5 */
-    --text-nav-light: #4b5563; /* Gray-600 */
+    --menu-bg-light: rgba(226, 226, 224, 0.95); /* #E2E2E0 with opacity */
+    --text-nav-light: #181b20; /* Gray-600 */
     --text-nav-dark: #e5e7eb; /* Gray-200 */
   }
 
   /* Navbar background custom color */
   .navbar-bg {
-    background-color: rgba(243, 244, 213, 0.95); /* #F3F4D5 with slight transparency */
+    background-color: rgba(226, 226, 224, 0.95); /* #E2E2E0 with slight transparency */
   }
 
-  /* Dark mode navbar background */
-  :global(.dark) .navbar-bg {
-    background-color: rgba(52, 53, 42, 0.95); /* Dark version of #F3F4D5 */
+  /* Dark mode navbar background - desktop only */
+  @media (min-width: 768px) {
+    :global(.dark) .navbar-bg {
+      background-color: rgba(52, 53, 42, 0.95); 
+    }
   }
 
   /* Navigation styles */
@@ -134,21 +127,15 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     width: 100%;
   }
 
-  /* Mobile menu container - Light/Dark mode responsive */
+  /* Mobile menu container - Always Light Mode */
   .mobile-menu-container {
     background-color: var(--menu-bg-light);
     backdrop-filter: blur(10px);
-    border: 1px solid var(--menu-border-light);
+    border: 1px solid rgba(226, 226, 224, 0.5);
     transition: all 0.3s ease;
   }
 
-  /* Dark mode for mobile menu */
-  :global(.dark) .mobile-menu-container {
-    background-color: var(--menu-bg-dark);
-    border-color: var(--menu-border-dark);
-  }
-
-  /* Mobile navigation styles */
+  /* Mobile navigation styles - Always Light Mode */
   .mobile-nav-link {
     display: block;
     padding: 0.75rem 0;
@@ -162,12 +149,6 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 
   .mobile-nav-link:hover {
     color: var(--gold-accent);
-  }
-
-  /* Dark mode for mobile nav links */
-  :global(.dark) .mobile-nav-link {
-    color: #e5e7eb; /* Gray-200 */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   /* Navbar container - extended to be closer to edges */
@@ -209,4 +190,21 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 
   // Event listeners
   mobileMenuButton?.addEventListener('click', toggleMobileMenu);
+  
+  // Force light mode on mobile
+  document.addEventListener('DOMContentLoaded', function() {
+    function handleResize() {
+      // If on mobile
+      if (window.innerWidth < 768) {
+        // Remove dark class if it exists
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    
+    // Initial check
+    handleResize();
+    
+    // Listen for window resize
+    window.addEventListener('resize', handleResize);
+  });
 </script>

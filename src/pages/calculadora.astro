@@ -3,7 +3,7 @@
 import SecualOptions from "@/components/ui/forms/SecualOptions.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 import { SITE } from "@data/constants";
-import FormValidation from "@/components/FormValidation.jsx";
+
 
 interface categoriaInstalación {
   id: string;
@@ -27,6 +27,7 @@ interface subTipoInstalacion {
   tipoUnidad: "unidad" | "metro lineal";
   precio: number;
 }
+
 
 const tipoInstalacion: categoriaInstalación[] = [
   {

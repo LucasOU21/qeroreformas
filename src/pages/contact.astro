@@ -28,5 +28,8 @@ const pageTitle: string = Astro.currentLocale === "en" ? `Contact | ${SITE.title
     "inLanguage": "es-ES"
   }}
 >
-  <ContactSection />
+  <!-- Added padding class to push content below navbar -->
+  <div class="pt-28 sm:pt-32 md:pt-36">
+    <ContactSection />
+  </div>
 </MainLayout>

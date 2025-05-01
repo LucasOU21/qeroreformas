@@ -17,7 +17,6 @@ declare global {
 }
 
 // This gets the static paths for all the unique products
-
 export async function getStaticPaths() {
   const productEntries = await getCollection("products", ({ id }) =>
     id.startsWith("es/")
@@ -55,7 +54,7 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
     <div>
       <p
         id="fadeText"
-        class="mb-8 max-w-prose text-pretty font-light text-neutral-700 dark:text-neutral-300 sm:text-xl"
+        class="mb-8 max-w-prose text-pretty font-medium text-neutral-900 dark:text-neutral-100 sm:text-xl"
       >
         {product.data.main.content}
       </p>
@@ -69,7 +68,7 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
         >
           {product.data.title}
         </h1>
-        <p class="mt-3 text-lg text-neutral-600 dark:text-neutral-400">
+        <p class="mt-3 text-lg text-neutral-800 dark:text-neutral-200">
           {product.data.description}
         </p>
       </div>
@@ -115,7 +114,7 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
                 {product.data.longDescription.title}
               </h2>
               <p
-                class="mt-3 text-pretty text-neutral-600 dark:text-neutral-400"
+                class="mt-3 text-pretty text-neutral-800 dark:text-neutral-200"
               >
                 {product.data.longDescription.subTitle}
               </p>
@@ -136,7 +135,7 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
                         {list.title}
                       </h3>
                       {list.subTitle.map((st: any) => (
-                        <p class="mt-1 text-neutral-600 dark:text-neutral-400">
+                        <p class="mt-1 text-neutral-800 dark:text-neutral-200">
                           {st.parrafo}
                         </p>
                       ))}
@@ -219,7 +218,7 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
                                     {/* Iterate through each cell value in the row's description array */}
                                     {rowData.map((cellValue) => (
                                       // Render each cell value in its own <td> element
-                                      <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-neutral-600 dark:text-neutral-400">
+                                      <td class="whitespace-nowrap px-6 py-4 text-sm font-medium text-neutral-800 dark:text-neutral-200">
                                         {cellValue}
                                       </td>
                                     ))}
@@ -255,19 +254,19 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
       id="close-modal"
       class="absolute right-4 top-4 cursor-pointer text-3xl font-bold text-white"
     >
-      &times;
+      Close
     </button>
     <button
       id="right-modal"
-      class="text-shadow-md absolute right-6 top-1/2 cursor-pointer text-4xl font-extrabold text-white"
+      class="text-shadow-md absolute right-6 top-1/2 cursor-pointer text-xl font-extrabold text-white"
     >
-      &rarr;
+      Next
     </button>
     <button
       id="left-modal"
-      class="text-shadow-md absolute left-6 top-1/2 cursor-pointer text-4xl font-extrabold text-white"
+      class="text-shadow-md absolute left-6 top-1/2 cursor-pointer text-xl font-extrabold text-white"
     >
-      &larr;
+      Prev
     </button>
   </div>
 </MainLayout>
@@ -422,33 +421,30 @@ const pageTitle: string = `${product.data.title} | ${SITE.title}`;
 
     let currentIndex = 0;
 
-    // Abrir modal al hacer clic en una imagen
+    // Modal image gallery functionality
     images.forEach((img) => {
       img.addEventListener("click", () => {
         currentIndex = dataSrc.indexOf(img.currentSrc);
-        modalImage.src = img.currentSrc; // Asigna la imagen en alta resolución
-        modal.classList.remove("hidden"); // Muestra el modal
+        modalImage.src = img.currentSrc;
+        modal.classList.remove("hidden");
       });
     });
 
-    // Cerrar modal al hacer clic en el botón de cierre
     closeModalButton.addEventListener("click", () => {
-      modal.classList.add("hidden"); // Oculta el modal
+      modal.classList.add("hidden");
     });
 
-    // Navegar a la imagen siguiente al hacer clic en el botón de derecha
     rightModalButton.addEventListener("click", () => {
       currentIndex = ((currentIndex + 1) > (dataSrc.length - 1)) ? 0 : (currentIndex + 1);
       modalImage.src = dataSrc[currentIndex] ?? imageNotFound.src;
     });
 
-    // Navegar a la imagen anterior al hacer clic en el botón de izquierda
     leftModalButton.addEventListener("click", () => {
       currentIndex = ((currentIndex - 1) < 0) ? (dataSrc.length - 1) : (currentIndex - 1);
       modalImage.src = dataSrc[currentIndex] ?? imageNotFound.src;
     });
 
-    // Cerrar modal al hacer clic fuera de la imagen
+    // Close on outside click
     modal.addEventListener("click", (event) => {
       if (event.target === modal) {
         modal.classList.add("hidden");
