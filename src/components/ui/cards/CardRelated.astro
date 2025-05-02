@@ -1,104 +1,57 @@
 ---
-// Import the Image component from Astro
 import { Image } from "astro:assets";
 import { formatDate } from "@utils/utils";
-import klingerImage from "@images/blog/Klinger.jpg";
-
-// Importar directamente las imágenes de blog
 import post1Image from "@images/blog/post-1.jpg";
 import post2Image from "@images/blog/post-2.jpg";
 import post3Image from "@images/blog/post-3.jpg";
 
-// Función para determinar qué imagen usar basada en el ID del blog
-function getBlogImage(blogId) {
-  const id = blogId.split('/')[1];
-  switch(id) {
-    case "encimera-en-los-disenos-de-cocina":
-      return post1Image;
-    case "estilos-de-cocina-disenos-que-inspiran":
-      return post2Image;
-    case "tendencias-en-suelos-laminados-y-tarimas-flotantes":
-      return post3Image;
-    default:
-      return post1Image; // Imagen por defecto
-  }
-}
-
-// Define interface for component props
 interface Props {
   blogEntry: any;
-  recentBlogLocale?: string;
 }
 
-// Get the component props
-const { blogEntry, recentBlogLocale }: Props = Astro.props;
+const { blogEntry } = Astro.props;
 
-// Extract the blog post ID considering the locale if provided
-const blogID = recentBlogLocale
-  ? `/${recentBlogLocale}/blog/${blogEntry.id.split("/")[1]}`
-  : `/blog/${blogEntry.id.split("/")[1]}`;
+// Get blog URL
+const blogId = blogEntry.id.split('/')[1];
+const blogURL = `/blog/${blogEntry.id.replace(/^es\//, "")}`;
 
-// Get the correct image for this blog post
-const blogImage = getBlogImage(blogEntry.id);
+// Get image
+let blogImage = post1Image;
+if (blogId === "estilos-de-cocina-disenos-que-inspiran") {
+  blogImage = post2Image;
+} else if (blogId === "tendencias-en-suelos-laminados-y-tarimas-flotantes") {
+  blogImage = post3Image;
+}
 
-// Set the author to Klinger Mallqui for all blogs
-const author = "Klinger Mallqui";
+// Check if this is the encimeras blog
+const isEncimerasBlog = blogId === "encimera-en-los-disenos-de-cocina";
 ---
 
-<a
-  href={blogID}
-  class="group relative block rounded-xl transition hover:shadow-sm dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
->
-  <div
-    class="flex flex-col h-full rounded-xl border border-neutral-200 dark:border-neutral-700 bg-transparent transition group-hover:bg-neutral-50 dark:group-hover:bg-white/[.03]"
+<div class="group">
+  <a 
+    href={blogURL}
+    class="block overflow-hidden rounded-xl transition duration-300 hover:shadow-lg"
   >
-    <div
-      class="flex flex-col gap-3 px-4 py-4 md:px-5 md:py-4 sm:flex-row items-center sm:items-start"
-    >
-      <div class="flex-shrink-0 size-14 rounded-lg">
+    {!isEncimerasBlog && (
+      <div class="relative overflow-hidden">
         <Image
           src={blogImage}
-          alt={blogEntry.data.cardImageAlt}
-          class="h-full w-full rounded-lg"
-          draggable={"false"}
-          format={"jpg"}
-          width={64}
-          height={64}
+          alt={blogEntry.data.cardImageAlt || "Blog post image"}
+          class="h-40 w-full object-cover transition duration-500 group-hover:scale-105"
+          width={300}
+          height={160}
+          draggable="false"
+          format="jpg"
         />
       </div>
-
-      <div class="flex flex-col grow">
-        <div>
-          <h3
-            class="text-base font-semibold text-gray-800 decoration-2 group-hover:underline dark:text-neutral-200"
-          >
-            {blogEntry.data.title}
-          </h3>
-          <p class="text-sm text-neutral-500 truncate w-full block">
-            {blogEntry.data.description}
-          </p>
-        </div>
-
-        <div class="mt-1.5 flex items-center gap-x-2">
-          <Image
-            class="h-6 w-6 rounded-full"
-            src={klingerImage}
-            alt="Avatar"
-            width={24}
-            height={24}
-          />
-          <div class="flex items-center gap-1">
-            <h5
-              class="text-xs font-semibold text-neutral-800 dark:text-neutral-200"
-            >
-              {author}
-            </h5>
-            <span class="inline-block text-xs text-neutral-500">
-              • {formatDate(blogEntry.data.pubDate)}
-            </span>
-          </div>
-        </div>
-      </div>
+    )}
+    <div class="p-4">
+      <h3 class="text-lg font-bold text-neutral-800 group-hover:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500">
+        {blogEntry.data.title}
+      </h3>
+      <p class="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
+        {formatDate(blogEntry.data.pubDate)}
+      </p>
     </div>
-  </div>
-</a>
+  </a>
+</div>

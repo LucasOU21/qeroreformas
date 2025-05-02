@@ -25,22 +25,22 @@ longDescription:
 descriptionList:
   - title: "Armarios"
     subTitle:
-      - parrafo: "✔ Montamos armarios Ikea, incluyendo armario Pax Ikea, armario Brimnes Ikea y armarios modulares Ikea, asegurando un ajuste preciso y funcionalidad óptima."
-      - parrafo: "✔ Especialistas en montaje de armarios con puertas correderas, ideales para aprovechar mejor el espacio en dormitorios y vestidores." 
+      - parrafo: "Montamos armarios Ikea, incluyendo armario Pax Ikea, armario Brimnes Ikea y armarios modulares Ikea, asegurando un ajuste preciso y funcionalidad óptima."
+      - parrafo: "Especialistas en montaje de armarios con puertas correderas, ideales para aprovechar mejor el espacio en dormitorios y vestidores." 
   - title: "Camas"
     subTitle: 
-      - parrafo: "✔ Ensamblamos camas abatibles Ikea, perfectas para espacios reducidos."
-      - parrafo: "✔ Instalamos camas nido con cajones, optimizando almacenamiento y comodidad." 
-      - parrafo: "✔ Montamos camas con cajones, una solución práctica para guardar ropa de cama y otros objetos." 
+      - parrafo: "Ensamblamos camas abatibles Ikea, perfectas para espacios reducidos."
+      - parrafo: "Instalamos camas nido con cajones, optimizando almacenamiento y comodidad." 
+      - parrafo: "Montamos camas con cajones, una solución práctica para guardar ropa de cama y otros objetos." 
   - title: "Muebles de Almacenamiento"
     subTitle: 
-      - parrafo: "✔️ Montamos cómodas y mesitas de noche Ikea, asegurando estabilidad y acabados de calidad."
-      - parrafo: "✔️ Instalamos muebles de baño Ikea y muebles de baño con lavabo Leroy Merlin, brindando funcionalidad y diseño en cada instalación." 
-      - parrafo: "✔️ Colocamos repisas de pared, ideales para maximizar el espacio y mejorar la organización del hogar." 
+      - parrafo: "Montamos cómodas y mesitas de noche Ikea, asegurando estabilidad y acabados de calidad."
+      - parrafo: "Instalamos muebles de baño Ikea y muebles de baño con lavabo Leroy Merlin, brindando funcionalidad y diseño en cada instalación." 
+      - parrafo: "Colocamos repisas de pared, ideales para maximizar el espacio y mejorar la organización del hogar." 
   - title: "Sofás y Literas"
     subTitle: 
-      - parrafo: "✔️ Ensamblamos sofás cama Ikea, sofá cama Leroy Merlin, sofá cama Amazon y sofá cama de El Corte Inglés, garantizando comodidad y durabilidad."
-      - parrafo: "✔️ Instalamos literas armario, literas cajoneras y literas simples, ideales para dormitorios infantiles y habitaciones compartidas." 
+      - parrafo: "Ensamblamos sofás cama Ikea, sofá cama Leroy Merlin, sofá cama Amazon y sofá cama de El Corte Inglés, garantizando comodidad y durabilidad."
+      - parrafo: "Instalamos literas armario, literas cajoneras y literas simples, ideales para dormitorios infantiles y habitaciones compartidas." 
 specificationsLeft:
   - title: "Armario"
     subTitle: "@/images/armario.jpg"

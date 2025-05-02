@@ -25,9 +25,9 @@ longDescription:
 descriptionList:
   - title: "Subservicios"
     subTitle:
-      - parrafo: "✔ Instalamos muebles altos de cocina y muebles bajos de cocina, asegurando un ajuste perfecto."
-      - parrafo: "✔ Montamos electrodomésticos panelados, campanas extractoras y encimeras." 
-      - parrafo: "✔ Diseño e instalación de cocinas Ikea y Leroy Merlin." 
+      - parrafo: "Instalamos muebles altos de cocina y muebles bajos de cocina, asegurando un ajuste perfecto."
+      - parrafo: "Montamos electrodomésticos panelados, campanas extractoras y encimeras." 
+      - parrafo: "Diseño e instalación de cocinas Ikea y Leroy Merlin." 
 specificationsLeft:
   - title: "Muebles altos"
     subTitle: "@/images/muebles-altos.jpg"

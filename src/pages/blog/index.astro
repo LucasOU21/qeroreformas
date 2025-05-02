@@ -3,6 +3,7 @@
 import MainLayout from "@/layouts/MainLayout.astro";
 import CardBlog from "@components/ui/cards/CardBlog.astro";
 import CardBlogRecent from "@components/ui/cards/CardBlogRecent.astro";
+// import CardInsight from "@components/ui/cards/CardInsight.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
@@ -27,47 +28,36 @@ const pageTitle: string = `Blog | ${SITE.title}`;
 ---
 
 <style>
-  /* Estilo para asegurar que el texto aparezca encima de la imagen en móviles */
+  /* Custom styles for Kalia branding */
+  :root {
+    --kalia-primary: #daa520; /* Gold color for Kalia */
+    --kalia-secondary: #333333;
+    --kalia-accent: #f5f5f5;
+  }
+  
+  h1, h2, h3, h4 {
+    font-family: 'Georgia', serif !important;
+  }
+  
+  p, span, a, li {
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  a:hover {
+    color: var(--kalia-primary) !important;
+  }
+  
+  /* Adjusted spacing for title section */
+  .title-section {
+    padding-top: 8rem !important; /* Increased padding to lower the title */
+    margin-bottom: 2rem;
+  }
+  
+  /* Extra padding for mobile */
   @media (max-width: 768px) {
-    .mobile-text-first {
-      display: flex;
-      flex-direction: column;
+    .title-section {
+      padding-top: 10rem !important;
     }
-    
-    .mobile-text-first .text-content {
-      order: 1;
-      margin-bottom: 1rem;
-    }
-    
-    .mobile-text-first .image-content {
-      order: 2;
-    }
-  }
-  
-  /* Extra padding to prevent navbar overlap */
-  section:first-of-type {
-    padding-top: 8rem !important; /* Further increased padding to ensure no overlap */
-  }
-  
-  @media (max-width: 768px) {
-    section:first-of-type {
-      padding-top: 7rem !important; /* More padding on mobile */
-    }
-  }
-  
-  /* Gold color scheme for consistency */
-  :global(a:hover), :global(h3:hover) {
-    color: #daa520 !important;
-  }
-  
-  /* Ensure the blog overlay text is visible and properly styled */
-  :global(.absolute.top-0), :global(.absolute.top-16) {
-    z-index: 20;
-  }
-  
-  /* Add text shadow for better readability */
-  :global(.absolute h3) {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
   }
 </style>
 
@@ -76,14 +66,14 @@ const pageTitle: string = `Blog | ${SITE.title}`;
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/blog",
-    url: "https://qeroreformas.com/blog",
+    "@id": "https://kaliareformas.com/blog",
+    url: "https://kaliareformas.com/blog",
     name: "Blog | Kalia Reformas",
     description:
       "Descubre ideas, tendencias y soluciones prácticas para reformar y construir espacios que cuenten tu historia con Kalia Reformas y Decoración.",
     isPartOf: {
       "@type": "WebSite",
-      url: "https://qeroreformas.com",
+      url: "https://kaliareformas.com",
       name: "Kalia Reformas",
       description:
         "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú.",
@@ -91,8 +81,9 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     inLanguage: "es-ES",
   }}
 >
+  <!-- Title section with increased top padding -->
   <section
-    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-32 sm:px-6 lg:px-8 2xl:max-w-full"
+    class="title-section mx-auto max-w-[85rem] space-y-8 px-4 sm:px-6 lg:px-8 2xl:max-w-full"
   >
     <!--Page header-->
     <div class="mx-auto max-w-3xl text-left sm:text-center">
@@ -116,31 +107,17 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     <!--Blog posts grid-->
     <div class="grid gap-6 lg:grid-cols-2">
       {
-        blogPosts.length > 0 ? (
-          blogPosts.map((blogEntry, index) => {
-            // Verificar que blogEntry no sea undefined y tenga datos
-            if (!blogEntry || !blogEntry.data) {
-              console.error("Blog entry undefined or missing data:", blogEntry);
-              return null;
-            }
-
-            if (index % 2 === 0 && index !== 0) {
-              return (
-                <section class="col-span-1 lg:col-span-2 mobile-text-first">
-                  <CardBlogRecent blogEntry={blogEntry} />
-                </section>
-              );
-            } else {
-              return <CardBlog blogEntry={blogEntry} />;
-            }
-          })
-        ) : (
-          <div class="col-span-2 text-center py-10">
-            <p class="text-lg text-neutral-600 dark:text-neutral-400">
-              No hay entradas de blog disponibles en este momento.
-            </p>
-          </div>
-        )
+        blogPosts.map((blogEntry, index) => {
+          if (index % 2 === 0 && index !== 0) {
+            return (
+              <section class="col-span-1 lg:col-span-2">
+                <CardBlogRecent blogEntry={blogEntry} />
+              </section>
+            );
+          } else {
+            return <CardBlog blogEntry={blogEntry} />;
+          }
+        })
       }
     </div>
   </section>

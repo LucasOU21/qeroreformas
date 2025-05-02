@@ -25,11 +25,11 @@ longDescription:
 descriptionList:
   - title: "Subservicios"
     subTitle:
-      - parrafo: "✔ Reemplazo de cisterna inodoro e inodoro completo."
-      - parrafo: "✔ Montaje de cortinas, espejos y estores." 
-      - parrafo: "✔ Instalación de lámparas colgantes y plafones LED." 
-      - parrafo: "✔ Montaje de TV en pared." 
-      - parrafo: "✔ Cambio de bombillas y otros accesorios." 
+      - parrafo: "Reemplazo de cisterna inodoro e inodoro completo."
+      - parrafo: "Montaje de cortinas, espejos y estores." 
+      - parrafo: "Instalación de lámparas colgantes y plafones LED." 
+      - parrafo: "Montaje de TV en pared." 
+      - parrafo: "Cambio de bombillas y otros accesorios." 
 specificationsLeft:
   - title: " "
     subTitle: "@/images/manitas-galery1.jpg"

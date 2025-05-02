@@ -35,7 +35,7 @@ interface Props {
       <!-- Section's heading and tab navigation -->
       <div class="mb-10 lg:order-2 lg:col-span-6 lg:col-start-6 lg:mb-0">
         <h2
-          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-3xl"
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-3xl font-georgia"
         >
           <!-- About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments -->
           <Fragment set:html={title} />
@@ -43,7 +43,7 @@ interface Props {
         
         <!-- Tab navigation - use the attribute 'first' in the first TabNav for the component to work -->
         <nav 
-          class="mt-8 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2" 
+          class="mt-8 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2 font-poppins" 
           aria-label="Tabs" 
           role="tablist"
         >
@@ -102,27 +102,60 @@ interface Props {
 </script>
 
 <style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  /* Font classes */
+  .font-georgia {
+    font-family: 'Georgia', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
   nav[role="tablist"] {
     display: grid;
     gap: 1rem;
   }
 
-  /* Make active tabs more prominent with gold accent */
+  /* Make active tabs more prominent with gold accent using the #FFD000 color */
   :global(.hs-tab-active) {
-    border-color: #daa520 !important;
-    box-shadow: 0 4px 12px rgba(218, 165, 32, 0.15) !important;
+    border-color: #FFD000 !important;
+    box-shadow: 0 4px 12px rgba(255, 208, 0, 0.15) !important;
   }
 
   :global(.dark .hs-tab-active) {
-    border-color: #daa520 !important;
-    background-color: rgba(218, 165, 32, 0.1) !important;
+    border-color: #FFD000 !important;
+    background-color: rgba(255, 208, 0, 0.1) !important;
   }
 
   /* Improve tab hover states */
   :global([data-hs-tab]:hover:not(.hs-tab-active)) {
-    background-color: rgba(218, 165, 32, 0.05);
+    background-color: rgba(255, 208, 0, 0.05);
     transform: translateY(-2px);
     transition: all 0.3s ease;
+  }
+
+  /* Enhance tab text colors */
+  :global(.tab-heading) {
+    font-family: 'Georgia', serif;
+    color: #000000;
+    font-weight: 600;
+  }
+
+  :global(.dark .tab-heading) {
+    color: #F8F1E7;
+  }
+
+  :global(.tab-content) {
+    font-family: 'Poppins', sans-serif;
+    color: #000000;
+    font-weight: 400;
+  }
+
+  :global(.dark .tab-content) {
+    color: #F8F1E7;
   }
 
   /* Enhance image appearance */
@@ -134,46 +167,45 @@ interface Props {
 
   :global(.dark .tab-image) {
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  
   }
 
   /* 
- * Add these styles to your FeatureNav.astro component
- * or to a global CSS file to properly hide it on mobile
- */
+  * Add these styles to your FeatureNav.astro component
+  * or to a global CSS file to properly hide it on mobile
+  */
 
-/* Hide FeatureNav on mobile devices but show on larger screens */
-.feature-nav {
-  display: none;
-}
-
-@media (min-width: 768px) {
+  /* Hide FeatureNav on mobile devices but show on larger screens */
   .feature-nav {
-    display: block;
-  }
-}
-
-/* If you need to override any existing mobile styles */
-@media (max-width: 767px) {
-  .feature-nav,
-  nav[class*="feature"],
-  [id*="feature-nav"],
-  [class*="feature-nav"] {
-    display: none !important;
-    height: 0 !important;
-    opacity: 0 !important;
-    overflow: hidden !important;
-    visibility: hidden !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: absolute !important;
-    pointer-events: none !important;
+    display: none;
   }
 
-  /* This removes any space that might be reserved for the nav */
-  .feature-nav-container {
-    display: none !important;
-    height: 0 !important;
+  @media (min-width: 768px) {
+    .feature-nav {
+      display: block;
+    }
   }
-}
+
+  /* If you need to override any existing mobile styles */
+  @media (max-width: 767px) {
+    .feature-nav,
+    nav[class*="feature"],
+    [id*="feature-nav"],
+    [class*="feature-nav"] {
+      display: none !important;
+      height: 0 !important;
+      opacity: 0 !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: absolute !important;
+      pointer-events: none !important;
+    }
+
+    /* This removes any space that might be reserved for the nav */
+    .feature-nav-container {
+      display: none !important;
+      height: 0 !important;
+    }
+  }
 </style>

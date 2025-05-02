@@ -1,9 +1,9 @@
 ---
 title: "Tendencias en Suelos Laminados y Tarimas Flotantes: Elegancia y Funcionalidad para Tu Hogar"
 description: "Los suelos laminados y las tarimas flotantes se han convertido en una de las opciones más populares en los proyectos de reformas y decoración."
-author: "Kligen Mallqui"
-authorImage: "@/images/blog/avatar.png"
-authorImageAlt: "Avatar Description"
+author: "Klinger Mallqui"
+authorImage: "src/images/blog/Klinger.jpg"
+authorImageAlt: "Klinger Mallqui"
 pubDate: 2025-02-11
 cardImage: "@/images/blog/post-3.jpg"
 cardImageAlt: "Tendencias en Suelos Laminados y Tarimas Flotantes: Elegancia y Funcionalidad para Tu Hogar"

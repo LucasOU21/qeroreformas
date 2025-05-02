@@ -1,7 +1,11 @@
 ---
 // Import necessary components and utilities
 import MainLayout from "@/layouts/MainLayout.astro";
+import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
 import CardRelated from "@components/ui/cards/CardRelated.astro";
+// import Bookmark from "@components/ui/buttons/Bookmark.astro";
+// import SocialShare from "@components/ui/buttons/SocialShare.astro";
+// import PostFeedback from "@components/ui/feedback/PostFeedback.astro";
 import { Image } from "astro:assets";
 import { capitalize, formatDate } from "@utils/utils";
 import { getCollection } from "astro:content";
@@ -9,13 +13,13 @@ import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 import klingerImage from "@images/blog/Klinger.jpg";
 
-// Importar directamente las imágenes de blog
+// Import blog images
 import post1Image from "@images/blog/post-1.jpg";
 import post2Image from "@images/blog/post-2.jpg";
 import post3Image from "@images/blog/post-3.jpg";
 
-// Función para determinar qué imagen usar basada en el ID del blog
-function getBlogImage(blogId) {
+// Function to get correct image based on blog ID
+function getBlogImage(blogId: string): typeof post1Image | typeof post2Image | typeof post3Image {
   const id = blogId.split('/')[1];
   switch(id) {
     case "encimera-en-los-disenos-de-cocina":
@@ -25,7 +29,7 @@ function getBlogImage(blogId) {
     case "tendencias-en-suelos-laminados-y-tarimas-flotantes":
       return post3Image;
     default:
-      return post1Image; // Imagen por defecto
+      return post1Image; // Default image
   }
 }
 
@@ -58,12 +62,35 @@ const relatedPosts: CollectionEntry<"blog">[] = blogPosts.filter(
 
 const pageTitle: string = `${post.data.title} | Kalia Reformas`;
 
-// Get the correct image for this blog post
-const blogImage = getBlogImage(post.id);
+// Get blog image
+const blogId: string = post.id;
+const blogImage = getBlogImage(blogId);
+
+// Check if encimeras blog
+const isEncimerasBlog: boolean = blogId.includes("encimera-en-los-disenos-de-cocina");
 ---
 
 <style>
-  /* Estilo para asegurar que el texto aparezca encima de la imagen en móviles */
+  /* Custom styles for Kalia branding */
+  :root {
+    --kalia-primary: #daa520; /* Gold color for Kalia */
+    --kalia-secondary: #333333;
+    --kalia-accent: #f5f5f5;
+  }
+  
+  h2, h3, h4 {
+    font-family: 'Georgia', serif !important;
+  }
+  
+  p, span, a, li {
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  a:hover {
+    color: var(--kalia-primary) !important;
+  }
+  
+  /* Mobile styles for images */
   @media (max-width: 768px) {
     .image-after-text {
       display: flex;
@@ -86,7 +113,7 @@ const blogImage = getBlogImage(post.id);
     <div class="max-w-2xl">
       <div class="mb-6 flex items-center justify-between">
         <div class="flex w-full gap-x-5 sm:items-center sm:gap-x-3">
-          <!-- Avatar con la imagen de Klinger -->
+          <!-- Avatar with Klinger image -->
           <div class="inline-block h-12 w-12 overflow-hidden rounded-full">
             <Image
               src={klingerImage}
@@ -124,26 +151,55 @@ const blogImage = getBlogImage(post.id);
       <!--Blog post contents-->
       <div class="mb-5 space-y-5 md:mb-8 md:space-y-8">
         {
-          post.data.contents.map((content: string, index: any) =>
-            index === 1 ? (
-              <div class="image-after-text">
-                <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 text-content ${((content).length <= 45 ) ? "font-bold" : ""}`}>
+          post.data.contents.map((content: string, index: number) => {
+            if (index === 0) {
+              return (
+                <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${content.length <= 45 ? "font-bold" : ""}`}>
                   {content}
                 </p>
-                <Image
-                  class="w-full rounded-xl object-cover image-content"
-                  src={blogImage}
-                  alt={post.data.cardImageAlt}
-                  draggable={"false"}
-                  format={"jpg"}
-                />
-              </div>
-            ) : (
-              <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${((content).length <= 45 ) ? "font-bold" : ""}`}>
-                {content}
-              </p>
-            )
-          )
+              );
+            } else if (index === 1) {
+              return (
+                <div class="image-after-text">
+                  <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 text-content ${content.length <= 45 ? "font-bold" : ""}`}>
+                    {content}
+                  </p>
+                  <div class="image-content">
+                    <Image
+                      class="w-full rounded-xl object-cover"
+                      src={post1Image}
+                      alt="Featured blog image"
+                      draggable="false"
+                      format="jpg"
+                    />
+                  </div>
+                </div>
+              );
+            } else if (index === 2 && !isEncimerasBlog) {
+              return (
+                <div class="image-after-text">
+                  <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 text-content ${content.length <= 45 ? "font-bold" : ""}`}>
+                    {content}
+                  </p>
+                  <div class="image-content">
+                    <Image
+                      class="w-full rounded-xl object-cover"
+                      src={blogImage}
+                      alt={post.data.cardImageAlt || "Blog image"}
+                      draggable="false"
+                      format="jpg"
+                    />
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${content.length <= 45 ? "font-bold" : ""}`}>
+                  {content}
+                </p>
+              );
+            }
+          })
         }
       </div>
       <div
@@ -176,7 +232,9 @@ const blogImage = getBlogImage(post.id);
     </div>
 
     <div class="grid grid-cols-2 gap-6">
-      {relatedPosts.map((entry) => <CardRelated blogEntry={entry} />)}
+      {relatedPosts.map((entry) => (
+        <CardRelated blogEntry={entry} />
+      ))}
     </div>
   </section>
 </MainLayout>

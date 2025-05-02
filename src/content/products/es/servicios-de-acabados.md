@@ -25,8 +25,8 @@ longDescription:
 descriptionList:
   - title: "Detalle"
     subTitle:
-      - parrafo: "✔ Pintura de alta calidad para interiores."
-      - parrafo: "✔ Colocación de papel pintado moderno y decorativo." 
+      - parrafo: "Pintura de alta calidad para interiores."
+      - parrafo: "Colocación de papel pintado moderno y decorativo." 
 specificationsLeft:
   - title: " "
     subTitle: "@/images//acabados-galery1.jpg"

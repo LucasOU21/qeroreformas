@@ -1,9 +1,9 @@
 ---
 title: "Funcionalidad y Estilo: El Uso de Encimeras en los Diseños de Cocina"
 description: "Las encimeras son uno de los elementos más importantes en cualquier diseño de cocina."
-author: "Kligen Mallqui"
-authorImage: "@/images/blog/avatar.png"
-authorImageAlt: "Avatar Description"
+author: "Klinger Mallqui"
+authorImage: "src/images/blog/Klinger.jpg"
+authorImageAlt: "Klinger Mallqui"
 pubDate: 2025-02-09
 cardImage: "@/images/blog/post-1.jpg"
 cardImageAlt: "Encimera en los diseños de cocina"

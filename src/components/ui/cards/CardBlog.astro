@@ -1,172 +1,70 @@
 ---
+// Import necessary components and utilities
+import AvatarBlog from "@components/ui/avatars/AvatarBlog.astro";
 import { Image } from "astro:assets";
 import { formatDate } from "@utils/utils";
-import klingerImage from "@images/blog/Klinger.jpg";
+import type { CollectionEntry } from "astro:content";
 
-// Blog post images
-import post1Image from "@images/blog/post-1.jpg";
-import post2Image from "@images/blog/post-2.jpg";
-import post3Image from "@images/blog/post-3.jpg";
+const { blogEntry, blogLocale = "" } = Astro.props;
 
-// Choose image based on blog ID
-function getBlogImage(blogId) {
-  const id = blogId.split('/')[1];
-  switch (id) {
-    case "encimera-en-los-disenos-de-cocina":
-      return post1Image;
-    case "estilos-de-cocina-disenos-que-inspiran":
-      return post2Image;
-    case "tendencias-en-suelos-laminados-y-tarimas-flotantes":
-      return post3Image;
-    default:
-      return post1Image; // default image
-  }
-}
-
-// Component props
 interface Props {
-  blogEntry: any;
+  blogEntry: CollectionEntry<"blog">;
   blogLocale?: string;
 }
-
-// Get props
-const { blogEntry, blogLocale }: Props = Astro.props;
-
-// Build blog URL
-const blogID = blogLocale
-  ? `/${blogLocale}/blog/${blogEntry.id.split("/")[1]}`
-  : `/blog/${blogEntry.id.split("/")[1]}`;
-
-// Select image
-const blogImage = getBlogImage(blogEntry.id);
-
-// Author
-const author = "Klinger Mallqui";
 ---
 
-<div class="group flex flex-col h-full rounded-xl hover:shadow-xl transition-all duration-300">
-  
-  <!-- Image wrapper -->
-  <div class="aspect-w-16 aspect-h-10 relative rounded-t-xl group">
-    <a class="absolute inset-0 z-10" href={blogID}>
-      <Image
-        src={blogImage}
-        alt={blogEntry.data.cardImageAlt}
-        class="h-full w-full rounded-t-xl object-cover"
-        draggable={"false"}
-        format={"jpg"}
-      />
-    </a>
-    
-    <!-- Category badge -->
-    <span
-      class="absolute start-0 top-0 rounded-se-xl rounded-ts-xl bg-neutral-100/80 px-3 py-1.5 text-xs font-medium text-neutral-800 backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200"
-    >
-      {blogEntry.data.category}
-    </span>
-    
-    <!-- Text overlay for encimera post -->
-    {blogEntry.id.includes("encimera-en-los-disenos-de-cocina") && (
-      <div
-        class="absolute inset-0 flex flex-col justify-end p-4 bg-black/40 rounded-t-xl"
-      >
-        <h3 class="text-white text-xl font-bold mb-2">
-          Funcionalidad y Estilo: El Uso de Encimeras en los Diseños de Cocina
-        </h3>
-        <p class="text-white text-sm mb-3">
-          Las encimeras son uno de los elementos más importantes en cualquier diseño de cocina.
-        </p>
-        <div class="flex items-center gap-x-2">
-          <Image
-            class="h-8 w-8 rounded-full"
-            src={klingerImage}
-            alt="Avatar"
-            width={32}
-            height={32}
-          />
-          <span class="text-white text-sm font-semibold">{author}</span>
-        </div>
-      </div>
-    )}
-
-    <!-- Text overlay for estilos de cocina post -->
-    {blogEntry.id.includes("estilos-de-cocina-disenos-que-inspiran") && (
-      <div
-        class="absolute inset-0 flex flex-col justify-end p-4 bg-black/40 rounded-t-xl"
-      >
-        <h3 class="text-white text-xl font-bold mb-2">
-          Principales Estilos de Cocina: Diseños que Inspiran
-        </h3>
-        <p class="text-white text-sm mb-3">
-          El diseño de las cocinas ha evolucionado a lo largo de los años para adaptarse a los gustos y necesidades de cada persona.
-        </p>
-        <div class="flex items-center gap-x-2">
-          <Image
-            class="h-8 w-8 rounded-full"
-            src={klingerImage}
-            alt="Avatar"
-            width={32}
-            height={32}
-          />
-          <span class="text-white text-sm font-semibold">{author}</span>
-        </div>
-      </div>
-    )}
-
-    <!-- Text overlay for suelos laminados post -->
-    {blogEntry.id.includes("tendencias-en-suelos-laminados-y-tarimas-flotantes") && (
-      <div
-        class="absolute inset-0 flex flex-col justify-end p-4 bg-black/40 rounded-t-xl"
-      >
-        <h3 class="text-white text-xl font-bold mb-2">
-          Tendencias en Suelos Laminados y Tarimas Flotantes: Elegancia y Funcionalidad para Tu Hogar
-        </h3>
-        <p class="text-white text-sm mb-3">
-          Los suelos laminados y las tarimas flotantes se han convertido en una de las opciones más populares en los proyectos de reformas y decoración.
-        </p>
-        <div class="flex items-center gap-x-2">
-          <Image
-            class="h-8 w-8 rounded-full"
-            src={klingerImage}
-            alt="Avatar"
-            width={32}
-            height={32}
-          />
-          <span class="text-white text-sm font-semibold">{author}</span>
-        </div>
-      </div>
-    )}
+<!-- The following anchor tag is the main container for the card.
+     It's a link to the blog post detailed page.
+     The data-astro-prefetch is an Astro specific Dynamic HTML feature,
+     which automatically prefetches the linked page to speed up navigation. -->
+<a
+  class="group relative block rounded-xl outline-none ring-zinc-500 transition duration-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
+  href={blogLocale && blogLocale !== "en"
+    ? `/${blogLocale}/blog/${blogEntry.id.replace(/^en\//, "")}/`
+    : `/blog/${blogEntry.id.replace(/^es\//, "")}/`}
+  data-astro-prefetch
+>
+  <!-- The container for the blog post's cover image. Uses astro:assets' Image for image source -->
+  <div
+    class="relative h-[350px] w-full flex-shrink-0 overflow-hidden rounded-xl before:absolute before:inset-x-0 before:z-[1] before:size-full before:bg-gradient-to-t before:from-neutral-900/[.7]"
+  >
+    <Image
+      class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
+      src={blogEntry.data.cardImage}
+      alt={blogEntry.data.cardImageAlt}
+      draggable={"false"}
+      loading={"eager"}
+      format={"jpg"}
+    />
   </div>
-  
-  <!-- Blog content below -->
-  <div class="flex h-full flex-col rounded-b-xl border border-neutral-200 p-4 dark:border-neutral-700 md:p-5">
-    <div class="my-3">
-      <a
-        href={blogID}
-        class="text-xl font-bold text-neutral-800 decoration-2 hover:underline dark:text-neutral-200"
+  <!-- The container for the blog author's avatar and associated metadata (author name and publication date) -->
+  <div class="absolute inset-x-0 top-0 z-10">
+    <div class="flex h-full flex-col p-4 sm:p-6">
+      <div class="flex items-center">
+        <AvatarBlog blogEntry={blogEntry} />
+
+        <div class="ms-2.5 sm:ms-4">
+          <h4 class="font-bold text-neutral-50">
+            {blogEntry.data.author}
+          </h4>
+          <p class="text-xs text-neutral-50/[.8]">
+            {formatDate(blogEntry.data.pubDate)}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- The container for the blog post's title and description -->
+  <div class="absolute inset-x-0 bottom-0 z-10">
+    <div class="flex h-full flex-col p-4 sm:p-6">
+      <h3
+        class="text-balance text-lg font-bold text-neutral-50 group-hover:text-neutral-50/[.8] sm:text-3xl"
       >
         {blogEntry.data.title}
-      </a>
-      <p class="mt-3 text-neutral-600 dark:text-neutral-400">
+      </h3>
+      <p class="mt-2 text-pretty text-neutral-50/[.8]">
         {blogEntry.data.description}
       </p>
     </div>
-    <div class="mt-auto flex items-center gap-x-3">
-      <Image
-        class="h-8 w-8 rounded-full"
-        src={klingerImage}
-        alt="Avatar"
-        width={32}
-        height={32}
-      />
-      <div>
-        <h5 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-          {author}
-        </h5>
-        <span class="block text-xs text-neutral-500">
-          {formatDate(blogEntry.data.pubDate)}
-        </span>
-      </div>
-    </div>
   </div>
-</div>
+</a>
