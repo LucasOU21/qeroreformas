@@ -9,8 +9,13 @@ import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
 // Get all blogs post in Spanish and sort them based on publish date
-const spanishBlogEntries = await getCollection("blog", ({ id }) => {
-  return id.startsWith("es/");
+// Filter out any blog that contains encimera in its id or title
+const spanishBlogEntries = await getCollection("blog", ({ id, data }) => {
+  return id.startsWith("es/") && 
+         !id.includes("encimera-en-los-disenos-de-cocina") && 
+         !id.includes("uso-de-encimeras-diseno-cocina") &&
+         !data.title.includes("Encimera") && 
+         !data.title.includes("encimera");
 });
 
 const blogPosts: CollectionEntry<"blog">[] = spanishBlogEntries.sort(

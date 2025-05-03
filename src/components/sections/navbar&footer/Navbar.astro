@@ -7,7 +7,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   <div class="navbar-container w-full max-w-none px-4 sm:px-8 lg:px-12">
     <div class="flex items-center justify-between navbar-bg backdrop-blur-sm px-4 sm:px-8 py-2 shadow-sm rounded-xl mx-2 sm:mx-4">
       <!-- Logo - moved more to the left with negative margin -->
-      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden -ml-6 sm:-ml-15">
+      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden" style="margin-left: -24px;">
         <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
           <div class="flex-shrink-0 py-4">
             <img 
@@ -25,7 +25,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
       </div>
 
       <!-- Right side with nav links and theme toggle -->
-      <div class="flex items-center space-x-8">
+      <div class="flex items-center space-x-2 md:space-x-8">
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-8">
           <a href="/" class="nav-link text-sm">Inicio</a>
@@ -54,8 +54,8 @@ import ThemeIcon from "@components/ThemeIcon.astro";
           <a href="/blog" class="nav-link text-sm">Blog</a>
         </nav>
 
-        <!-- Theme Toggle - Desktop only -->
-        <div class="hidden md:block">
+        <!-- Theme Toggle - Show on both desktop and mobile now -->
+        <div class="flex items-center">
           <ThemeIcon />
         </div>
 
@@ -63,7 +63,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
         <button 
           id="mobile-menu-button" 
           type="button" 
-          class="md:hidden inline-flex items-center justify-center p-1.5 rounded-md text-gray-700 hover:text-[#FFD000]" 
+          class="md:hidden inline-flex items-center justify-center p-1.5 rounded-md text-gray-700 hover:text-[#FFD000] dark:text-gray-300 dark:hover:text-[#FFD000]" 
           aria-controls="mobile-menu" 
           aria-expanded="false"
         >
@@ -81,21 +81,50 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     </div>
   </div>
 
-  <!-- Mobile menu - Always Light Mode -->
+  <!-- Improved Mobile menu with accordion-style dropdown -->
   <div id="mobile-menu" class="md:hidden hidden mx-2 mt-2">
-    <div class="mobile-menu-container px-5 pt-2 pb-4 space-y-1.5 rounded-xl shadow-lg mx-2 sm:mx-4">
+    <div class="mobile-menu-container px-5 pt-4 pb-6 space-y-2 rounded-xl shadow-lg mx-2 sm:mx-4 bg-white dark:bg-black dark:border-gray-800">
+      <!-- Mobile nav items -->
       <a href="/" class="mobile-nav-link">Inicio</a>
-      <a href="/services" class="mobile-nav-link">Servicios</a>
-      <!-- Mobile Submenu for Services -->
-      <div class="pl-4 space-y-1 hidden" id="mobile-services-submenu">
-        <a href="/services/montaje-de-muebles" class="mobile-nav-link text-sm pl-4 bg-gray-50">Montaje de Muebles</a>
-        <a href="/services/diseno-de-muebles" class="mobile-nav-link text-sm pl-4 bg-gray-50">Diseño de Muebles</a>
-        <a href="/services/intalacion-cocinas-electrodomesticos" class="mobile-nav-link text-sm pl-4 bg-gray-50">Cocinas y Electrodomésticos</a>
-        <a href="/services/reformas-de-vivienda" class="mobile-nav-link text-sm pl-4 bg-gray-50">Reformas de Vivienda</a>
-        <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="mobile-nav-link text-sm pl-4 bg-gray-50">Puertas, Tarima y Rodapiés</a>
-        <a href="/services/servicios-de-acabados" class="mobile-nav-link text-sm pl-4 bg-gray-50">Servicios de Acabados</a>
-        <a href="/services/manitas" class="mobile-nav-link text-sm pl-4 bg-gray-50">Manitas</a>
+      
+      <!-- Improved Mobile Services Dropdown -->
+      <div class="mobile-dropdown">
+        <!-- Services button with chevron -->
+        <button id="mobile-services-button" class="w-full text-left flex items-center justify-between px-2 py-3 text-neutral-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg">
+          <span class="font-medium">Servicios</span>
+          <svg id="mobile-services-chevron" xmlns="http://www.w3.org/2000/svg" 
+               class="h-5 w-5 text-neutral-500 dark:text-neutral-400 transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        
+        <!-- Mobile Submenu with improved styling -->
+        <div id="mobile-services-submenu" class="overflow-hidden hidden mt-1 space-y-1">
+          <a href="/services/montaje-de-muebles" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Montaje de Muebles
+          </a>
+          <a href="/services/diseno-de-muebles" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Diseño de Muebles
+          </a>
+          <a href="/services/intalacion-cocinas-electrodomesticos" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Cocinas y Electrodomésticos
+          </a>
+          <a href="/services/reformas-de-vivienda" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Reformas de Vivienda
+          </a>
+          <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Puertas, Tarima y Rodapiés
+          </a>
+          <a href="/services/servicios-de-acabados" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Servicios de Acabados
+          </a>
+          <a href="/services/manitas" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Manitas
+          </a>
+        </div>
       </div>
+      
       <a href="/nosotros" class="mobile-nav-link">Nosotros</a>
       <!-- <a href="/equipo" class="mobile-nav-link">Equipo</a> -->
       <a href="/blog" class="mobile-nav-link">Blog</a>
@@ -111,6 +140,7 @@ import ThemeIcon from "@components/ThemeIcon.astro";
   :root {
     --gold-accent: #FFD000;
     --menu-bg-light: #FFFFFF; /* Pure white */
+    --menu-bg-dark: #000000; /* Black for dark mode */
     --text-color-light: #000000; /* Black text */
     --text-color-dark: #F8F1E7; /* Beige text */
   }
@@ -128,12 +158,10 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     border: 1px solid rgba(0, 0, 0, 0.05);
   }
 
-  /* Dark mode navbar background - desktop only */
-  @media (min-width: 768px) {
-    :global(.dark) .navbar-bg {
-      background-color: #000000; /* Midnight black for dark mode */
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
+  /* Dark mode navbar background */
+  :global(.dark) .navbar-bg {
+    background-color: #000000; /* Midnight black for dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   /* Navigation styles */
@@ -170,39 +198,64 @@ import ThemeIcon from "@components/ThemeIcon.astro";
     width: 100%;
   }
 
-  /* Mobile menu container - Always Light Mode */
+  /* Mobile menu container - Support Dark Mode */
   .mobile-menu-container {
-    background-color: var(--menu-bg-light);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
   }
 
-  /* Mobile navigation styles - Always Light Mode */
+  :global(.dark) .mobile-menu-container {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Mobile navigation styles */
   .mobile-nav-link {
     display: block;
-    padding: 0.65rem 0;
+    padding: 0.75rem 0.5rem;
     color: var(--text-color-light);
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 0.95rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+  }
+
+  :global(.dark) .mobile-nav-link {
+    color: var(--text-color-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .mobile-nav-link:hover {
     color: var(--gold-accent);
+    background-color: rgba(0, 0, 0, 0.02);
   }
   
-  /* Mobile submenu transition */
+  :global(.dark) .mobile-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Mobile dropdown styling */
+  .mobile-dropdown {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  :global(.dark) .mobile-dropdown {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Mobile submenu animation */
   #mobile-services-submenu {
     max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+    opacity: 0;
   }
   
   #mobile-services-submenu.expanded {
-    max-height: 500px; /* Set a large enough value to accommodate all items */
+    max-height: 500px;
+    transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
+    opacity: 1;
   }
 
   /* Navbar container - extended to be full width */
@@ -213,81 +266,56 @@ import ThemeIcon from "@components/ThemeIcon.astro";
 </style>
 
 <script>
-  // DOM elements
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerIcon = mobileMenuButton?.querySelector('svg:nth-child(1)');
-  const closeIcon = mobileMenuButton?.querySelector('svg:nth-child(2)');
-  const mobileServicesLink = document.querySelector('.mobile-nav-link[href="/services"]');
-  const mobileServicesSubmenu = document.getElementById('mobile-services-submenu');
+  document.addEventListener('DOMContentLoaded', function() {
+    // DOM elements
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = mobileMenuButton?.querySelector('svg:nth-child(1)');
+    const closeIcon = mobileMenuButton?.querySelector('svg:nth-child(2)');
+    const mobileServicesButton = document.getElementById('mobile-services-button');
+    const mobileServicesSubmenu = document.getElementById('mobile-services-submenu');
+    const mobileServicesChevron = document.getElementById('mobile-services-chevron');
 
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    const expanded = mobileMenuButton?.getAttribute('aria-expanded') === 'true';
-    
-    mobileMenuButton?.setAttribute('aria-expanded', (!expanded).toString());
-    mobileMenu?.classList.toggle('hidden', expanded);
-    
-    if (hamburgerIcon && closeIcon) {
-      hamburgerIcon.classList.toggle('hidden', !expanded);
-      closeIcon.classList.toggle('hidden', expanded);
-    }
-  }
-
-  // Toggle services submenu on mobile
-  if (mobileServicesLink) {
-    mobileServicesLink.addEventListener('click', function(e) {
-      // Prevent navigating to the services page
-      e.preventDefault();
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const expanded = mobileMenuButton?.getAttribute('aria-expanded') === 'true';
       
-      // Toggle the visibility of the submenu
-      if (mobileServicesSubmenu) {
-        // Toggle both classes for animation and visibility
+      mobileMenuButton?.setAttribute('aria-expanded', (!expanded).toString());
+      mobileMenu?.classList.toggle('hidden', expanded);
+      
+      if (hamburgerIcon && closeIcon) {
+        hamburgerIcon.classList.toggle('hidden', !expanded);
+        closeIcon.classList.toggle('hidden', expanded);
+      }
+    }
+
+    // Services dropdown toggle
+    if (mobileServicesButton && mobileServicesSubmenu && mobileServicesChevron) {
+      mobileServicesButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Toggle submenu
         mobileServicesSubmenu.classList.toggle('hidden');
+        mobileServicesSubmenu.classList.toggle('expanded');
         
-        // Wait a tiny bit to allow the display change, then animate height
-        setTimeout(() => {
-          mobileServicesSubmenu.classList.toggle('expanded');
-        }, 10);
-        
-        // Add dropdown indicator
-        const hasExpanded = mobileServicesSubmenu.classList.contains('expanded');
-        this.innerHTML = `Servicios ${hasExpanded ? '▼' : '▶'}`;
+        // Rotate chevron
+        mobileServicesChevron.classList.toggle('rotate-90');
+      });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const target = event.target as Node;
+      const isMenuButton = mobileMenuButton?.contains(target);
+      const isMenuContent = mobileMenu?.contains(target);
+      const isMenuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+      
+      if (isMenuOpen && !isMenuButton && !isMenuContent) {
+        toggleMobileMenu();
       }
     });
-    
-    // Initialize with arrow indicator
-    mobileServicesLink.innerHTML = 'Servicios ▶';
-  }
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(event) {
-    const isMenuButton = mobileMenuButton?.contains(event.target as Node);
-    const isMenuContent = mobileMenu?.contains(event.target as Node);
-    const isMenuOpen = !mobileMenu?.classList.contains('hidden');
-    
-    if (isMenuOpen && !isMenuButton && !isMenuContent) {
-      toggleMobileMenu();
-    }
-  });
-
-  // Event listeners
-  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
-  
-  // Force light mode on mobile
-  document.addEventListener('DOMContentLoaded', function() {
-    function handleResize() {
-      // If on mobile
-      if (window.innerWidth < 768) {
-        // Remove dark class if it exists
-        document.documentElement.classList.remove('dark');
-      }
-    }
-    
-    // Initial check
-    handleResize();
-    
-    // Listen for window resize
-    window.addEventListener('resize', handleResize);
+    // Event listeners
+    mobileMenuButton?.addEventListener('click', toggleMobileMenu);
   });
 </script>

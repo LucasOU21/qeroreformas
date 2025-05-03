@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import { formatDate } from "@utils/utils";
 import klingerImage from "@images/blog/Klinger.jpg";
-import post1Image from "@images/blog/post-1.jpg";
 import post2Image from "@images/blog/post-2.jpg";
 import post3Image from "@images/blog/post-3.jpg";
 
@@ -15,21 +14,84 @@ const { blogEntry, recentBlogLocale } = Astro.props;
 
 // Get blog URL
 const blogId = blogEntry.id.split('/')[1];
+
+// Skip rendering completely if this is the encimera blog
+if (blogId === "encimera-en-los-disenos-de-cocina" || 
+    blogId === "uso-de-encimeras-diseno-cocina" || 
+    blogEntry.data.title.includes("Encimera") || 
+    blogEntry.data.title.includes("encimera")) {
+  return null;
+}
+
 const blogURL = recentBlogLocale
   ? `/${recentBlogLocale}/blog/${blogId}`
   : `/blog/${blogId}`;
 
 // Get image
-let blogImage = post1Image;
+let blogImage;
 if (blogId === "estilos-de-cocina-disenos-que-inspiran") {
   blogImage = post2Image;
 } else if (blogId === "tendencias-en-suelos-laminados-y-tarimas-flotantes") {
   blogImage = post3Image;
+} else {
+  blogImage = post2Image; // Default fallback
 }
-
-// Check if this is the encimeras blog
-const isEncimerasBlog = blogId === "encimera-en-los-disenos-de-cocina";
 ---
+
+{blogId !== "encimera-en-los-disenos-de-cocina" && blogId !== "uso-de-encimeras-diseno-cocina" && !blogEntry.data.title.includes("Encimera") && !blogEntry.data.title.includes("encimera") && (
+  <div class="group rounded-xl transition duration-300">
+    <div class="mobile-text-first grid gap-8 md:grid-cols-2">
+      <div class="relative image-content">
+        <Image
+          src={blogImage}
+          alt={blogEntry.data.cardImageAlt || "Blog image"}
+          class="h-full w-full rounded-xl object-cover"
+          draggable="false"
+          format="jpg"
+        />
+        
+        {blogEntry.data.category && (
+          <span class="absolute start-0 top-0 rounded-se-xl rounded-ts-xl bg-neutral-100/80 px-3 py-1.5 text-xs font-medium text-neutral-800 backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200">
+            {blogEntry.data.category}
+          </span>
+        )}
+      </div>
+
+      <div class="text-content">
+        <div class="flex h-full flex-col p-0 sm:p-4 md:p-5">
+          <div class="mb-2">
+            <a
+              href={blogURL}
+              class="text-xl font-bold text-neutral-800 decoration-2 hover:underline dark:text-neutral-200"
+            >
+              {blogEntry.data.title}
+            </a>
+            <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+              {blogEntry.data.description}
+            </p>
+          </div>
+          <div class="mt-auto flex items-center gap-x-3">
+            <Image
+              class="h-8 w-8 rounded-full"
+              src={klingerImage}
+              alt="Klinger Mallqui"
+              width={32}
+              height={32}
+            />
+            <div>
+              <h5 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                Klinger Mallqui
+              </h5>
+              <span class="block text-xs text-neutral-500">
+                {formatDate(blogEntry.data.pubDate)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
 <style>
   @media (max-width: 768px) {
@@ -48,59 +110,3 @@ const isEncimerasBlog = blogId === "encimera-en-los-disenos-de-cocina";
     }
   }
 </style>
-
-<div class="group rounded-xl transition duration-300">
-  <div class="mobile-text-first grid gap-8 md:grid-cols-2">
-    {!isEncimerasBlog && (
-      <div class="relative image-content">
-        <!-- Removed the absolute anchor link -->
-        <Image
-          src={blogImage}
-          alt={blogEntry.data.cardImageAlt || "Blog image"}
-          class="h-full w-full rounded-xl object-cover"
-          draggable="false"
-          format="jpg"
-        />
-        
-        {blogEntry.data.category && (
-          <span class="absolute start-0 top-0 rounded-se-xl rounded-ts-xl bg-neutral-100/80 px-3 py-1.5 text-xs font-medium text-neutral-800 backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200">
-            {blogEntry.data.category}
-          </span>
-        )}
-      </div>
-    )}
-
-    <div class={isEncimerasBlog ? "md:col-span-2 text-content" : "text-content"}>
-      <div class="flex h-full flex-col p-0 sm:p-4 md:p-5">
-        <div class="mb-2">
-          <a
-            href={blogURL}
-            class="text-xl font-bold text-neutral-800 decoration-2 hover:underline dark:text-neutral-200"
-          >
-            {blogEntry.data.title}
-          </a>
-          <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-            {blogEntry.data.description}
-          </p>
-        </div>
-        <div class="mt-auto flex items-center gap-x-3">
-          <Image
-            class="h-8 w-8 rounded-full"
-            src={klingerImage}
-            alt="Klinger Mallqui"
-            width={32}
-            height={32}
-          />
-          <div>
-            <h5 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
-              Klinger Mallqui
-            </h5>
-            <span class="block text-xs text-neutral-500">
-              {formatDate(blogEntry.data.pubDate)}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

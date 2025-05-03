@@ -280,31 +280,58 @@
       flex-direction: column;
       height: auto;
       min-height: 110vh;
+      position: relative;
     }
     
     .hero-content-side, 
     .hero-image-side {
       width: 100%;
-      height: 55vh;
     }
     
     .hero-content-side {
       order: 2;
+      height: auto;
+      min-height: 60vh;
+      position: relative;
+      z-index: 2;
       padding: 2rem 0;
-      animation: fadeIn 1.2s ease-out forwards;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
     }
     
     .hero-image-side {
       order: 1;
-      animation: fadeIn 1.2s ease-out forwards;
+      position: absolute;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
     
     .hero-image-full {
-      height: 55vh;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
     }
     
     .hero-content {
-      max-width: 90%;
+      background: rgba(0, 0, 0, 0.75);
+      margin: 6rem auto 2rem auto; /* Adjust this top margin to move content down */
+      backdrop-filter: blur(3px);
+    }
+    
+    /* Add this to create a subtle overlay for better text readability */
+    .hero-image-side::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+      z-index: 1;
     }
     
     @keyframes fadeIn {
@@ -318,23 +345,18 @@
       min-height: 110vh;
     }
     
-    .hero-content-side, 
-    .hero-image-side {
-      height: auto;
+    .hero-content-side {
+      min-height: 60vh;
     }
     
     .hero-image-side {
-      height: 45vh;
-    }
-    
-    .hero-image-full {
       height: 100%;
     }
     
     .hero-content {
       padding: 2rem 1.5rem;
       width: 95%;
-      margin: 1rem 0;
+      margin-top: 6rem; /* Increased from 6rem to move content further down */
     }
     
     .brand-name {
@@ -409,8 +431,9 @@
         </a>
         <p class="button-hint">¡Haz clic aquí para obtener tu presupuesto personalizado!</p>
         
+        
         <a href="tel:603370840" class="call-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
           </svg>
           603 37 08 40

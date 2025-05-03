@@ -51,13 +51,13 @@
 </button>
 
 <script>
-  // Theme toggle functionality with improved iOS compatibility
+  // Theme toggle functionality with mobile support
   document.addEventListener("DOMContentLoaded", function() {
     const html = document.documentElement;
     const themeToggle = document.getElementById("theme-toggle");
     
-    // Function to set theme
-    function setTheme(theme) {
+    // Function to set theme with type annotation
+    function setTheme(theme: string): void {
       if (theme === "dark") {
         html.classList.add("dark");
         localStorage.setItem("theme", "dark");
@@ -70,10 +70,7 @@
     // Check for saved user preference, first in localStorage, then in system setting
     const savedTheme = localStorage.getItem("theme");
     
-    // On mobile (less than 768px width), always use light theme
-    if (window.innerWidth < 768) {
-      setTheme("light");
-    } else if (savedTheme) {
+    if (savedTheme) {
       setTheme(savedTheme);
     } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setTheme("dark");
@@ -81,39 +78,23 @@
       setTheme("light");
     }
     
-    // Toggle theme when button is clicked - only works on desktop
+    // Toggle theme when button is clicked - works on all devices now
     themeToggle?.addEventListener("click", function() {
-      // Only toggle if on desktop
-      if (window.innerWidth >= 768) {
-        if (html.classList.contains("dark")) {
-          setTheme("light");
-        } else {
-          setTheme("dark");
-        }
+      if (html.classList.contains("dark")) {
+        setTheme("light");
+      } else {
+        setTheme("dark");
       }
     });
     
-    // Listen for changes in system preference - only apply on desktop
+    // Listen for changes in system preference
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-      // Only update if the user hasn't manually set a preference and if on desktop
-      if (!localStorage.getItem("theme") && window.innerWidth >= 768) {
+      // Only update if the user hasn't manually set a preference
+      if (!localStorage.getItem("theme")) {
         if (e.matches) {
           setTheme("dark");
         } else {
           setTheme("light");
-        }
-      }
-    });
-    
-    // Listen for window resize to handle desktop/mobile transitions
-    window.addEventListener("resize", function() {
-      if (window.innerWidth < 768) {
-        setTheme("light"); // Force light theme on mobile
-      } else {
-        // Restore preferred theme on desktop
-        const storedTheme = localStorage.getItem("theme");
-        if (storedTheme) {
-          setTheme(storedTheme);
         }
       }
     });

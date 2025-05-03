@@ -28,7 +28,7 @@ interface Article {
 const pageTitle: string = Astro.currentLocale === "en" ? `About us | ${SITE.title}` : `Sobre nosotros | ${SITE.title}`;
 
 // Función para eliminar emojis y limpiar texto
-function cleanText(text) {
+function cleanText(text: string | string[]): string | string[] {
   if (Array.isArray(text)) {
     return text.map(item => {
       // Quitar emojis (✔) y reemplazar con bullet point
