@@ -4,7 +4,7 @@ import FooterSocialLink from "@components/ui/links/FooterSocialLink.astro";
 // import EmailFooterInput from "@components/ui/forms/input/EmailFooterInput.astro";
 import Icon from "@components/ui/icons/Icon.astro";
 import { SITE } from "@data/constants";
-import BrandLogo from "@components/BrandLogo.astro";
+// import BrandLogo from "@components/BrandLogo.astro";
 
 import esStrings from "@utils/navigation.ts";
 import enStrings from "@/utils/en/navigation";
@@ -19,146 +19,141 @@ const sectionThreeContent: string = Astro.currentLocale === "en" ? "Stay up to d
 const crafted: string = Astro.currentLocale === "en" ? "Crafted by" : "Elaborado por";
 ---
 
-<footer class="w-full bg-neutral-300 dark:bg-neutral-900">
+<footer class="w-full bg-white dark:bg-[#1E1E1E]">
   <div
     class="mx-auto w-full max-w-[85rem] px-6 pt-4 lg:px-10 lg:pt-6 2xl:max-w-screen-2xl"
   >
-    <div class="flex flex-row md:flex-row items-start justify-between gap-12">
-      <div class="col-span-full">
-        <!-- Brand Logo -->
-        <BrandLogo class="h-auto w-32" />
-        <!-- <p class="block text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-3xl lg:leading-tight">Qero Reformas</p> -->
-      </div>
-
-      <div class="col-span-2 md:col-span-2 lg:col-span-2 lg:col-start-4 mx-2 sm:mx-0">
-        <!-- <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
-          {sectionThreeTitle}
-        </h3>
-
-        <form id="formFooter">
-          <EmailFooterInput />
-          <p class="mt-3 text-sm text-neutral-600 dark:text-neutral-400">
-            {sectionThreeContent}
-          </p>
-        </form> -->
-
-      <!-- An array of links for Product and Company sections -->
-      {
-        strings.footerLinks.map((section) => (
-          <div class="col-span-1 md:col-span-2 lg:col-span-1 lg:col-start-1 text-right">
-            <h3 class="font-bold text-neutral-800 dark:text-neutral-200">
-              {section.section}
-            </h3>
-            <ul class="mt-3 grid space-y-3">
-              {section.links.map((link, index) => (
-                <li>
-                  <a
-                    href={link.url}
-                    class="inline-flex gap-x-2 rounded-lg text-neutral-600 outline-none ring-zinc-500 transition duration-300 hover:text-neutral-500 focus-visible:ring dark:text-neutral-400 dark:ring-zinc-200 dark:hover:text-neutral-300 dark:focus:outline-none"
-                  >
-                    {link.name}
-                  </a>
-                  {section.section === "Company" && index === 2 ? (
-                    <span class="ms-1 inline rounded-lg bg-orange-500 px-2 py-1 text-xs font-bold text-neutral-50">
-                      We're hiring!
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))
-      }
-      </div>
-
-    </div>
-
-    <div class="grid gap-y-2 sm:flex sm:items-center sm:justify-between sm:gap-y-0 py-4">
-      <div class="text-center">
-        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/aviso-legal">Aviso Legal</a>
-        <span class="font-bold text-lg mx-1 md:mx-4 dark:text-rose-300"> · </span>
-        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/politica-de-seguridad">Política de seguridad</a>
-        <span class="font-bold text-lg mx-1 md:mx-4 dark:text-rose-300"> · </span>
-        <a class="text-xs md:text-sm font-bold text-primary-500 dark:text-secondary-500" href="/politica-de-cookies">Política de cookies</a>
-      </div>
-      <div class="flex items-center justify-center my-2 md:my-0">
-        <p class="text-sm text-neutral-600 dark:text-neutral-400 ">
-          © <span id="current-year"></span> {SITE.title}. {crafted}
-          <a
-            class="rounded-lg font-medium underline underline-offset-2 outline-none ring-zinc-500 transition duration-300 hover:text-neutral-700 hover:decoration-dashed focus:outline-none focus-visible:ring dark:ring-zinc-200 dark:hover:text-neutral-300"
-            href="https://www.linkedin.com/in/mauricio-aguirreo/"
-            target="_blank"
-            rel="noopener noreferrer">MauricioA</a
-          >.
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 py-8">
+      <!-- Logo and company information column -->
+      <div class="col-span-1">
+        <!-- Brand Logo - significantly increased size -->
+        <div class="flex justify-center md:justify-start mb-6 -mt-20">
+          <img 
+            src="/src/images/logos/KaliaLogo-300x300.png" 
+            alt="Kalia Logo" 
+            class="h-85 w-auto block dark:hidden"
+          />
+          <img 
+            src="/src/images/logos/KaliaLogo300x300Dark.png" 
+            alt="Kalia Logo" 
+            class="h-85 w-auto hidden dark:block"
+          />
+        </div>
+        <p class="text-[#000000] dark:text-[#F8F1E7] text-center md:text-left mb-6 font-poppins">
+          Diseñamos y transformamos espacios con calidad y elegancia para hacer de tu hogar un lugar excepcional.
         </p>
+        
+        <!-- Contact information -->
+        <div class="flex flex-col space-y-3 text-center md:text-left">
+          <a href="tel:603370840" class="flex items-center justify-center md:justify-start gap-2 text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            603 37 08 40
+          </a>
+          <!-- 
+          <a href="mailto:contacto@kaliareformas.com" class="flex items-center justify-center md:justify-start gap-2 text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            contacto@kaliareformas.com
+          </a>-->
+        </div>
       </div>
 
-      <!-- Social Brands 
-      <div class="flex justify-center md:justify-end items-center gap-x-3 my-3">
-        <FooterSocialLink url={strings.socialLinks.facebook}>
-          <Icon name="facebookFooter" />
-        </FooterSocialLink>
+      <!-- Navigation links column -->
+      <div class="col-span-1">
+        <h3 class="font-bold text-[#000000] dark:text-[#F8F1E7] text-center md:text-left mb-6 font-georgia">
+          Servicios
+        </h3>
+        <ul class="grid grid-cols-1 gap-3 text-center md:text-left">
+          <li>
+            <a href="/servicios/montaje-muebles" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+              Montaje de muebles
+            </a>
+          </li>
+          <li>
+            <a href="/servicios/diseno-muebles" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+              Diseño de muebles a medida
+            </a>
+          </li>
+          <li>
+            <a href="/servicios/cocinas" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+              Instalación de cocinas
+            </a>
+          </li>
+          <li>
+            <a href="/servicios/reformas" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+              Reformas integrales
+            </a>
+          </li>
+          <li>
+            <a href="/servicios/manitas" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors font-poppins">
+              Servicio de manitas
+            </a>
+          </li>
+        </ul>
+      </div>
 
-        <FooterSocialLink url={strings.socialLinks.instagram}>
-          <Icon name="instagramFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.tiktok}>
-          <Icon name="tiktokFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.x}
-          ><Icon name="xFooter" /></FooterSocialLink
-        >
-
-        <FooterSocialLink url={strings.socialLinks.github}
-          ><Icon name="githubFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.google}
-          ><Icon name="googleFooter" />
-        </FooterSocialLink>
-
-        <FooterSocialLink url={strings.socialLinks.slack}
-          ><Icon name="slackFooter" />
-        </FooterSocialLink>
-      </div>-->
-
-
+      <!-- Social media and location column -->
+      <div class="col-span-1">
+        <h3 class="font-bold text-[#000000] dark:text-[#F8F1E7] text-center md:text-left mb-6 font-georgia">
+          Ubicación
+        </h3>
+        <div class="flex flex-col space-y-3 text-center md:text-left">
+          <p class="text-[#000000] dark:text-[#F8F1E7] font-poppins">
+            Madrid, España
+          </p>
+          <p class="text-[#000000] dark:text-[#F8F1E7] font-poppins">
+            Servicio en toda la Comunidad de Madrid
+          </p>
+        </div>
+        
+        <!-- Social media icons -->
+        <div class="mt-6">
+          <h3 class="font-bold text-[#000000] dark:text-[#F8F1E7] text-center md:text-left mb-4 font-georgia">
+            Síguenos
+          </h3>
+          <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="text-[#000000] dark:text-[#F8F1E7] hover:text-[#FFD000] dark:hover:text-[#FFD000] transition-colors">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M19.355 4.642A9.946 9.946 0 0 0 12.008 2C6.485 2 2 6.485 2 11.992c0 1.856.483 3.666 1.392 5.267L2 22l4.833-1.268a10.022 10.022 0 0 0 5.175 1.408h.008c5.517 0 10-4.485 10-10 0-2.667-1.042-5.183-2.93-7.067l-.73-.431zm-7.346 15.358h-.008c-1.492 0-2.95-.4-4.225-1.158l-.3-.183-3.133.825.833-3.05-.2-.317a8.274 8.274 0 0 1-1.267-4.392c0-4.584 3.734-8.317 8.325-8.317a8.277 8.277 0 0 1 5.9 2.45 8.275 8.275 0 0 1 2.441 5.892c0 4.575-3.733 8.317-8.325 8.317l.033-.067h-.074zm4.567-6.224c-.25-.125-1.483-.733-1.717-.817-.233-.083-.4-.125-.566.125-.167.25-.65.817-.8 1-.15.183-.3.208-.55.083-.25-.125-1.05-.383-2-1.233-.741-.667-1.241-1.492-1.391-1.742-.15-.25-.016-.383.113-.508.116-.108.25-.283.375-.425.125-.142.167-.242.25-.4.083-.159.041-.3-.021-.425-.063-.125-.567-1.358-.775-1.85-.208-.483-.416-.4-.567-.416-.15-.017-.316-.017-.483-.017a.934.934 0 0 0-.675.317c-.233.25-.883.867-.883 2.108 0 1.242.9 2.442.025 2.608.125.167 1.75 2.675 4.25 3.75.591.258 1.05.408 1.408.525.591.183 1.133.158 1.559.1.475-.07 1.483-.608 1.692-1.2.208-.591.208-1.1.146-1.2-.063-.1-.23-.158-.48-.275l.09.017z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <script>
-      const year = new Date().getFullYear();
-      const element = document.getElementById("current-year");
-      element!.innerText = year.toString();
-    </script>
+    <!-- Copyright section 
+    <div class="border-t border-neutral-200 dark:border-neutral-700 py-6 text-center">
+      <p class="text-sm text-[#000000] dark:text-[#F8F1E7] font-poppins">
+        © <span id="current-year"></span> Kalia Reformas y Decoración. {crafted}
+        
+        <a
+          class="rounded-lg font-medium underline underline-offset-2 outline-none ring-zinc-500 transition duration-300 hover:text-[#FFD000] hover:decoration-dashed focus:outline-none focus-visible:ring dark:ring-zinc-200 dark:hover:text-[#FFD000]"
+          href="https://www.linkedin.com/in/mauricio-aguirreo/"
+          target="_blank"
+          rel="noopener noreferrer">MauricioA</a
+        >.
+      </p>
+    </div>
   </div>
-</footer>
+</footer> -->
 
-<script is:inline>
-  // const formFooter = document.getElementById("formFooter");
+<style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-  // formFooter.addEventListener("submit", function (e) {
-  //   e.preventDefault();
-  //   const formData = new FormData(this);
-  //   const data = Object.fromEntries(formData.entries());
+  .font-georgia {
+    font-family: 'Georgia', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
 
-  //   let templateParams = {
-  //     nombre: "Sin Especificar",
-  //     apellido: "",
-  //     telefono: "Sin especificar",
-  //     email: data.email,
-  //     message: "Enviado desde la web: qeroreformas.com",
-  //   };
-
-  //   emailjs.send("service_uf0bunm","template_ptjbynb", templateParams).then(
-  //     function (response) {
-  //       alert("Se ha enviado el mensaje satisfactoriamente, ¡Gracias por su preferencia!");
-  //       console.log("Correo enviado", response);
-  //     },
-  //     function (error) {
-  //       console.error("Error", error);
-  //     }
-  //   );
-  // });
+<script>
+  const year = new Date().getFullYear();
+  const element = document.getElementById("current-year");
+  element!.innerText = year.toString();
 </script>

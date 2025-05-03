@@ -8,59 +8,87 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
 
-// Get all blogs post in English and sort them based on publish date
-
-const spanishBlogEntries = await getCollection("blog", ({ id }) => {
-  return id.startsWith("es/");
+// Get all blogs post in Spanish and sort them based on publish date
+// Filter out any blog that contains encimera in its id or title
+const spanishBlogEntries = await getCollection("blog", ({ id, data }) => {
+  return id.startsWith("es/") && 
+         !id.includes("encimera-en-los-disenos-de-cocina") && 
+         !id.includes("uso-de-encimeras-diseno-cocina") &&
+         !data.title.includes("Encimera") && 
+         !data.title.includes("encimera");
 });
-
-// const englishInsightsEntries = await getCollection("insights", ({ id }) => {
-//   return id.startsWith("es/");
-// });
 
 const blogPosts: CollectionEntry<"blog">[] = spanishBlogEntries.sort(
   (a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) =>
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-// Get all insights posts
-// const insightPosts: CollectionEntry<"insights">[] = englishInsightsEntries;
-
 
 // Define variables for page content
 const title: string =
-  "Qero Transforma: Inspiración, Consejos y Proyectos para tu Hogar";
+  "Kalia Transforma: Inspiración, Consejos y Proyectos para tu Hogar";
 const subTitle: string =
   "Descubre ideas, tendencias y soluciones prácticas para reformar y construir espacios que cuenten tu historia.";
-// const secondTitle: string =
-//   "Perspectivas Qero: Expertos en Reformas y Construcción";
-// const secondSubTitle: string =
-//   "Análisis, datos y reflexiones de nuestros profesionales para ayudarte a tomar decisiones inteligentes en tus proyectos.s";
 
 const pageTitle: string = `Blog | ${SITE.title}`;
 ---
+
+<style>
+  /* Custom styles for Kalia branding */
+  :root {
+    --kalia-primary: #daa520; /* Gold color for Kalia */
+    --kalia-secondary: #333333;
+    --kalia-accent: #f5f5f5;
+  }
+  
+  h1, h2, h3, h4 {
+    font-family: 'Georgia', serif !important;
+  }
+  
+  p, span, a, li {
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  a:hover {
+    color: var(--kalia-primary) !important;
+  }
+  
+  /* Adjusted spacing for title section */
+  .title-section {
+    padding-top: 8rem !important; /* Increased padding to lower the title */
+    margin-bottom: 2rem;
+  }
+  
+  /* Extra padding for mobile */
+  @media (max-width: 768px) {
+    .title-section {
+      padding-top: 10rem !important;
+    }
+  }
+</style>
 
 <MainLayout
   title={pageTitle}
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/faqs",
-    url: "https://qeroreformas.com/faqs",
-    name: "Blog | Qero Reformas",
+    "@id": "https://kaliareformas.com/blog",
+    url: "https://kaliareformas.com/blog",
+    name: "Blog | Kalia Reformas",
     description:
-      "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+      "Descubre ideas, tendencias y soluciones prácticas para reformar y construir espacios que cuenten tu historia con Kalia Reformas y Decoración.",
     isPartOf: {
       "@type": "WebSite",
-      url: "https://qeroreformas.com",
-      name: "Qero Reformas",
+      url: "https://kaliareformas.com",
+      name: "Kalia Reformas",
       description:
-        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+        "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú.",
     },
     inLanguage: "es-ES",
   }}
 >
+  <!-- Title section with increased top padding -->
   <section
-    class="mx-auto max-w-[85rem] space-y-8 px-4 pt-16 sm:px-6 lg:px-8 2xl:max-w-full"
+    class="title-section mx-auto max-w-[85rem] space-y-8 px-4 sm:px-6 lg:px-8 2xl:max-w-full"
   >
     <!--Page header-->
     <div class="mx-auto max-w-3xl text-left sm:text-center">
@@ -85,44 +113,17 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     <div class="grid gap-6 lg:grid-cols-2">
       {
         blogPosts.map((blogEntry, index) => {
-          if (index % 2 === 0 && index !== 0) 
-          return (
+          if (index % 2 === 0 && index !== 0) {
+            return (
               <section class="col-span-1 lg:col-span-2">
                 <CardBlogRecent blogEntry={blogEntry} />
               </section>
             );
-          else
-            return <CardBlog blogEntry={blogEntry} />;  
+          } else {
+            return <CardBlog blogEntry={blogEntry} />;
+          }
         })
       }
     </div>
   </section>
-  <!--Most recent blog post-->
-  <!-- <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <CardBlogRecent blogEntry={mostRecentPost} />
-  </section> -->
-  <!--Insights section-->
-  <!-- <section
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
-  >
-    <div class="mx-auto mb-10 max-w-2xl text-center lg:mb-14">
-      <h2
-        class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
-      >
-        {secondTitle}
-      </h2>
-      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
-        {secondSubTitle}
-      </p>
-    </div>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {
-        insightPosts.map((insightEntry) => (
-          <CardInsight insightEntry={insightEntry} />
-        ))
-      }
-    </div>
-  </section> -->
 </MainLayout>

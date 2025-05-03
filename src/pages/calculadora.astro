@@ -4,6 +4,7 @@ import SecualOptions from "@/components/ui/forms/SecualOptions.astro";
 import MainLayout from "@/layouts/MainLayout.astro";
 import { SITE } from "@data/constants";
 
+
 interface categoriaInstalación {
   id: string;
   nombre: string;
@@ -26,6 +27,7 @@ interface subTipoInstalacion {
   tipoUnidad: "unidad" | "metro lineal";
   precio: number;
 }
+
 
 const tipoInstalacion: categoriaInstalación[] = [
   {
@@ -153,11 +155,15 @@ const pageTitle: string =
     inLanguage: "es-ES",
   }}
 >
+  <!-- Fixed spacing to prevent overlap with navbar -->
+  <div class="pt-32"></div>
+  
   <section
+    id="calculator"
     class="mx-auto flex max-w-4xl min-h-[calc(100vh-250px)] flex-col justify-center px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
   >
     <h2
-      class="text-center text-xl font-bold text-neutral-800 dark:text-neutral-200 md:text-2xl md:leading-tight"
+      class="text-center text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-3xl md:leading-tight"
     >
       <Fragment
         set:html={Astro.currentLocale === "en"
@@ -172,7 +178,7 @@ const pageTitle: string =
         <div class="flex w-full items-center">
           <div
             id="oneStepNumber"
-            class="mx-[-1px] flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-orange-400 dark:bg-secondary-500"
+            class="mx-[-1px] flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#daa520] dark:bg-[#daa520]"
           >
             <span class="text-sm font-bold text-white dark:text-black">1</span>
           </div>
@@ -183,7 +189,7 @@ const pageTitle: string =
           </div>
         </div>
         <div class="mr-4 mt-2">
-          <h6 class="text-sm font-bold text-primary-500 dark:text-rose-400">
+          <h6 class="text-sm font-bold text-[#daa520] dark:text-[#daa520]">
             Paquete
           </h6>
           <p
@@ -255,12 +261,12 @@ const pageTitle: string =
             tipoInstalacion.map((i) => (
               <button
                 id={i.id}
-                class="p-5 min-w-[305px] flex cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border border-gray-200 bg-white shadow-sm transition duration-300 hover:scale-105 dark:border-gray-700 dark:bg-gray-800 "
+                class="p-5 min-w-[305px] flex cursor-pointer flex-col items-center justify-between gap-2 rounded-lg border border-gray-200 bg-white shadow-sm transition duration-300 hover:scale-105 hover:border-[#daa520] dark:border-gray-700 dark:bg-gray-800 dark:hover:border-[#daa520]"
               >
                 <div>
                   {i.svg === "estandar" && (
                   <svg
-                    class="mx-auto text-neutral-700 hs-tab-active:text-orange-300 dark:text-neutral-300 dark:hs-tab-active:text-rose-400"
+                    class="mx-auto text-[#daa520] dark:text-[#daa520]"
                     xmlns="http://www.w3.org/2000/svg"
                     width="48"
                     height="48"
@@ -278,7 +284,7 @@ const pageTitle: string =
                 )}
                 {i.svg === "premium" && (
                   <svg
-                    class="mx-auto text-yellow-500 hs-tab-active:text-orange-300 dark:text-rose-500 dark:hs-tab-active:text-rose-400"
+                    class="mx-auto text-[#daa520] dark:text-[#daa520]"
                     xmlns="http://www.w3.org/2000/svg"
                     width="48"
                     height="48"
@@ -309,7 +315,9 @@ const pageTitle: string =
                   <ul class="flex flex-col justify-start gap-y-1 mt-1">
                     {
                       i.beneficios.map((b: any) => (
-                        <li class="flex items-center text-xs text-neutral-600 dark:text-neutral-200 text-left">✔ {b}</li>
+                        <li class="flex items-center text-xs text-neutral-600 dark:text-neutral-200 text-left">
+                          <span class="text-[#daa520] mr-1">✓</span> {b}
+                        </li>
                       ))
                     }
                   </ul>
@@ -333,7 +341,7 @@ const pageTitle: string =
         >
         <select
           id="subtiposEstandar"
-          class="block w-[80%] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          class="block w-[80%] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#daa520] focus:ring-[#daa520] dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-[#daa520] dark:focus:ring-[#daa520]"
         >
           <option selected disabled>Seleccionar</option>
           {
@@ -363,7 +371,7 @@ const pageTitle: string =
         >
         <select
           id="subtiposPremium"
-          class="block w-[80%] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500  dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          class="block w-[80%] rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-[#daa520] focus:ring-[#daa520] dark:border-gray-700 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-[#daa520] dark:focus:ring-[#daa520]"
         >
           <option selected disabled>Seleccionar</option>
           {
@@ -391,8 +399,8 @@ const pageTitle: string =
         <h5 class="text-lg font-bold leading-none text-gray-900 dark:text-white">
           Lista de Servicios -
         </h5>
-        <span id="seTitle" class="hidden text-lg font-bold leading-none text-primary-500 dark:text-blue-400">&nbsp;Estándar</span>
-        <span id="spTitle" class="hidden text-lg font-bold leading-none text-yellow-500 dark:text-yellow-400">&nbsp;Premium</span>
+        <span id="seTitle" class="hidden text-lg font-bold leading-none text-[#daa520] dark:text-[#daa520]">&nbsp;Estándar</span>
+        <span id="spTitle" class="hidden text-lg font-bold leading-none text-[#daa520] dark:text-[#daa520]">&nbsp;Premium</span>
       </div>
       <div class="flow-root">
         <ul id="productList" role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
@@ -421,517 +429,862 @@ const pageTitle: string =
       </div>
     </div>
 
+    <!-- Replace your existing form element with this updated version -->
     <form id="formPresupuesto" class="hidden mx-auto w-full max-w-md rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800">
       <label class="text-lg font-bold leading-none text-gray-900 dark:text-white">Te atenderemos</label>
       <div class="mb-6 mt-4">
-        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre</label>
-        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
-    </div> 
+        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre*</label>
+        <input type="text" id="nombre" name="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tu nombre" required />
+      </div> 
       <div class="grid gap-6 mb-6 md:grid-cols-2 mt-4">
         <div>
-          <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono</label>
-          <input type="tel" id="telefono" name="telefono" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
-      </div>
-          <div>
-              <label for="codigopostal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Código Postal</label>
-              <input type="number" id="codigopostal" name="codigopostal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required min="10000" max="99999" />
-          </div>  
+          <label for="telefono" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Teléfono*</label>
+          <input 
+            type="tel" 
+            id="telefono" 
+            name="telefono" 
+            pattern="[6-9]\d{8}"
+            maxlength="9"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+            placeholder="Ej: 612345678" 
+            required 
+          />
+        </div>
+        <div>
+          <label for="codigopostal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Código Postal*</label>
+          <input 
+            type="text" 
+            id="codigopostal" 
+            name="codigopostal" 
+            pattern="[0-9]{5}"
+            maxlength="5"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+            placeholder="Ej: 28001" 
+            required 
+          />
+        </div>  
       </div>
       <div class="mb-6">
-          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-          <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" required />
-      </div> 
+        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+          placeholder="tu@email.com" 
+        />
+      </div>
+    
+      <div class="flex items-center justify-between mt-6">
+        <button 
+          type="button" 
+          id="form-back-button"
+          
+        class="w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-yellow-500 p-3 text-sm font-bold text-white outline-none ring-yellow-500 transition duration-300 hover:bg-yellow-600 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:focus:outline-none dark:focus:ring-1 sm:w-auto mr-2"
+        >
 
-      <button type="submit" id="enviarMail"
-      class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-primary-500 p-3 text-sm font-bold text-neutral-50 outline-none ring-zinc-500 transition duration-300 hover:bg-sky-950 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-secondary-500 dark:text-black dark:ring-secondary-500 dark:hover:bg-yellow-200 dark:focus:outline-none dark:focus:ring-1 sm:w-auto float-right">Enviar</button>
-  </form>
-
-    <div
-    id="finalMessage"
-    class="hidden mx-auto w-full max-w-md min-h-[20rem] rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8 flex-col items-center justify-center"
-  ><h5 class="text-lg font-bold text-center text-gray-900 dark:text-white">¡Gracias! Nos pondremos en contacto</h5></div>
-
-    <div class="mx-auto my-8 flex  max-w-screen-md items-start">
-      <div class="w-full">
-        <div class="flex w-full items-center justify-between gap-4">
-          <button
-            id="one-b-button"
-            class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-primary-500 p-3 text-sm font-bold text-neutral-50 outline-none ring-zinc-500 transition duration-300 hover:bg-sky-950 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-secondary-500 dark:text-black dark:ring-secondary-500 dark:hover:bg-yellow-200 dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
-            >Atrás</button
-          >
-          <button>
-            <button
-            id="reset"
-            class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-primary-500 p-3 text-sm font-bold text-neutral-50 outline-none ring-zinc-500 transition duration-300 hover:bg-sky-950 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-secondary-500 dark:text-black dark:ring-secondary-500 dark:hover:bg-yellow-200 dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
+          Atrás
+        </button>
+        <button 
+          type="submit" 
+          id="enviarMail"
+          
+            class="w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-yellow-500 p-3 text-sm font-bold text-white outline-none ring-yellow-500 transition duration-300 hover:bg-yellow-600 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-yellow-700 dark:hover:bg-yellow-600 dark:focus:outline-none dark:focus:ring-1 sm:w-auto mr-2"
             >
-            Reiniciar
-          </button>
-          <button
-              id="two-a-button"
-              class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-primary-500 p-3 text-sm font-bold text-neutral-50 outline-none ring-zinc-500 transition duration-300 hover:bg-sky-950 focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-secondary-500 dark:text-black dark:ring-secondary-500 dark:hover:bg-yellow-200 dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
-              >
-              Guardar
-            </button>
 
+          Enviar
+        </button>
+      </div>
+    </form>
+
+  <div
+  id="finalMessage"
+  class="hidden mx-auto w-full max-w-md min-h-[20rem] rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-8 flex-col items-center justify-center"
+>
+  <svg class="w-20 h-20 mx-auto mb-4 text-[#daa520]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <h5 class="text-lg font-bold text-center text-gray-900 dark:text-white">¡Gracias! Nos pondremos en contacto</h5>
+</div>
+
+  <div class="mx-auto my-8 flex max-w-screen-md items-start">
+    <div class="w-full">
+      <div class="flex w-full items-center justify-between gap-4">
+        <button
+          id="one-b-button"
+          class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-[#daa520] p-3 text-sm font-bold text-white outline-none ring-zinc-500 transition duration-300 hover:bg-[#c09018] focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-[#daa520] dark:text-black dark:ring-zinc-200 dark:hover:bg-[#c09018] dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
+          >Atrás</button
+        >
+        <button>
+          <button
+          id="reset"
+          class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-[#daa520] p-3 text-sm font-bold text-white outline-none ring-zinc-500 transition duration-300 hover:bg-[#c09018] focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-[#daa520] dark:text-black dark:ring-zinc-200 dark:hover:bg-[#c09018] dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
+          >
+          Reiniciar
+        </button>
+        <button
+            id="two-a-button"
+            class="hidden w-full min-w-[100px] items-center justify-center gap-x-2 whitespace-nowrap rounded-lg border border-transparent bg-[#daa520] p-3 text-sm font-bold text-white outline-none ring-zinc-500 transition duration-300 hover:bg-[#c09018] focus-visible:ring disabled:pointer-events-none disabled:opacity-50 dark:bg-[#daa520] dark:text-black dark:ring-zinc-200 dark:hover:bg-[#c09018] dark:focus:outline-none dark:focus:ring-1 sm:w-auto"
+            >
+            Siguiente
           </button>
-        </div>
+
+        </button>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 </MainLayout>
 
-  <script is:inline>
+<script is:inline>
 
-    const style = document.createElement('style');
-      style.textContent = `
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-          -webkit-appearance: none;
-          margin: 0;    
-        }
-      `;
-      document.head.appendChild(style);
+  const style = document.createElement('style');
+    style.textContent = `
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;    
+      }
+    `;
+    document.head.appendChild(style);
 
-    //Contenedores
-    let catI = "";
-    const categoriaInstalacion = document.getElementById("categoriaInstalacion");
-    const subTiposInstalacionEstandar = document.getElementById("subTiposInstalacionEstandar");
-    const subTiposInstalacionPremium = document.getElementById("subTiposInstalacionPremium");
-    let productListContainer = document.getElementById("productListContainer");
-    let staticPLClone = productListContainer.cloneNode(true);
-    const finalMessage = document.getElementById("finalMessage");
-    const formPresupuesto = document.getElementById("formPresupuesto");
-    
-    // Pasarela
-    const twoStepNumber = document.getElementById("twoStepNumber");
-    const threeStepNumber = document.getElementById("threeStepNumber");
-    const oneStepBar = document.getElementById("oneStepBar");
-    const twoStepBar = document.getElementById("twoStepBar");
-    const oneStepStatus = document.getElementById("oneStepStatus");
-    const twoStepStatus = document.getElementById("twoStepStatus");
-    const threeStepStatus = document.getElementById("threeStepStatus");
-    const twoStepText = document.getElementById("twoStepText"); 
-    const threeStepText = document.getElementById("threeStepText"); 
-    
-    //Botones
-    const oneBeforeBtn = document.getElementById("one-b-button");
-    const reset = document.getElementById("reset");
+  //Contenedores
+  let catI = "";
+  const categoriaInstalacion = document.getElementById("categoriaInstalacion");
+  const subTiposInstalacionEstandar = document.getElementById("subTiposInstalacionEstandar");
+  const subTiposInstalacionPremium = document.getElementById("subTiposInstalacionPremium");
+  let productListContainer = document.getElementById("productListContainer");
+  let staticPLClone = productListContainer.cloneNode(true);
+  const finalMessage = document.getElementById("finalMessage");
+  const formPresupuesto = document.getElementById("formPresupuesto");
+  
+  // Pasarela
+  const twoStepNumber = document.getElementById("twoStepNumber");
+  const threeStepNumber = document.getElementById("threeStepNumber");
+  const oneStepBar = document.getElementById("oneStepBar");
+  const twoStepBar = document.getElementById("twoStepBar");
+  const oneStepStatus = document.getElementById("oneStepStatus");
+  const twoStepStatus = document.getElementById("twoStepStatus");
+  const threeStepStatus = document.getElementById("threeStepStatus");
+  const twoStepText = document.getElementById("twoStepText"); 
+  const threeStepText = document.getElementById("threeStepText"); 
+  
+  //Botones
+  const oneBeforeBtn = document.getElementById("one-b-button");
+  const reset = document.getElementById("reset");
 
-    const premiumBtn = document.getElementById("premium");
-    const estandarBtn = document.getElementById("estandar");
-    const twoAfterBtn = document.getElementById("two-a-button");
+  const premiumBtn = document.getElementById("premium");
+  const estandarBtn = document.getElementById("estandar");
+  const twoAfterBtn = document.getElementById("two-a-button");
 
-    const mailBtn = document.getElementById("enviarMail");
-    
-    //Calcular Presupuesto
-    const subtiposEstandar = document.getElementById("subtiposEstandar");
-    const subtiposPremium = document.getElementById("subtiposPremium");
+  const mailBtn = document.getElementById("enviarMail");
+  
+  //Calcular Presupuesto
+  const subtiposEstandar = document.getElementById("subtiposEstandar");
+  const subtiposPremium = document.getElementById("subtiposPremium");
 
-    //================ Parte 1 ====================
-    premiumBtn.addEventListener("click", () => {
-      catI = "premium";
-      //Actualizar Barra de Navegación
-      oneStepBar.classList.add("bg-orange-400");
-      oneStepBar.classList.add("dark:bg-secondary-500");
-      oneStepStatus.classList.remove("hidden");
-      twoStepNumber.classList.add("bg-orange-400");
-      twoStepNumber.classList.add("dark:bg-secondary-500");
-      twoStepText.classList.add("text-primary-500");
-      twoStepText.classList.add("dark:text-rose-400");
-      twoStepText.classList.remove("text-gray-800");
-      twoStepText.classList.remove("dark:text-gray-400");
+  //================ Parte 1 ====================
+  premiumBtn.addEventListener("click", () => {
+    catI = "premium";
+    //Actualizar Barra de Navegación
+    oneStepBar.classList.add("bg-[#daa520]");
+    oneStepBar.classList.add("dark:bg-[#daa520]");
+    oneStepStatus.classList.remove("hidden");
+    twoStepNumber.classList.add("bg-[#daa520]");
+    twoStepNumber.classList.add("dark:bg-[#daa520]");
+    twoStepText.classList.add("text-[#daa520]");
+    twoStepText.classList.add("dark:text-[#daa520]");
+    twoStepText.classList.remove("text-gray-800");
+    twoStepText.classList.remove("dark:text-gray-400");
 
-      //Actualziar Botones
-      oneBeforeBtn.classList.add("inline-flex");
-      oneBeforeBtn.classList.remove("hidden");
-      twoAfterBtn.classList.add("inline-flex");
-      twoAfterBtn.classList.remove("hidden");
+    //Actualziar Botones
+    oneBeforeBtn.classList.add("inline-flex");
+    oneBeforeBtn.classList.remove("hidden");
+    twoAfterBtn.classList.add("inline-flex");
+    twoAfterBtn.classList.remove("hidden");
 
-      //Actualizar contenedores
-      categoriaInstalacion.classList.add("hidden");
-      subTiposInstalacionPremium.classList.remove("hidden");
-      productListContainer.classList.remove("hidden");
+    //Actualizar contenedores
+    categoriaInstalacion.classList.add("hidden");
+    subTiposInstalacionPremium.classList.remove("hidden");
+    productListContainer.classList.remove("hidden");
 
-      const spTitle = document.getElementById("spTitle");
-      spTitle.classList.remove("hidden");
-    });
+    const spTitle = document.getElementById("spTitle");
+    spTitle.classList.remove("hidden");
+  });
 
-    estandarBtn.addEventListener("click", () => {
-      catI = "estandar";
-      //Actualizar Barra de Navegación
-      oneStepBar.classList.add("bg-orange-400");
-      oneStepBar.classList.add("dark:bg-secondary-500");
-      oneStepStatus.classList.remove("hidden");
-      twoStepNumber.classList.add("bg-orange-400");
-      twoStepNumber.classList.add("dark:bg-secondary-500");
-      twoStepText.classList.add("text-primary-500");
-      twoStepText.classList.add("dark:text-rose-400");
-      twoStepText.classList.remove("text-gray-800");
-      twoStepText.classList.remove("dark:text-gray-400");
+  estandarBtn.addEventListener("click", () => {
+    catI = "estandar";
+    //Actualizar Barra de Navegación
+    oneStepBar.classList.add("bg-[#daa520]");
+    oneStepBar.classList.add("dark:bg-[#daa520]");
+    oneStepStatus.classList.remove("hidden");
+    twoStepNumber.classList.add("bg-[#daa520]");
+    twoStepNumber.classList.add("dark:bg-[#daa520]");
+    twoStepText.classList.add("text-[#daa520]");
+    twoStepText.classList.add("dark:text-[#daa520]");
+    twoStepText.classList.remove("text-gray-800");
+    twoStepText.classList.remove("dark:text-gray-400");
 
-      //Actualizar Botones
-      oneBeforeBtn.classList.add("inline-flex");
-      oneBeforeBtn.classList.remove("hidden");
-      twoAfterBtn.classList.add("inline-flex");
-      twoAfterBtn.classList.remove("hidden");
+    //Actualizar Botones
+    oneBeforeBtn.classList.add("inline-flex");
+    oneBeforeBtn.classList.remove("hidden");
+    twoAfterBtn.classList.add("inline-flex");
+    twoAfterBtn.classList.remove("hidden");
 
-      //Actualizar contenedores
-      categoriaInstalacion.classList.add("hidden");
-      subTiposInstalacionEstandar.classList.remove("hidden");
-      productListContainer.classList.remove("hidden");
+    //Actualizar contenedores
+    categoriaInstalacion.classList.add("hidden");
+    subTiposInstalacionEstandar.classList.remove("hidden");
+    productListContainer.classList.remove("hidden");
 
-      const seTitle = document.getElementById("seTitle");
-      seTitle.classList.remove("hidden");
-    });
-    
-    //============== Parte 2 =================
-    oneBeforeBtn.addEventListener("click", () => {
-      //Actualizar Barra de Navegación
-      oneStepBar.classList.remove("bg-orange-400");
-      oneStepBar.classList.remove("dark:bg-secondary-500");
-      oneStepStatus.classList.add("hidden");
+    const seTitle = document.getElementById("seTitle");
+    seTitle.classList.remove("hidden");
+  });
 
-      twoStepNumber.classList.remove("bg-orange-400");
-      twoStepNumber.classList.remove("dark:bg-secondary-500");
-      twoStepText.classList.remove("text-primary-500");
-      twoStepText.classList.remove("dark:text-rose-400");
-      twoStepText.classList.add("text-gray-800");
-      twoStepText.classList.add("dark:text-gray-400");
-      
-      //Actualizar Botones
-      oneBeforeBtn.classList.add("hidden");
-      oneBeforeBtn.classList.remove("inline-flex");
-      
-      categoriaInstalacion.classList.remove("hidden");
-      categoriaInstalacion.classList.add("inline-flex");
-      
-      twoAfterBtn.classList.add("hidden");
-      twoAfterBtn.classList.remove("inline-flex");
-      
-      //Actualizar contenedores
-      categoriaInstalacion.classList.remove("hidden");
-      productListContainer.classList.add("hidden");
 
-      catI === "premium"
-      ? subTiposInstalacionPremium.classList.add("hidden")
-      : subTiposInstalacionEstandar.classList.add("hidden");
-      catI = "";
+// Get the form back button element
+const formBackButton = document.getElementById("form-back-button");
 
-      // document.getElementById("seTitle") ?? document.getElementById("seTitle").classList.add("hidden");
-      // document.getElementById("spTitle") ?? document.getElementById("spTitle").classList.add("hidden");
-
-      const parent = productListContainer.parentElement;
-      const newContainer = staticPLClone.cloneNode(true);
-      parent.replaceChild(newContainer, productListContainer);
-      productListContainer = newContainer; 
-
-    });
-
-  const accionSeleccion = function(event) {
-    // Obtener el valor seleccionado
-    const valorSeleccionado = event.target.value;
-    
-    // Obtener el texto de la opción seleccionada
-    const textoSeleccionado = (event.target.options[event.target.selectedIndex].text).trim();
-    const nombre = event.target.options[event.target.selectedIndex].dataset.nombre;
-    const unidad = event.target.options[event.target.selectedIndex].dataset.unidad;
-
-    const productList = document.getElementById("productList");
-    
-    if(productList.querySelector("#quantity-input-"+nombre)) return;
-    productList.insertAdjacentHTML('beforeend', `<li class="py-2 sm:py-4">
-            <div class="flex items-center">
-              <div class="min-w-0 flex-1">
-                <p
-                  class="truncate text-sm font-medium text-gray-900 dark:text-white nombreProducto"
-                >
-                  ${textoSeleccionado}
-                </p>
-                <p class="truncate text-sm text-gray-500 dark:text-gray-400">
-                  precio: <span class="precioProducto">${unidad === "metro lineal" ? Number(valorSeleccionado).toFixed(2) : valorSeleccionado}</span> € / <span class="tipoUnidad">${unidad === "unidad" ? "und." : ""}
-                  ${unidad === "metro lineal" ? "ml" : ""} </span>
-                </p>
-              </div>
-              ${
-                unidad === "unidad"
-                ? 
-                `<form class="mx-auto max-w-xs">
-                <div class="relative flex max-w-[10rem] items-center">
-                  <button
-                    type="button"
-                    id=${"decrement-button-"+nombre}
-                    data-input-counter-decrement="quantity-input"
-                    class="h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-                  >
-                    <svg
-                      class="h-3 w-3 text-gray-900 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 2"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M1 1h16"></path>
-                    </svg>
-                  </button>
-                  <input
-                    type="number"
-                    id=${"quantity-input-"+nombre}
-                    value="0"
-                    min="0"
-                    readonly
-                    onkeydown="return event.keyCode !== 69"
-                    data-input-counter
-                    aria-describedby="helper-text-explanation"
-                    class="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    id=${"increment-button-"+nombre}
-                    data-input-counter-increment="quantity-input"
-                    class="h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
-                  >
-                    <svg
-                      class="h-3 w-3 text-gray-900 dark:text-white"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 18 18"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 1v16M1 9h16"></path>
-                    </svg>
-                  </button>
-
-                </div>
-              </form>`
-              : 
-              `<form class="mx-auto max-w-xs" submit="return false">
-                <div class="relative flex max-w-[10rem] items-center">
-                   <input
-                    type="number"
-                    id=${"quantity-input-"+nombre}
-                    value="0"
-                    min="0"
-                    step="any"
-                    onkeydown="return event.keyCode !== 69"
-                    data-input-counter
-                    aria-describedby="helper-text-explanation"
-                    class="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                    required/>
-                </div>
-              </form>`
-              }
-
-            </div>
-          </li>`);
-
-          if(unidad === "unidad"){
-            const increment = document.getElementById(`increment-button-${nombre}`)
-          const decrement = document.getElementById(`decrement-button-${nombre}`)
-          
-          if(!(productList.contains(increment)) || !(productList.contains(decrement))) return;
-          const number = document.getElementById(`quantity-input-${nombre}`);
-          const total = document.getElementById("totalPresupuesto");
-          
-          increment.addEventListener("click",()=>{
-            const valorItem = Number(valorSeleccionado);
-            const numeroActual = Number(number.value) || 0;
-            const totalActual = Number(total.value) || 0;
-            number.value = numeroActual + 1
-            total.value = totalActual + valorItem;
-          })
-
-          decrement.addEventListener("click",()=>{
-            const valorItem = Number(valorSeleccionado);
-            const numeroActual = Number(number.value) || 0;
-            const totalActual = Number(total.value) || 0;
-            if(numeroActual - 1 < 0) return;
-            number.value = numeroActual - 1
-            total.value = totalActual - valorItem;
-          })
-          }else if(unidad === "metro lineal"){
-            const number = document.getElementById(`quantity-input-${nombre}`);
-            if(!(productList.contains(number))) return;
-            const total = document.getElementById("totalPresupuesto");
-            localStorage.setItem(`${nombre}`, 0);
-            const valorItem = Number(valorSeleccionado);
-            const accionInput = (e) => {
-              e.preventDefault();                         
-              total.value = (parseFloat(total.value) || 0) - (parseFloat(localStorage.getItem(`${nombre}`)) * valorItem);
-              if(parseFloat(total.value) <= 0) total.value = 0;
-              if(isNaN(parseInt(number.value))) return;
-              total.value = (parseFloat(total.value) || 0) + ((parseFloat(number.value) || 0) * valorItem);
-              localStorage.setItem(`${nombre}`, parseFloat(number.value) || 0);
-            }
-            number.addEventListener("input", accionInput);
-            number.addEventListener("change", accionInput);
-          }
-
+// Add event listener to the form back button
+formBackButton.addEventListener("click", () => {
+  // Hide the form
+  formPresupuesto.classList.add("hidden");
+  
+  // Show the product list container
+  productListContainer.classList.remove("hidden");
+  
+  // Show the appropriate subtype container based on the selected category
+  if (catI === "premium") {
+    subTiposInstalacionPremium.classList.remove("hidden");
+  } else if (catI === "estandar") {
+    subTiposInstalacionEstandar.classList.remove("hidden");
   }
+  
+  // Update the navigation UI
+  twoStepBar.classList.remove("bg-[#daa520]");
+  twoStepBar.classList.remove("dark:bg-[#daa520]");
+  twoStepStatus.classList.add("hidden");
+  
+  threeStepNumber.classList.remove("bg-[#daa520]");
+  threeStepNumber.classList.remove("dark:bg-[#daa520]");
+  
+  threeStepText.classList.remove("text-[#daa520]");
+  threeStepText.classList.remove("dark:text-[#daa520]");
+  threeStepText.classList.add("text-gray-800");
+  threeStepText.classList.add("dark:text-gray-400");
+  
+  // Show the appropriate buttons
+  oneBeforeBtn.classList.add("inline-flex");
+  oneBeforeBtn.classList.remove("hidden");
+  
+  twoAfterBtn.classList.add("inline-flex");
+  twoAfterBtn.classList.remove("hidden");
+  
+  mailBtn.classList.add("hidden");
+});
 
-  subtiposEstandar.addEventListener('change', accionSeleccion)
 
-  subtiposPremium.addEventListener('change', accionSeleccion)
+  //============== Parte 2 =================
+  oneBeforeBtn.addEventListener("click", () => {
+    //Actualizar Barra de Navegación
+    oneStepBar.classList.remove("bg-[#daa520]");
+    oneStepBar.classList.remove("dark:bg-[#daa520]");
+    oneStepStatus.classList.add("hidden");
 
-  //========= Parte 3 =============
-  twoAfterBtn.addEventListener("click", () => {
-
-    const total = document.getElementById("totalPresupuesto");
-    const totalActual = Number(total.value) || 0;
-
-    if(totalActual <= 0) {
-      alert("Debes agregar algunos productos");
-      return;
-    };
-
-      totalGuardado = totalActual;
-      //Actualizar Barra de Navegación
-      twoStepBar.classList.add("bg-orange-400");
-      twoStepBar.classList.add("dark:bg-secondary-500");
-      twoStepStatus.classList.remove("hidden");
-
-      threeStepNumber.classList.add("bg-orange-400");
-      threeStepNumber.classList.add("dark:bg-secondary-500");
-
-      threeStepText.classList.add("text-primary-500");
-      threeStepText.classList.add("dark:text-rose-400");
-      threeStepText.classList.remove("text-gray-800");
-      threeStepText.classList.remove("dark:text-gray-400");
-
-      //Actualizar Botones
-      oneBeforeBtn.classList.remove("inline-flex");
-      oneBeforeBtn.classList.add("hidden");
-
-      twoAfterBtn.classList.remove("inline-flex");
-      twoAfterBtn.classList.add("hidden");
-
-      mailBtn.classList.remove("hidden");
-
-      //contenedores
-      catI === "premium"
-      ? subTiposInstalacionPremium.classList.add("hidden")
-      : subTiposInstalacionEstandar.classList.add("hidden");
-      categoriaInstalacion.classList.add("hidden");
-
-      productListContainer.classList.add("hidden");
-      formPresupuesto.classList.remove("hidden");
-    });
-
-    formPresupuesto.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      let productListContainer = document.getElementById("productListContainer");
-      const newProductList = productListContainer.cloneNode(true);
-      newProductList.classList.remove("hidden");
-      let textoCorreo = "";
-      let totalElement = newProductList.querySelector("#totalPresupuesto");
-      let total = totalElement ? totalElement.value : "0";
-      let instalacion = catI === "premium" ? "Premium" : "Estándar";
-
-      try {
-        let productos = newProductList.querySelectorAll("#productList li"); // Selecciona todos los productos
-        if (productos.length === 0) throw new Error("No se encontraron productos en la lista.");
-
-        productos.forEach((producto, i) => {
-            try {
-                let nombre = producto.querySelector("p.nombreProducto")?.textContent.trim() || "Producto sin nombre";
-                let precioTexto = producto.querySelector(".precioProducto")?.textContent.trim() || "Precio no disponible";
-                let tipoUnidad = producto.querySelector(".tipoUnidad")?.textContent.trim() || "Unidad no disponible";
-                let inputCantidad = producto.querySelector("input[type='number']");
-                let cantidad = inputCantidad ? parseFloat(inputCantidad.value, 10) : 0;
-              
-                // Solo incluir productos que tengan al menos 1 unidad seleccionada
-                if (cantidad > 0) {
-                    textoCorreo += `<tr><td>${i + 1}</td><td>${nombre}</td><td>${tipoUnidad}</td><td>${cantidad}</td><td>${precioTexto} €</td><td>${(parseFloat(precioTexto) * parseFloat(cantidad)).toFixed(2)} €</td></tr>`;
-                    // textoCorreo[i] = {
-                    //     id: i + 1,
-                    //     nombre,
-                    //     precio,
-                    //     cantidad,
-                    //     total: String(Number(precio) * Number(cantidad)),
-                    //     tipoUnidad
-                    // }
-                }
-            } catch (error) {
-                console.error(`Error al procesar un producto: ${error.message}`);
-            }
-        });
-    } catch (error) {
-        console.error(`Error al obtener la lista de productos: ${error.message}`);
-        return "Error al generar el listado de productos.";
-    }
+    twoStepNumber.classList.remove("bg-[#daa520]");
+    twoStepNumber.classList.remove("dark:bg-[#daa520]");
+    twoStepText.classList.remove("text-[#daa520]");
+    twoStepText.classList.remove("dark:text-[#daa520]");
+    twoStepText.classList.add("text-gray-800");
+    twoStepText.classList.add("dark:text-gray-400");
     
-      const formData = new FormData(this); 
-      const data = Object.fromEntries(formData.entries());
+    //Actualizar Botones
+    oneBeforeBtn.classList.add("hidden");
+    oneBeforeBtn.classList.remove("inline-flex");
+    
+    categoriaInstalacion.classList.remove("hidden");
+    categoriaInstalacion.classList.add("inline-flex");
+    
+    twoAfterBtn.classList.add("hidden");
+    twoAfterBtn.classList.remove("inline-flex");
+    
+    //Actualizar contenedores
+    categoriaInstalacion.classList.remove("hidden");
+    productListContainer.classList.add("hidden");
 
-        let templateParams = {
-          cliente: data.nombre,
-          telefono: data.telefono,
-          fecha: new Date().toLocaleDateString(),
-          productos: textoCorreo,
-          costodirecto: parseFloat(total).toFixed(2),
-          costofinal: parseFloat(total).toFixed(2),
-          email: data.email,
-          instalacion,
-          codigopostal: data.codigopostal
-        };    
-        // console.log(templateParams);
+    catI === "premium"
+    ? subTiposInstalacionPremium.classList.add("hidden")
+    : subTiposInstalacionEstandar.classList.add("hidden");
+    catI = "";
 
-        emailjs.send("service_8t7pklm","template_j3im9z6", templateParams)
-        .then(function(response) {
-            formPresupuesto.classList.add("hidden");
-            finalMessage.classList.remove("hidden");
-            finalMessage.classList.add("flex");
-            threeStepStatus.classList.remove("hidden");
-            reset.classList.remove("hidden");
-            console.log("Correo enviado", response);
-        }, function(error) {
-            console.error("Error", error);
+    // document.getElementById("seTitle") ?? document.getElementById("seTitle").classList.add("hidden");
+    // document.getElementById("spTitle") ?? document.getElementById("spTitle").classList.add("hidden");
+
+    const parent = productListContainer.parentElement;
+    const newContainer = staticPLClone.cloneNode(true);
+    parent.replaceChild(newContainer, productListContainer);
+    productListContainer = newContainer; 
+
+  });
+
+const accionSeleccion = function(event) {
+  // Obtener el valor seleccionado
+  const valorSeleccionado = event.target.value;
+  
+  // Obtener el texto de la opción seleccionada
+  const textoSeleccionado = (event.target.options[event.target.selectedIndex].text).trim();
+  const nombre = event.target.options[event.target.selectedIndex].dataset.nombre;
+  const unidad = event.target.options[event.target.selectedIndex].dataset.unidad;
+
+  const productList = document.getElementById("productList");
+  
+  if(productList.querySelector("#quantity-input-"+nombre)) return;
+  productList.insertAdjacentHTML('beforeend', `<li class="py-2 sm:py-4" id="product-item-${nombre}">
+          <div class="flex items-center">
+            <div class="min-w-0 flex-1">
+              <p
+                class="truncate text-sm font-medium text-gray-900 dark:text-white nombreProducto"
+              >
+                ${textoSeleccionado}
+              </p>
+              <p class="truncate text-sm text-gray-500 dark:text-gray-400">
+                precio: <span class="precioProducto">${unidad === "metro lineal" ? Number(valorSeleccionado).toFixed(2) : valorSeleccionado}</span> € / <span class="tipoUnidad">${unidad === "unidad" ? "und." : ""}
+                ${unidad === "metro lineal" ? "ml" : ""} </span>
+              </p>
+            </div>
+            ${
+              unidad === "unidad"
+              ? 
+              `<form class="mx-auto max-w-xs">
+              <div class="relative flex max-w-[10rem] items-center">
+                <button
+                  type="button"
+                  id=${"decrement-button-"+nombre}
+                  data-input-counter-decrement="quantity-input"
+                  class="h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                >
+                  <svg
+                    class="h-3 w-3 text-gray-900 dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 18 2"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M1 1h16"></path>
+                  </svg>
+                </button>
+                <input
+                  type="number"
+                  id=${"quantity-input-"+nombre}
+                  value="0"
+                  min="0"
+                  readonly
+                  onkeydown="return event.keyCode !== 69"
+                  data-input-counter
+                  aria-describedby="helper-text-explanation"
+                  class="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-[#daa520] focus:ring-[#daa520] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-[#daa520] dark:focus:ring-[#daa520]"
+                  required
+                />
+                <button
+                  type="button"
+                  id=${"increment-button-"+nombre}
+                  data-input-counter-increment="quantity-input"
+                  class="h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                >
+                  <svg
+                    class="h-3 w-3 text-gray-900 dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 18 18"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 1v16M1 9h16"></path>
+                  </svg>
+                </button>
+              </div>
+            </form>`
+            : 
+            `<form class="mx-auto max-w-xs" submit="return false">
+              <div class="relative flex max-w-[10rem] items-center">
+                 <input
+                  type="number"
+                  id=${"quantity-input-"+nombre}
+                  value="0"
+                  min="0"
+                  step="any"
+                  onkeydown="return event.keyCode !== 69"
+                  data-input-counter
+                  aria-describedby="helper-text-explanation"
+                  class="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-[#daa520] focus:ring-[#daa520] dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-[#daa520] dark:focus:ring-[#daa520]"
+                  required/>
+              </div>
+            </form>`
+            }
+            <button 
+              type="button" 
+              class="delete-product ml-2 rounded-lg text-red-500 hover:bg-red-100 p-1 transition-colors duration-200 dark:hover:bg-red-900/30" 
+              data-product-id="${nombre}"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </li>`);
+
+        // Add delete button functionality
+        const deleteButtons = document.querySelectorAll('.delete-product');
+        deleteButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const productItem = document.getElementById(`product-item-${productId}`);
+            const quantityInput = document.getElementById(`quantity-input-${productId}`);
+            const total = document.getElementById("totalPresupuesto");
+            
+            // Update total before removing
+            const valorItem = Number(valorSeleccionado);
+            let valueToSubtract = 0;
+            
+            if (unidad === "unidad") {
+              valueToSubtract = valorItem * Number(quantityInput.value);
+            } else if (unidad === "metro lineal") {
+              valueToSubtract = valorItem * parseFloat(localStorage.getItem(`${productId}`) || 0);
+              localStorage.removeItem(`${productId}`);
+            }
+            
+            total.value = (Number(total.value) - valueToSubtract).toFixed(2);
+            if (parseFloat(total.value) <= 0) total.value = 0;
+            
+            // Remove the product from the list
+            productItem.remove();
+          });
         });
-    })
 
-    reset.addEventListener("click", () => {
+        if(unidad === "unidad"){
+          const increment = document.getElementById(`increment-button-${nombre}`)
+        const decrement = document.getElementById(`decrement-button-${nombre}`)
+        
+        if(!(productList.contains(increment)) || !(productList.contains(decrement))) return;
+        const number = document.getElementById(`quantity-input-${nombre}`);
+        const total = document.getElementById("totalPresupuesto");
+        
+        increment.addEventListener("click",()=>{
+          const valorItem = Number(valorSeleccionado);
+          const numeroActual = Number(number.value) || 0;
+          const totalActual = Number(total.value) || 0;
+          number.value = numeroActual + 1
+          total.value = totalActual + valorItem;
+        })
 
-      oneStepBar.classList.remove("bg-orange-400");
-      oneStepBar.classList.remove("dark:bg-secondary-500");
-      oneStepStatus.classList.add("hidden");
-      twoStepNumber.classList.remove("bg-orange-400");
-      twoStepNumber.classList.remove("dark:bg-secondary-500");
-      twoStepBar.classList.remove("bg-orange-400");
-      twoStepBar.classList.remove("dark:bg-secondary-500");
-      twoStepStatus.classList.add("hidden");
-      threeStepNumber.classList.remove("bg-orange-400");
-      threeStepNumber.classList.remove("dark:bg-secondary-500");
-      threeStepStatus.classList.add("hidden");
+        decrement.addEventListener("click",()=>{
+          const valorItem = Number(valorSeleccionado);
+          const numeroActual = Number(number.value) || 0;
+          const totalActual = Number(total.value) || 0;
+          if(numeroActual - 1 < 0) return;
+          number.value = numeroActual - 1
+          total.value = totalActual - valorItem;
+        })
+        }else if(unidad === "metro lineal"){
+          const number = document.getElementById(`quantity-input-${nombre}`);
+          if(!(productList.contains(number))) return;
+          const total = document.getElementById("totalPresupuesto");
+          localStorage.setItem(`${nombre}`, 0);
+          const valorItem = Number(valorSeleccionado);
+          const accionInput = (e) => {
+            e.preventDefault();                         
+            total.value = (parseFloat(total.value) || 0) - (parseFloat(localStorage.getItem(`${nombre}`)) * valorItem);
+            if(parseFloat(total.value) <= 0) total.value = 0;
+            if(isNaN(parseInt(number.value))) return;
+            total.value = (parseFloat(total.value) || 0) + ((parseFloat(number.value) || 0) * valorItem);
+            localStorage.setItem(`${nombre}`, parseFloat(number.value) || 0);
+          }
+          number.addEventListener("input", accionInput);
+          number.addEventListener("change", accionInput);
+        }
 
-      twoStepText.classList.remove("text-primary-500");
-      twoStepText.classList.remove("dark:text-rose-400");
-      twoStepText.classList.add("text-gray-800");
-      twoStepText.classList.add("dark:text-gray-400");
-      threeStepText.classList.remove("text-primary-500");
-      threeStepText.classList.remove("dark:text-rose-400");
-      threeStepText.classList.add("text-gray-800");
-      threeStepText.classList.add("dark:text-gray-400");
+}
 
-      //contenedores
-      finalMessage.classList.add("hidden");
-      categoriaInstalacion.classList.remove("hidden");
-      reset.classList.add("hidden");
-      const parent = productListContainer.parentElement;
-      const newContainer = staticPLClone.cloneNode(true);
-      parent.replaceChild(newContainer, productListContainer);
-      productListContainer = newContainer; 
-      catI = "";
-    })
-  </script>
+subtiposEstandar.addEventListener('change', accionSeleccion)
 
+subtiposPremium.addEventListener('change', accionSeleccion)
+
+//========= Parte 3 =============
+twoAfterBtn.addEventListener("click", () => {
+
+  const total = document.getElementById("totalPresupuesto");
+  const totalActual = Number(total.value) || 0;
+
+  if(totalActual <= 0) {
+    alert("Debes agregar algunos productos");
+    return;
+  };
+
+    totalGuardado = totalActual;
+    //Actualizar Barra de Navegación
+    twoStepBar.classList.add("bg-[#daa520]");
+    twoStepBar.classList.add("dark:bg-[#daa520]");
+    twoStepStatus.classList.remove("hidden");
+
+    threeStepNumber.classList.add("bg-[#daa520]");
+    threeStepNumber.classList.add("dark:bg-[#daa520]");
+
+    threeStepText.classList.add("text-[#daa520]");
+    threeStepText.classList.add("dark:text-[#daa520]");
+    threeStepText.classList.remove("text-gray-800");
+    threeStepText.classList.remove("dark:text-gray-400");
+
+    //Actualizar Botones
+    oneBeforeBtn.classList.remove("inline-flex");
+    oneBeforeBtn.classList.add("hidden");
+
+    twoAfterBtn.classList.remove("inline-flex");
+    twoAfterBtn.classList.add("hidden");
+
+    formBackButton.classList.add("inline-flex");
+    formBackButton.classList.remove("hidden");
+
+    mailBtn.classList.remove("hidden");
+
+    //contenedores
+    catI === "premium"
+    ? subTiposInstalacionPremium.classList.add("hidden")
+    : subTiposInstalacionEstandar.classList.add("hidden");
+    categoriaInstalacion.classList.add("hidden");
+
+    productListContainer.classList.add("hidden");
+    formPresupuesto.classList.remove("hidden");
+  });
+
+  formPresupuesto.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let productListContainer = document.getElementById("productListContainer");
+    const newProductList = productListContainer.cloneNode(true);
+    newProductList.classList.remove("hidden");
+    let textoCorreo = "";
+    let totalElement = newProductList.querySelector("#totalPresupuesto");
+    let total = totalElement ? totalElement.value : "0";
+    let instalacion = catI === "premium" ? "Premium" : "Estándar";
+
+    try {
+      let productos = newProductList.querySelectorAll("#productList li"); // Selecciona todos los productos
+      if (productos.length === 0) throw new Error("No se encontraron productos en la lista.");
+
+      productos.forEach((producto, i) => {
+          try {
+              let nombre = producto.querySelector("p.nombreProducto")?.textContent.trim() || "Producto sin nombre";
+              let precioTexto = producto.querySelector(".precioProducto")?.textContent.trim() || "Precio no disponible";
+              let tipoUnidad = producto.querySelector(".tipoUnidad")?.textContent.trim() || "Unidad no disponible";
+              let inputCantidad = producto.querySelector("input[type='number']");
+              let cantidad = inputCantidad ? parseFloat(inputCantidad.value, 10) : 0;
+            
+              // Solo incluir productos que tengan al menos 1 unidad seleccionada
+              if (cantidad > 0) {
+                  textoCorreo += `<tr><td>${i + 1}</td><td>${nombre}</td><td>${tipoUnidad}</td><td>${cantidad}</td><td>${precioTexto} €</td><td>${(parseFloat(precioTexto) * parseFloat(cantidad)).toFixed(2)} €</td></tr>`;
+                  // textoCorreo[i] = {
+                  //     id: i + 1,
+                  //     nombre,
+                  //     precio,
+                  //     cantidad,
+                  //     total: String(Number(precio) * Number(cantidad)),
+                  //     tipoUnidad
+                  // }
+              }
+          } catch (error) {
+              console.error(`Error al procesar un producto: ${error.message}`);
+          }
+      });
+  } catch (error) {
+      console.error(`Error al obtener la lista de productos: ${error.message}`);
+      return "Error al generar el listado de productos.";
+  }
+  
+    const formData = new FormData(this); 
+    const data = Object.fromEntries(formData.entries());
+
+      let templateParams = {
+        cliente: data.nombre,
+        telefono: data.telefono,
+        fecha: new Date().toLocaleDateString(),
+        productos: textoCorreo,
+        costodirecto: parseFloat(total).toFixed(2),
+        costofinal: parseFloat(total).toFixed(2),
+        email: data.email,
+        instalacion,
+        codigopostal: data.codigopostal
+      };    
+      // console.log(templateParams);
+
+      emailjs.send("service_8t7pklm","template_j3im9z6", templateParams)
+      .then(function(response) {
+          formPresupuesto.classList.add("hidden");
+          finalMessage.classList.remove("hidden");
+          finalMessage.classList.add("flex");
+          threeStepStatus.classList.remove("hidden");
+          reset.classList.remove("hidden");
+          console.log("Correo enviado", response);
+      }, function(error) {
+          console.error("Error", error);
+      });
+  })
+
+  reset.addEventListener("click", () => {
+
+    oneStepBar.classList.remove("bg-[#daa520]");
+    oneStepBar.classList.remove("dark:bg-[#daa520]");
+    oneStepStatus.classList.add("hidden");
+    twoStepNumber.classList.remove("bg-[#daa520]");
+    twoStepNumber.classList.remove("dark:bg-[#daa520]");
+    twoStepBar.classList.remove("bg-[#daa520]");
+    twoStepBar.classList.remove("dark:bg-[#daa520]");
+    twoStepStatus.classList.add("hidden");
+    threeStepNumber.classList.remove("bg-[#daa520]");
+    threeStepNumber.classList.remove("dark:bg-[#daa520]");
+    threeStepStatus.classList.add("hidden");
+
+    twoStepText.classList.remove("text-[#daa520]");
+    twoStepText.classList.remove("dark:text-[#daa520]");
+    twoStepText.classList.add("text-gray-800");
+    twoStepText.classList.add("dark:text-gray-400");
+    threeStepText.classList.remove("text-[#daa520]");
+    threeStepText.classList.remove("dark:text-[#daa520]");
+    threeStepText.classList.add("text-gray-800");
+    threeStepText.classList.add("dark:text-gray-400");
+
+    //contenedores
+    finalMessage.classList.add("hidden");
+    categoriaInstalacion.classList.remove("hidden");
+    reset.classList.add("hidden");
+    const parent = productListContainer.parentElement;
+    const newContainer = staticPLClone.cloneNode(true);
+    parent.replaceChild(newContainer, productListContainer);
+    productListContainer = newContainer; 
+    catI = "";
+  })
+
+// Add this to the end of your calculadora.astro file inside a <script> tag
+  document.addEventListener('DOMContentLoaded', function() {
+  // Find form elements
+  // Find form elements
+// Find form elements
+const form = document.getElementById('formPresupuesto');
+const emailField = document.getElementById('email');
+const phoneField = document.getElementById('telefono');
+const postalCodeField = document.getElementById('codigopostal');
+const nameField = document.getElementById('nombre');
+const submitButton = document.getElementById('enviarMail');
+
+if (!form || !emailField || !phoneField || !postalCodeField || !nameField || !submitButton) {
+  console.warn('Form elements not found');
+  return;
+}
+
+// Create error message elements
+const errorContainer = document.createElement('div');
+errorContainer.className = 'validation-errors text-sm text-red-500 my-2';
+form.insertBefore(errorContainer, submitButton.parentNode);
+
+// Validation functions
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validatePhone(phone) {
+  const phoneRegex = /^[6-9]\d{8}$/;
+  return phoneRegex.test(phone);
+}
+
+function validatePostalCode(postalCode) {
+  const postalCodeRegex = /^[0-9]{5}$/;
+  return postalCodeRegex.test(postalCode);
+}
+
+// Format input handlers
+phoneField.addEventListener('input', function(e) {
+  // Remove non-numeric characters
+  let value = e.target.value.replace(/\D/g, '');
+  
+  // Ensure it starts with valid Spanish mobile prefix (6, 7, 8, 9)
+  if (value.length > 0 && !'6789'.includes(value[0])) {
+    value = '';
+  }
+  
+  // Limit to 9 digits
+  if (value.length > 9) {
+    value = value.substring(0, 9);
+  }
+  
+  // Update input value
+  e.target.value = value;
+  validateForm();
+});
+
+postalCodeField.addEventListener('input', function(e) {
+  // Remove non-numeric characters
+  let value = e.target.value.replace(/\D/g, '');
+  
+  // Limit to 5 digits
+  if (value.length > 5) {
+    value = value.substring(0, 5);
+  }
+  
+  // Update input value
+  e.target.value = value;
+  validateForm();
+});
+
+// Track which fields have been touched by the user
+const touchedFields = {
+  email: false,
+  phone: false,
+  postalCode: false,
+  name: false
+};
+
+// Check form validity and update UI
+function validateForm(showAllErrors = false) {
+  const errors = [];
+  let isValid = true;
+
+  // Clear previous error messages
+  errorContainer.innerHTML = '';
+  
+  // Validate email only if it's not empty
+  if (emailField.value.trim() !== '' && !validateEmail(emailField.value)) {
+    if (showAllErrors || touchedFields.email) {
+      errors.push('Por favor, introduce un email válido');
+      emailField.classList.add('border-red-500');
+      emailField.classList.remove('border-green-500');
+    }
+    isValid = false;
+  } else {
+    emailField.classList.remove('border-red-500');
+    if (emailField.value.trim() !== '') {
+      emailField.classList.add('border-green-500');
+    }
+  }
+  
+  // Validate phone
+  if (!validatePhone(phoneField.value)) {
+    if (showAllErrors || touchedFields.phone) {
+      errors.push('Por favor, introduce un número de teléfono español válido (9 dígitos comenzando con 6, 7, 8 o 9)');
+      phoneField.classList.add('border-red-500');
+      phoneField.classList.remove('border-green-500');
+    }
+    isValid = false;
+  } else {
+    phoneField.classList.remove('border-red-500');
+    phoneField.classList.add('border-green-500');
+  }
+  
+  // Validate postal code
+  if (!validatePostalCode(postalCodeField.value)) {
+    if (showAllErrors || touchedFields.postalCode) {
+      errors.push('Por favor, introduce un código postal español válido (5 dígitos)');
+      postalCodeField.classList.add('border-red-500');
+      postalCodeField.classList.remove('border-green-500');
+    }
+    isValid = false;
+  } else {
+    postalCodeField.classList.remove('border-red-500');
+    postalCodeField.classList.add('border-green-500');
+  }
+  
+  // Validate name (just check if not empty)
+  if (nameField.value.trim() === '') {
+    if (showAllErrors || touchedFields.name) {
+      errors.push('Por favor, introduce tu nombre');
+      nameField.classList.remove('border-green-500');
+      nameField.classList.add('border-red-500');
+    }
+    isValid = false;
+  } else {
+    nameField.classList.remove('border-red-500');
+    nameField.classList.add('border-green-500');
+  }
+  
+  // Display error messages
+  errors.forEach(error => {
+    const errorElement = document.createElement('p');
+    errorElement.textContent = error;
+    errorContainer.appendChild(errorElement);
+  });
+  
+  // Enable/disable submit button based on form validity
+  // Check only required fields (name, phone, postal code) and validate email if provided
+  const requiredFieldsFilled = 
+    phoneField.value.trim() !== '' && 
+    postalCodeField.value.trim() !== '' && 
+    nameField.value.trim() !== '';
+  
+  // Email can be empty, but if it has content, it must be valid
+  const emailValid = emailField.value.trim() === '' || validateEmail(emailField.value);
+  
+  submitButton.disabled = !(isValid && requiredFieldsFilled);
+  submitButton.classList.toggle('opacity-50', !(isValid && requiredFieldsFilled));
+  
+  return isValid && requiredFieldsFilled;
+}
+
+// Add event listeners to fields to mark them as touched
+emailField.addEventListener('blur', function() {
+  touchedFields.email = true;
+  validateForm();
+});
+
+phoneField.addEventListener('blur', function() {
+  touchedFields.phone = true;
+  validateForm();
+});
+
+postalCodeField.addEventListener('blur', function() {
+  touchedFields.postalCode = true;
+  validateForm();
+});
+
+nameField.addEventListener('blur', function() {
+  touchedFields.name = true;
+  validateForm();
+});
+
+// Input listeners for real-time validation after fields are touched
+emailField.addEventListener('input', function() {
+  if (touchedFields.email) validateForm();
+});
+
+phoneField.addEventListener('input', function() {
+  if (touchedFields.phone) validateForm();
+});
+
+postalCodeField.addEventListener('input', function() {
+  if (touchedFields.postalCode) validateForm();
+});
+
+nameField.addEventListener('input', function() {
+  if (touchedFields.name) validateForm();
+});
+
+// Override form submission
+form.addEventListener('submit', function(e) {
+  // Show all errors on submit attempt
+  if (!validateForm(true)) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// Initial validation
+validateForm();
+});
+
+</script>

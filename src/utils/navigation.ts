@@ -1,4 +1,9 @@
-// An array of links for navigation bar
+// Import necessary components and utilities
+import { Image } from "astro:assets";
+import kaliaLogo from "@images/logos/KaliaLogo-removebg.png";
+import ThemeIcon from "@components/ThemeIcon.astro";
+
+// Navigation data defined directly in the component
 const navBarLinks = [
   { name: "Inicio", url: "/" },
   { name: "Servicios", url: "/services" },
@@ -7,28 +12,18 @@ const navBarLinks = [
   { name: "Blog", url: "/blog" },
   // { name: "Contacto", url: "/contact" },
 ];
-// An array of links for footer
+
 const footerLinks = [
-  // {
-  //   section: "Ecosystem",
-  //   links: [
-  //     { name: "Documentation", url: "/welcome-to-docs/" },
-  //     { name: "Tools & Equipment", url: "/products" },
-  //     { name: "Construction Services", url: "/services" },
-  //   ],
-  // },
   {
     section: "Secciones",
     links: [
       { name: "Nosotros", url: "/nosotros" },
       { name: "Servicios", url: "/services" },
-      // { name: "Equipo", url: "/equipo" },
       { name: "Blog", url: "/blog" },
-      // { name: "Contacto", url: "/contact" },
     ],
   },
 ];
-// An object of links for social icons
+
 const socialLinks = {
   facebook: "https://www.facebook.com/",
   instagram: "https://www.instagram.com/",

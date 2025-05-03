@@ -1,9 +1,9 @@
 ---
 title: "Principales Estilos de Cocina: Diseños que Inspiran"
 description: "El diseño de las cocinas ha evolucionado a lo largo de los años para adaptarse a los gustos y necesidades de cada persona."
-author: "Kligen Mallqui"
-authorImage: "@/images/blog/avatar.png"
-authorImageAlt: "Avatar Description"
+author: "Klinger Mallqui"
+authorImage: "src/images/blog/Klinger.jpg"
+authorImageAlt: "Klinger Mallqui"
 pubDate: 2025-02-11
 cardImage: "@/images/blog/post-2.jpg"
 cardImageAlt: "Estilos de cocina: diseños que inspiran"

@@ -1,66 +1,112 @@
 ---
-// Import all required components and utilities
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
-import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
-import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
-
-const { blogEntry, recentBlogLocale = "" } = Astro.props;
+import { formatDate } from "@utils/utils";
+import klingerImage from "@images/blog/Klinger.jpg";
+import post2Image from "@images/blog/post-2.jpg";
+import post3Image from "@images/blog/post-3.jpg";
 
 interface Props {
-  blogEntry: CollectionEntry<"blog">;
+  blogEntry: any;
   recentBlogLocale?: string;
+}
+
+const { blogEntry, recentBlogLocale } = Astro.props;
+
+// Get blog URL
+const blogId = blogEntry.id.split('/')[1];
+
+// Skip rendering completely if this is the encimera blog
+if (blogId === "encimera-en-los-disenos-de-cocina" || 
+    blogId === "uso-de-encimeras-diseno-cocina" || 
+    blogEntry.data.title.includes("Encimera") || 
+    blogEntry.data.title.includes("encimera")) {
+  return null;
+}
+
+const blogURL = recentBlogLocale
+  ? `/${recentBlogLocale}/blog/${blogId}`
+  : `/blog/${blogId}`;
+
+// Get image
+let blogImage;
+if (blogId === "estilos-de-cocina-disenos-que-inspiran") {
+  blogImage = post2Image;
+} else if (blogId === "tendencias-en-suelos-laminados-y-tarimas-flotantes") {
+  blogImage = post3Image;
+} else {
+  blogImage = post2Image; // Default fallback
 }
 ---
 
-<!-- Root container, which is divided into 2 grid column layout for larger screens -->
-<div class="grid gap-8 grid-cols-1 sm:grid-cols-2 sm:items-center">
-  <!-- Container for the blog post's cover image -->
-  <div class="sm:order-2">
-    <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
-      <Image
-        class="absolute start-0 top-0 size-full rounded-xl object-cover"
-        src={blogEntry.data.cardImage}
-        alt={blogEntry.data.cardImageAlt}
-        draggable={"false"}
-        loading={"eager"}
-        format={"jpg"}
-      />
-    </div>
-  </div>
-  <!-- Container for the blog post's heading, author avatar, author's role, and read more button -->
-  <div class="sm:order-1">
-    <!-- Blog title which is also a hyperlink to the blog detail page  -->
-    <h2
-      class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight"
-    >
-      <a
-        class="outline-none ring-zinc-500 transition duration-300 hover:text-orange-400 focus-visible:ring dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-50 dark:focus:outline-none"
-        href={recentBlogLocale && recentBlogLocale !== "es" ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^en\//, '')}/` : `/blog/${blogEntry.id.replace(/^es\//, '')}/`}
-      >
-        {blogEntry.data.description}
-      </a>
-    </h2>
-    <!-- Container for the author's avatar and metadata -->
-    <div class="mt-6 flex items-center sm:mt-10">
-      <AvatarBlogLarge blogEntry={blogEntry} />
+{blogId !== "encimera-en-los-disenos-de-cocina" && blogId !== "uso-de-encimeras-diseno-cocina" && !blogEntry.data.title.includes("Encimera") && !blogEntry.data.title.includes("encimera") && (
+  <div class="group rounded-xl transition duration-300">
+    <div class="mobile-text-first grid gap-8 md:grid-cols-2">
+      <div class="relative image-content">
+        <Image
+          src={blogImage}
+          alt={blogEntry.data.cardImageAlt || "Blog image"}
+          class="h-full w-full rounded-xl object-cover"
+          draggable="false"
+          format="jpg"
+        />
+        
+        {blogEntry.data.category && (
+          <span class="absolute start-0 top-0 rounded-se-xl rounded-ts-xl bg-neutral-100/80 px-3 py-1.5 text-xs font-medium text-neutral-800 backdrop-blur-sm dark:bg-neutral-800/80 dark:text-neutral-200">
+            {blogEntry.data.category}
+          </span>
+        )}
+      </div>
 
-      <div class="ms-3 sm:ms-4">
-        <p class="font-bold text-neutral-800 dark:text-neutral-200 sm:mb-1">
-          {blogEntry.data.author}
-        </p>
-        <p class="text-xs text-neutral-500">
-          {blogEntry.data.role}
-        </p>
+      <div class="text-content">
+        <div class="flex h-full flex-col p-0 sm:p-4 md:p-5">
+          <div class="mb-2">
+            <a
+              href={blogURL}
+              class="text-xl font-bold text-neutral-800 decoration-2 hover:underline dark:text-neutral-200"
+            >
+              {blogEntry.data.title}
+            </a>
+            <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+              {blogEntry.data.description}
+            </p>
+          </div>
+          <div class="mt-auto flex items-center gap-x-3">
+            <Image
+              class="h-8 w-8 rounded-full"
+              src={klingerImage}
+              alt="Klinger Mallqui"
+              width={32}
+              height={32}
+            />
+            <div>
+              <h5 class="text-sm font-semibold text-neutral-800 dark:text-neutral-200">
+                Klinger Mallqui
+              </h5>
+              <span class="block text-xs text-neutral-500">
+                {formatDate(blogEntry.data.pubDate)}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Read More button which is a link to the blog post detailed page -->
-    <div class="mt-5">
-      <PrimaryCTA
-        url={recentBlogLocale && recentBlogLocale !== "es" ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^en\//, '')}/` : `/blog/${blogEntry.id.replace(/^es\//, '')}/`}
-        title="Leer más"
-        data-astro-prefetch
-      />
-    </div>
   </div>
-</div>
+)}
+
+<style>
+  @media (max-width: 768px) {
+    .mobile-text-first {
+      display: flex;
+      flex-direction: column !important;
+    }
+    
+    .mobile-text-first .text-content {
+      order: 1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .mobile-text-first .image-content {
+      order: 2;
+    }
+  }
+</style>

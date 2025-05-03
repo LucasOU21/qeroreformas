@@ -1,17 +1,14 @@
 ---
 // Importing necessary components
 import MainLayout from "@/layouts/MainLayout.astro";
-// import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
 import CardSmall from "@components/ui/cards/CardSmall.astro";
 import CardWide from "@components/ui/cards/CardWide.astro";
-import FeaturesStatsAlt from "@components/sections/features/FeaturesStatsAlt.astro";
-// import TestimonialsSectionAlt from "@components/sections/testimonials/TestimonialsSectionAlt.astro";
+import ContactSection from "@/components/sections/misc/ContactSection.astro";
 
 // Importing necessary functions from Astro
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
-import ContactSection from "@/components/sections/misc/ContactSection.astro";
 
 // Fetching all the product related content and sorting it by main.id
 const services: CollectionEntry<"products">[] = (
@@ -25,45 +22,8 @@ const services: CollectionEntry<"products">[] = (
 
 // Define variables for page content
 const title: string = Astro.preferredLocale === "en" ? "Services" : "Servicios";
-// const subTitle: string =
-//   "Explore the durability and precision of ScrewFast tools, designed for both professionals and enthusiasts. Each of our products is crafted with precision and built to last, ensuring you have the right tool for every job.";
 
-// Testimonial data that will be rendered in the component
-// const testimonials = [
-//   // First testimonial data
-//   {
-//     content:
-//       " \"Since switching to ScrewFast's hardware tools, the efficiency on our construction sites has skyrocketed. The durability of the hex bolts and precision of the machine screws are simply unmatched. It's refreshing to work with a company that truly understands the daily demands of the industry.\" ",
-//     author: "Jason Clark",
-//     role: "Site Foreman | TopBuild",
-//     avatarSrc:
-//       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-//     avatarAlt: "Image Description",
-//   },
-//   // Second testimonial data
-//   {
-//     content:
-//       " \"As an interior designer, I'm always looking for high-quality materials and tools that help bring my visions to life. ScrewFast's mixed screws assortment has been a game-changer for my projects, providing the perfect blend of quality and variety. The outstanding customer support was just the cherry on top!\" ",
-//     author: "Maria Gonzalez",
-//     role: "Interior Designer | Creative Spaces",
-//     avatarSrc:
-//       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-//     avatarAlt: "Image Description",
-//   },
-//   // Third testimonial data
-//   {
-//     content:
-//       " \"I’ve been a professional carpenter for over 15 years, and I can sincerely say that ScrewFast’s tap bolts and nuts are some of the best I've used. They grip like no other, and I have full confidence in every joint and fixture. Plus, the service is impeccable – they truly care about my project's success.\" ",
-//     author: "Richard Kim",
-//     role: "Master Carpenter | WoodWright",
-//     avatarSrc:
-//       "https://images.unsplash.com/photo-1474176857210-7287d38d27c6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80",
-//     avatarAlt: "Image Description",
-//   },
-// ];
-
-const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Reformas" : `Servicios | ${SITE.title}`;
-// export const prerender = false;
+const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Kalia Reformas" : `Servicios | ${SITE.title}`;
 ---
 
 <MainLayout
@@ -71,21 +31,21 @@ const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Refo
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/products",
-    "url": "https://qeroreformas.com/products",
-    "name": "Galería | Qero Reformas",
-    "description": "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
+    "@id": "https://kaliareformas.com/services",
+    "url": "https://kaliareformas.com/services",
+    "name": "Servicios | Kalia Reformas",
+    "description": "Explora nuestros servicios de reforma, diseño y montaje para tu hogar. Ofrecemos soluciones personalizadas con calidad y profesionalismo.",
     "isPartOf": {
       "@type": "WebSite",
-      "url": "https://qeroreformas.com",
-      "name": "Qero Reformas",
-      "description": "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar."
+      "url": "https://kaliareformas.com",
+      "name": "Kalia Reformas",
+      "description": "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo."
     },
     "inLanguage": "es-ES"
   }}
 >
   <div
-    class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+    class="mx-auto max-w-[85rem] px-4 py-10 pt-28 sm:px-6 lg:px-8 lg:py-14 lg:pt-32 2xl:max-w-full"
   >
     <div class="mb-4 flex items-center justify-between gap-8 sm:mb-8 md:mb-12">
       <div class="flex items-center gap-12">
@@ -94,47 +54,53 @@ const pageTitle: string = Astro.preferredLocale === "en" ? "Services | Qero Refo
         >
           {title}
         </h1>
-        <!-- {
-          subTitle && (
-            <p class="hidden max-w-screen-sm text-pretty text-neutral-600 dark:text-neutral-400 md:block">
-              {subTitle}
-            </p>
-          )
-        } -->
       </div>
-      <!-- <PrimaryCTA title="Customer Stories" url="#testimonials" noArrow={true} /> -->
     </div>
-    <!--Displaying products in alternating styles. Alternative product gets different card styling.-->
-    <!--Maps through all product entries and displays them with either CardSmall or CardWide based on their position.-->
+    
+    <!-- Services Grid -->
     <section class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-6 xl:gap-8">
       {
-        services.map((s, index) => {
+        services.map((service, index) => {
+          // Add a custom button to each service card
+          const serviceWithButton = {
+            ...service,
+            data: {
+              ...service.data,
+              callButtonEnabled: true
+            }
+          };
+          
           const position = index % 4;
           if (position === 0 || position === 3) {
-            return <CardSmall product={s} />;
+            return <CardSmall product={serviceWithButton} />;
           } else {
-            return <CardWide product={s} />;
+            return <CardWide product={serviceWithButton} />;
           }
         })
       }
     </section>
   </div>
-  <!--Features statistics section-->
-  <FeaturesStatsAlt
-    title="¿Porqué elegir a Qero Reformas y Decoración?"
-    subTitle="Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar."
-    benefits={[
-      "Montaje profesional de muebles Ikea, Leroy Merlin y otras marcas.",
-      "Diseños de muebles a medida para cualquier espacio.",
-      "Reformas de vivienda y acabados de alta calidad.",
-      "Instalación de cocinas, puertas, tarima flotante y electrodomésticos.",
-      "Servicio de manitas para pequeñas reparaciones y montajes.",
-    ]}
-  />
-  <ContactSection />
-  <!--Testimonials section-->
-  <!-- <TestimonialsSectionAlt
-    title="What Our Customers Say"
-    testimonials={testimonials}
-  /> -->
+  
+  <!-- Contact section without unnecessary content -->
+  <ContactSection simplified={true} />
 </MainLayout>
+
+<style>
+  /* Ensure cards have consistent height and proper spacing */
+  :global(.card-service) {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  :global(.card-service .card-content) {
+    flex: 1;
+  }
+  
+  /* Improved hover effects for cards */
+  :global(.card-service:hover) {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+</style>

@@ -1,24 +1,25 @@
 ---
-// Import necessary components and utilities
+// This is a complete update for your blog post template (id.astro)
 import MainLayout from "@/layouts/MainLayout.astro";
-import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
-import CardRelated from "@components/ui/cards/CardRelated.astro";
-// import Bookmark from "@components/ui/buttons/Bookmark.astro";
-// import SocialShare from "@components/ui/buttons/SocialShare.astro";
-// import PostFeedback from "@components/ui/feedback/PostFeedback.astro";
 import { Image } from "astro:assets";
 import { capitalize, formatDate } from "@utils/utils";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@data/constants";
+import klingerImage from "@images/blog/Klinger.jpg";
+import CardRelated from "@components/ui/cards/CardRelated.astro";
 
-// Update getStaticPaths for English posts
+// Import blog images
+import post2Image from "@images/blog/post-2.jpg";
+import post3Image from "@images/blog/post-3.jpg";
+
+// Required getStaticPaths function for dynamic routes
 export async function getStaticPaths() {
   const blogPosts = await getCollection("blog", ({ id }) =>
-    id.startsWith("es/")
+    id.startsWith("es/") && !id.includes("encimera-en-los-disenos-de-cocina")
   );
   return blogPosts.map((post) => {
-    const idWithoutLang = post.id.replace(/^es\//, ""); // Remove the "en/" prefix
+    const idWithoutLang = post.id.replace(/^es\//, ""); // Remove the "es/" prefix
     return {
       params: { id: idWithoutLang },
       props: { post },
@@ -29,34 +30,116 @@ export async function getStaticPaths() {
 // Get the current post's data
 const { post } = Astro.props;
 
+// Get blog ID and title for image selection
+const blogId: string = post.id;
+const blogTitle: string = post.data.title;
+
+// More reliable image selection based on both ID and title
+let blogImage;
+if (blogId.includes("tarimas-flotantes") || 
+    blogTitle.includes("Suelos Laminados") || 
+    blogTitle.includes("Tarimas Flotantes")) {
+  blogImage = post3Image; // Assign post-3.jpg for the tarimas blog
+} else if (blogId.includes("estilos-de-cocina") || 
+          blogTitle.includes("Estilos de Cocina")) {
+  blogImage = post2Image; // Assign post-2.jpg for the cocina blog
+} else {
+  // Fallback based on specific title matching
+  if (blogTitle.includes("Tendencias")) {
+    blogImage = post3Image;
+  } else {
+    blogImage = post2Image;
+  }
+}
+
+// Debug logging - this will show in the build log
+console.log("Blog ID:", blogId);
+console.log("Blog Title:", blogTitle);
+console.log("Selected Image:", blogImage === post2Image ? "post-2.jpg" : "post-3.jpg");
+
+// Get related posts
 const blogPosts: CollectionEntry<"blog">[] = await getCollection(
   "blog",
-  ({ id }) => id.startsWith("es/")
+  ({ id }) => id.startsWith("es/") && !id.includes("encimera-en-los-disenos-de-cocina")
 );
 
-// Filter out the current post to get related posts
-// Note: This is a very basic way of choosing related posts, just for the purpose of the example.
-// In a production site, you might want to implement a more robust algorithm, choosing related posts based on tags, categories, dates, authors, or keywords.
-// See example: https://blog.codybrunner.com/2024/adding-related-articles-with-astro-content-collections/
 const relatedPosts: CollectionEntry<"blog">[] = blogPosts.filter(
   (blogEntry) => blogEntry.id !== post.id
 );
 
-const pageTitle: string = `${post.data.title} | ${SITE.title}`;
+const pageTitle: string = `${post.data.title} | Kalia Reformas`;
 ---
+
+<style is:global>
+  /* Quick fix for navbar overlapping blog content */
+  html body section.mx-auto.max-w-3xl.px-4.pb-12.pt-6 {
+    padding-top: 9rem !important;
+  }
+  
+  @media (max-width: 768px) {
+    html body section.mx-auto.max-w-3xl.px-4.pb-12.pt-6 {
+      padding-top: 12rem !important;
+    }
+  }
+  
+  /* Custom styles for Kalia branding */
+  :root {
+    --kalia-primary: #daa520; /* Gold color for Kalia */
+    --kalia-secondary: #333333;
+    --kalia-accent: #f5f5f5;
+  }
+  
+  h2, h3, h4 {
+    font-family: 'Georgia', serif !important;
+  }
+  
+  p, span, a, li {
+    font-family: 'Poppins', sans-serif !important;
+  }
+  
+  a:hover {
+    color: var(--kalia-primary) !important;
+  }
+  
+  /* Mobile styles for images */
+  @media (max-width: 768px) {
+    .image-after-text {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .image-after-text .text-content {
+      order: 1;
+    }
+    
+    .image-after-text .image-content {
+      order: 2;
+      margin-top: 1.5rem;
+    }
+  }
+</style>
 
 <MainLayout title={pageTitle}>
   <section class="mx-auto max-w-3xl px-4 pb-12 pt-6 sm:px-6 lg:px-8 lg:pt-10">
     <div class="max-w-2xl">
       <div class="mb-6 flex items-center justify-between">
         <div class="flex w-full gap-x-5 sm:items-center sm:gap-x-3">
-          <AvatarBlogLarge blogEntry={post} />
+          <!-- Avatar with Klinger image -->
+          <div class="inline-block h-12 w-12 overflow-hidden rounded-full">
+            <Image
+              src={klingerImage}
+              alt="Klinger Mallqui"
+              class="h-full w-full rounded-full object-cover"
+              width={48}
+              height={48}
+            />
+          </div>
           <div class="grow">
             <div class="flex items-center justify-between gap-x-2">
               <div>
                 <!--Post metadata and author info-->
                 <span class="font-bold text-neutral-700 dark:text-neutral-300">
-                  {post.data.author}
+                  Klinger Mallqui
                 </span>
                 <ul class="text-xs text-neutral-500">
                   <li
@@ -64,11 +147,6 @@ const pageTitle: string = `${post.data.title} | ${SITE.title}`;
                   >
                     {formatDate(post.data.pubDate)}
                   </li>
-                  <!-- <li
-                    class="relative inline-block pe-6 before:absolute before:end-2 before:top-1/2 before:size-1 before:-translate-y-1/2 before:rounded-full before:bg-neutral-300 last:pe-0 last-of-type:before:hidden dark:text-neutral-400 dark:before:bg-neutral-600"
-                  >
-                    {post.data.readTime} min read
-                  </li> -->
                 </ul>
               </div>
             </div>
@@ -81,29 +159,57 @@ const pageTitle: string = `${post.data.title} | ${SITE.title}`;
       >
         {post.data.title}
       </h2>
+      
+      <!-- Reliable image display with improved alt text -->
+      {blogTitle.includes("Tendencias en Suelos Laminados") && (
+        <div class="mb-8">
+          <Image
+            class="w-full rounded-xl object-cover"
+            src={post3Image}
+            alt="Tendencias en Suelos Laminados y Tarimas Flotantes"
+            draggable="false"
+            format="jpg"
+            loading="eager"
+          />
+        </div>
+      )}
+      
+      {blogTitle.includes("Estilos de Cocina") && (
+        <div class="mb-8">
+          <Image
+            class="w-full rounded-xl object-cover"
+            src={post2Image}
+            alt="Principales Estilos de Cocina: Diseños que Inspiran"
+            draggable="false"
+            format="jpg"
+            loading="eager"
+          />
+        </div>
+      )}
+      
+      <!-- Fallback image display if none of the specific titles match -->
+      {!blogTitle.includes("Tendencias en Suelos Laminados") && 
+       !blogTitle.includes("Estilos de Cocina") && (
+        <div class="mb-8">
+          <Image
+            class="w-full rounded-xl object-cover"
+            src={blogImage}
+            alt={blogTitle || "Blog featured image"}
+            draggable="false"
+            format="jpg"
+            loading="eager"
+          />
+        </div>
+      )}
+      
       <!--Blog post contents-->
       <div class="mb-5 space-y-5 md:mb-8 md:space-y-8">
         {
-          post.data.contents.map((content: string, index: any) =>
-            index === 1 ? (
-              <>
-                <Image
-                  class="w-full rounded-xl object-cover"
-                  src={post.data.cardImage}
-                  alt={post.data.cardImageAlt}
-                  draggable={"false"}
-                  format={"jpg"}
-                />
-                <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${((content).length <= 45 ) ? "font-bold" : ""}`}>
-                  {content}
-                </p>
-              </>
-            ) : (
-              <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${((content).length <= 45 ) ? "font-bold" : ""}`}>
-                {content}
-              </p>
-            )
-          )
+          post.data.contents.map((content: string, index: number) => (
+            <p class={`text-pretty text-lg text-neutral-700 dark:text-neutral-300 ${content.length <= 45 ? "font-bold" : ""}`}>
+              {content}
+            </p>
+          ))
         }
       </div>
       <div
@@ -121,24 +227,8 @@ const pageTitle: string = `${post.data.title} | ${SITE.title}`;
             ))
           }
         </div>
-        <!--Bookmark and Share buttons-->
-        <!-- <div class="flex items-center justify-end gap-x-1.5">
-          <Bookmark />
-          <div
-            class="mx-3 block h-4 border-e border-neutral-400 dark:border-neutral-500"
-          >
-          </div>
-          <div class="inline-flex">
-            <SocialShare pageTitle={post.data.title} />
-          </div>
-        </div> -->
       </div>
     </div>
-    <!-- <PostFeedback
-      title="¿Este articulo fue útil?"
-      firstChoice="Si"
-      secondChoice="No"
-    /> -->
   </section>
 
   <!--Related articles section-->
@@ -152,7 +242,9 @@ const pageTitle: string = `${post.data.title} | ${SITE.title}`;
     </div>
 
     <div class="grid grid-cols-2 gap-6">
-      {relatedPosts.map((entry) => <CardRelated blogEntry={entry} />)}
+      {relatedPosts.map((entry) => (
+        <CardRelated blogEntry={entry} />
+      ))}
     </div>
   </section>
 </MainLayout>

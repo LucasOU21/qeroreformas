@@ -25,8 +25,8 @@ longDescription:
 descriptionList:
   - title: "Detalle"
     subTitle:
-      - parrafo: "✔ Reformas de interiores y reformas de vivienda con materiales de alta calidad."
-      - parrafo: "✔ Renovaciones en baños, cocinas y espacios abiertos con un diseño moderno y funcional." 
+      - parrafo: "Reformas de interiores y reformas de vivienda con materiales de alta calidad."
+      - parrafo: "Renovaciones en baños, cocinas y espacios abiertos con un diseño moderno y funcional." 
 specificationsLeft:
   - title: " "
     subTitle: "@/images/reformas-vivienda-galery1.jpg"

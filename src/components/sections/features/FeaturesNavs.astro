@@ -26,7 +26,7 @@ interface Props {
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full hidden md:block"
 >
   <div class="relative p-6 md:p-16">
     <div
@@ -35,13 +35,18 @@ interface Props {
       <!-- Section's heading and tab navigation -->
       <div class="mb-10 lg:order-2 lg:col-span-6 lg:col-start-6 lg:mb-0">
         <h2
-          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-3xl"
+          class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-3xl font-georgia"
         >
           <!-- About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments -->
           <Fragment set:html={title} />
         </h2>
+        
         <!-- Tab navigation - use the attribute 'first' in the first TabNav for the component to work -->
-        <nav class="mt-5 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2" aria-label="Tabs" role="tablist">
+        <nav 
+          class="mt-8 grid gap-4 md:mt-10 grid-cols-1 xl:grid-cols-2 font-poppins" 
+          aria-label="Tabs" 
+          role="tablist"
+        >
           {
             tabs.map((tab, index) => (
               <TabNav
@@ -81,14 +86,92 @@ interface Props {
     </div>
 
     <div class="absolute inset-0 grid h-full w-full grid-cols-12">
-      <!-- Decorative background and sizing -->
-      <div class="col-span-full h-5/6 w-full rounded-xl bg-neutral-100 dark:bg-white/[.075] sm:h-3/4 lg:col-span-7 lg:col-start-5 lg:h-full" >
+      <!-- Decorative background with updated color scheme -->
+      <div 
+        class="col-span-full h-5/6 w-full rounded-xl bg-gradient-to-br from-amber-50 to-yellow-100 dark:from-neutral-800 dark:to-neutral-900 dark:bg-opacity-70 sm:h-3/4 lg:col-span-7 lg:col-start-5 lg:h-full" 
+      >
       </div>
     </div>
   </div>
 </section>
+
 <!--Import the necessary Tabs plugin-->
 <!--https://preline.co/plugins/html/tabs.html-->
 <script>
   import "@preline/tabs/index.js";
 </script>
+
+<style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  /* Font classes */
+  .font-georgia {
+    font-family: 'Georgia', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  nav[role="tablist"] {
+    display: grid;
+    gap: 1rem;
+  }
+
+  /* Make active tabs more prominent with gold accent using the #FFD000 color */
+  :global(.hs-tab-active) {
+    border-color: #FFD000 !important;
+    box-shadow: 0 4px 12px rgba(255, 208, 0, 0.15) !important;
+  }
+
+  :global(.dark .hs-tab-active) {
+    border-color: #FFD000 !important;
+    background-color: rgba(255, 208, 0, 0.1) !important;
+  }
+
+  /* Improve tab hover states */
+  :global([data-hs-tab]:hover:not(.hs-tab-active)) {
+    background-color: rgba(255, 208, 0, 0.05);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+
+  /* Enhance tab text colors */
+  :global(.tab-heading) {
+    font-family: 'Georgia', serif;
+    color: #000000;
+    font-weight: 600;
+  }
+
+  :global(.dark .tab-heading) {
+    color: #F8F1E7;
+  }
+
+  :global(.tab-content) {
+    font-family: 'Poppins', sans-serif;
+    color: #000000;
+    font-weight: 400;
+  }
+
+  :global(.dark .tab-content) {
+    color: #F8F1E7;
+  }
+
+  /* Enhance image appearance */
+  :global(.tab-image) {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+  }
+
+  :global(.dark .tab-image) {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  /* 
+  * The existing mobile visibility styles were already defined here
+  * but I've added the tailwind classes directly to the section element above
+  * for simplicity and clarity
+  */
+</style>

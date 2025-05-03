@@ -6,8 +6,8 @@ main:
   id: 3
   content: |
     Nos encargamos del montaje e instalación de muebles de cocina Ikea, Leroy Merlin y otros fabricantes.
-  imgCard: "@/images/instalacion-cocina-electro.jpg"
-  imgMain: "@/images/instalacion-cocina-electro.jpg"
+  imgCard: "@/images/realKitchen1.jpg"
+  imgMain: "@/images/realKitchen1.jpg"
   imgAlt: "Instalación de Cocinas y Electrodomésticos"
 tabs:
   - id: "tabs-with-card-item-1"
@@ -25,9 +25,9 @@ longDescription:
 descriptionList:
   - title: "Subservicios"
     subTitle:
-      - parrafo: "✔ Instalamos muebles altos de cocina y muebles bajos de cocina, asegurando un ajuste perfecto."
-      - parrafo: "✔ Montamos electrodomésticos panelados, campanas extractoras y encimeras." 
-      - parrafo: "✔ Diseño e instalación de cocinas Ikea y Leroy Merlin." 
+      - parrafo: "Instalamos muebles altos de cocina y muebles bajos de cocina, asegurando un ajuste perfecto."
+      - parrafo: "Montamos electrodomésticos panelados, campanas extractoras y encimeras." 
+      - parrafo: "Diseño e instalación de cocinas Ikea y Leroy Merlin." 
 specificationsLeft:
   - title: "Muebles altos"
     subTitle: "@/images/muebles-altos.jpg"

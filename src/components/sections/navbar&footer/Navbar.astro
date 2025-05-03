@@ -1,219 +1,321 @@
 ---
-//Import relevant dependencies
+// src/components/sections/navbar&footer/Navbar.astro
 import ThemeIcon from "@components/ThemeIcon.astro";
-import NavLink from "@components/ui/links/NavLink.astro";
-// import LanguagePicker from "@components/ui/LanguagePicker.astro";
-import BrandLogo from "@components/BrandLogo.astro";
-// import Authentication from "../misc/Authentication.astro";
-
-import esStrings from "@utils/navigation.ts";
-import enStrings from "@utils/en/navigation.ts";
-
-// Select the correct translation based on the page's lang prop:
-const strings = Astro.currentLocale === "es" ? esStrings : enStrings;
-const homeUrl = Astro.currentLocale === "es" ? "/" : "/en";
-
 ---
 
-<!-- Main header component -->
-<header
-  class="sticky inset-x-0 top-4 z-50 flex w-full flex-wrap text-sm md:flex-nowrap md:justify-start"
->
-  <!-- Navigation container -->
-  <nav
-    class="relative mx-2 w-full rounded-[36px] border border-yellow-100/40 bg-yellow-50/60 px-4 py-3 backdrop-blur-md dark:border-neutral-700/40 dark:bg-neutral-800/80 dark:backdrop-blur-md md:flex md:items-center md:justify-between md:px-6 md:py-0 lg:px-8 xl:mx-auto"
-    aria-label="Global"
-  >
-    <div class="flex items-center justify-between">
-      <!-- Brand logo -->
-      <a
-        class="flex-none rounded-lg text-xl font-bold outline-none ring-zinc-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
-        href={homeUrl}
-        aria-label="Brand"
-      >
-        <BrandLogo class="h-10 w-10 m-2" />
-         <!-- <p class="block p-0 m-0 text-balance text-xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 sm:text-2xl lg:leading-tight">Qero</p> -->
-      </a>
-      <!-- Collapse toggle for smaller screens -->
-      <div class="ml-auto mr-5 md:hidden">
-        <button
-          type="button"
-          class="hs-collapse-toggle flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-neutral-600 transition duration-300 hover:bg-neutral-200 disabled:pointer-events-none disabled:opacity-50 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:focus:outline-none"
-          data-hs-collapse="#navbar-collapse-with-animation"
-          aria-controls="navbar-collapse-with-animation"
-          aria-label="Toggle navigation"
+<header id="navbar" class="absolute top-2 left-0 right-0 z-50 w-screen">
+  <div class="navbar-container w-full max-w-none px-4 sm:px-8 lg:px-12">
+    <div class="flex items-center justify-between navbar-bg backdrop-blur-sm px-4 sm:px-8 py-2 shadow-sm rounded-xl mx-2 sm:mx-4">
+      <!-- Logo - moved more to the left with negative margin -->
+      <div class="flex-shrink-0 h-10 flex items-center overflow-hidden" style="margin-left: -24px;">
+        <a href="/" class="flex items-center" aria-label="Kalia Reformas y Decoración">
+          <div class="flex-shrink-0 py-4">
+            <img 
+              src="/src/images/logos/KaliaLogo-300x300.png" 
+              alt="Kalia Logo" 
+              class="w-auto h-48 -mt-2 block dark:hidden"
+            />
+            <img 
+              src="/src/images/logos/KaliaLogo300x300Dark.png" 
+              alt="Kalia Logo" 
+              class="w-auto h-48 -mt-2 hidden dark:block"
+            />
+          </div>
+        </a>
+      </div>
+
+      <!-- Right side with nav links and theme toggle -->
+      <div class="flex items-center space-x-2 md:space-x-8">
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="/" class="nav-link text-sm">Inicio</a>
+          <!-- Services dropdown menu -->
+          <div class="relative group">
+            <a href="/services" class="nav-link text-sm flex items-center group-hover:text-[#FFD000] dark:group-hover:text-[#FFD000]">
+              Servicios
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 transition-transform duration-300 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </a>
+            <div class="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform origin-top scale-95 group-hover:scale-100">
+              <div class="py-1 rounded-md bg-white dark:bg-gray-800 shadow-xs">
+                <a href="/services/montaje-de-muebles" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Montaje de Muebles</a>
+                <a href="/services/diseno-de-muebles" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Diseño de Muebles</a>
+                <a href="/services/intalacion-cocinas-electrodomesticos" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Cocinas y Electrodomésticos</a>
+                <a href="/services/reformas-de-vivienda" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Reformas de Vivienda</a>
+                <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Puertas, Tarima y Rodapiés</a>
+                <a href="/services/servicios-de-acabados" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Servicios de Acabados</a>
+                <a href="/services/manitas" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">Manitas</a>
+              </div>
+            </div>
+          </div>
+          <a href="/nosotros" class="nav-link text-sm">Nosotros</a>
+          <!-- <a href="/equipo" class="nav-link text-sm">Equipo</a> -->
+          <a href="/blog" class="nav-link text-sm">Blog</a>
+        </nav>
+
+        <!-- Theme Toggle - Show on both desktop and mobile now -->
+        <div class="flex items-center">
+          <ThemeIcon />
+        </div>
+
+        <!-- Mobile menu button -->
+        <button 
+          id="mobile-menu-button" 
+          type="button" 
+          class="md:hidden inline-flex items-center justify-center p-1.5 rounded-md text-gray-700 hover:text-[#FFD000] dark:text-gray-300 dark:hover:text-[#FFD000]" 
+          aria-controls="mobile-menu" 
+          aria-expanded="false"
         >
-          <svg
-            class="h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:hidden"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <line x1="3" x2="21" y1="6" y2="6"></line>
-            <line x1="3" x2="21" y1="12" y2="12"></line>
-            <line x1="3" x2="21" y1="18" y2="18"></line>
+          <span class="sr-only">Abrir menú principal</span>
+          <!-- Hamburger icon -->
+          <svg class="block h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          <svg
-            class="hidden h-[1.25rem] w-[1.25rem] flex-shrink-0 hs-collapse-open:block"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M18 6 6 18"></path>
-            <path d="m6 6 12 12"></path>
+          <!-- X icon -->
+          <svg class="hidden h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <!-- ThemeIcon component specifically for smaller screens -->
-      <span class="inline-block md:hidden">
-        <ThemeIcon />
-      </span>
     </div>
-    <!-- Contains navigation links -->
-    <div
-      id="navbar-collapse-with-animation"
-      class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 md:block"
-    >
-      <!-- Navigation links container -->
-      <div
-        class="mt-5 mb-5 ms-2 md:ms-0 md:mb-0 flex flex-col gap-x-0 gap-y-4 md:mt-0 md:flex-row md:items-center md:justify-end md:gap-x-4 lg:gap-x-7 md:gap-y-0 md:ps-7"
-      >
-        <!-- Navigation links and Authentication component -->
-        {strings.navBarLinks.map(link => (
-          <NavLink url={link.url} name={link.name} />
-        ))}
+  </div>
 
-        <!-- <Authentication /> -->
-
-        <!-- <LanguagePicker /> -->
-
-        <!-- ThemeIcon component specifically for larger screens -->
-        <span class="hidden md:inline-block">
-          <ThemeIcon />
-        </span>
+  <!-- Improved Mobile menu with accordion-style dropdown -->
+  <div id="mobile-menu" class="md:hidden hidden mx-2 mt-2">
+    <div class="mobile-menu-container px-5 pt-4 pb-6 space-y-2 rounded-xl shadow-lg mx-2 sm:mx-4 bg-white dark:bg-black dark:border-gray-800">
+      <!-- Mobile nav items -->
+      <a href="/" class="mobile-nav-link">Inicio</a>
+      
+      <!-- Improved Mobile Services Dropdown -->
+      <div class="mobile-dropdown">
+        <!-- Services button with chevron -->
+        <button id="mobile-services-button" class="w-full text-left flex items-center justify-between px-2 py-3 text-neutral-800 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-900 rounded-lg">
+          <span class="font-medium">Servicios</span>
+          <svg id="mobile-services-chevron" xmlns="http://www.w3.org/2000/svg" 
+               class="h-5 w-5 text-neutral-500 dark:text-neutral-400 transition-transform duration-300" 
+               fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        
+        <!-- Mobile Submenu with improved styling -->
+        <div id="mobile-services-submenu" class="overflow-hidden hidden mt-1 space-y-1">
+          <a href="/services/montaje-de-muebles" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Montaje de Muebles
+          </a>
+          <a href="/services/diseno-de-muebles" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Diseño de Muebles
+          </a>
+          <a href="/services/intalacion-cocinas-electrodomesticos" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Cocinas y Electrodomésticos
+          </a>
+          <a href="/services/reformas-de-vivienda" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Reformas de Vivienda
+          </a>
+          <a href="/services/instalacion-puertas-tarimaflotante-rodapies" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Puertas, Tarima y Rodapiés
+          </a>
+          <a href="/services/servicios-de-acabados" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Servicios de Acabados
+          </a>
+          <a href="/services/manitas" class="block py-2 px-4 rounded-lg text-sm text-neutral-700 dark:text-neutral-300 hover:bg-gray-50 dark:hover:bg-gray-900 ml-4">
+            Manitas
+          </a>
+        </div>
       </div>
+      
+      <a href="/nosotros" class="mobile-nav-link">Nosotros</a>
+      <!-- <a href="/equipo" class="mobile-nav-link">Equipo</a> -->
+      <a href="/blog" class="mobile-nav-link">Blog</a>
     </div>
-  </nav>
+  </div>
 </header>
-<!-- Theme Appearance script to manage light/dark modes -->
-<script is:inline>
-  const HSThemeAppearance = {
-    init() {
-      const defaultTheme = "default";
-      let theme = localStorage.getItem("hs_theme") || defaultTheme;
 
-      if (document.querySelector("html").classList.contains("dark")) return;
-      this.setAppearance(theme);
-    },
-    _resetStylesOnLoad() {
-      const $resetStyles = document.createElement("style");
-      $resetStyles.innerText = `*{transition: unset !important;}`;
-      $resetStyles.setAttribute("data-hs-appearance-onload-styles", "");
-      document.head.appendChild($resetStyles);
-      return $resetStyles;
-    },
-    setAppearance(theme, saveInStore = true, dispatchEvent = true) {
-      const $resetStylesEl = this._resetStylesOnLoad();
+<style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-      if (saveInStore) {
-        localStorage.setItem("hs_theme", theme);
-      }
+  /* Gold accent color */
+  :root {
+    --gold-accent: #FFD000;
+    --menu-bg-light: #FFFFFF; /* Pure white */
+    --menu-bg-dark: #000000; /* Black for dark mode */
+    --text-color-light: #000000; /* Black text */
+    --text-color-dark: #F8F1E7; /* Beige text */
+  }
 
-      if (theme === "auto") {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "default";
-      }
+  /* Make navbar full width */
+  #navbar {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    width: 100vw;
+  }
+  
+  /* Navbar background custom color */
+  .navbar-bg {
+    background-color: #FFFFFF; /* Pure white for light mode */
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
 
-      document.querySelector("html").classList.remove("dark");
-      document.querySelector("html").classList.remove("default");
-      document.querySelector("html").classList.remove("auto");
+  /* Dark mode navbar background */
+  :global(.dark) .navbar-bg {
+    background-color: #000000; /* Midnight black for dark mode */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-      document
-        .querySelector("html")
-        .classList.add(this.getOriginalAppearance());
+  /* Navigation styles */
+  .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+    position: relative;
+    color: var(--text-color-light);
+  }
+  
+  :global(.dark) .nav-link {
+    color: var(--text-color-dark);
+  }
 
-      setTimeout(() => {
-        $resetStylesEl.remove();
-      });
+  .nav-link:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background-color: var(--gold-accent);
+    transition: width 0.3s ease;
+  }
 
-      if (dispatchEvent) {
-        window.dispatchEvent(
-          new CustomEvent("on-hs-appearance-change", { detail: theme }),
-        );
-      }
-    },
-    getAppearance() {
-      let theme = this.getOriginalAppearance();
-      if (theme === "auto") {
-        theme = window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "default";
-      }
-      return theme;
-    },
-    getOriginalAppearance() {
-      const defaultTheme = "default";
-      return localStorage.getItem("hs_theme") || defaultTheme;
-    },
-  };
-  HSThemeAppearance.init();
+  .nav-link:hover {
+    color: var(--gold-accent);
+  }
 
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", () => {
-      if (HSThemeAppearance.getOriginalAppearance() === "auto") {
-        HSThemeAppearance.setAppearance("auto", false);
-      }
-    });
+  .nav-link:hover:after {
+    width: 100%;
+  }
 
-  window.addEventListener("load", () => {
-    const $clickableThemes = document.querySelectorAll(
-      "[data-hs-theme-click-value]",
-    );
-    const $switchableThemes = document.querySelectorAll(
-      "[data-hs-theme-switch]",
-    );
+  /* Mobile menu container - Support Dark Mode */
+  .mobile-menu-container {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
 
-    $clickableThemes.forEach(($item) => {
-      $item.addEventListener("click", () =>
-        HSThemeAppearance.setAppearance(
-          $item.getAttribute("data-hs-theme-click-value"),
-          true,
-          $item,
-        ),
-      );
-    });
+  :global(.dark) .mobile-menu-container {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-    $switchableThemes.forEach(($item) => {
-      $item.addEventListener("change", (e) => {
-        HSThemeAppearance.setAppearance(e.target.checked ? "dark" : "default");
-      });
+  /* Mobile navigation styles */
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 0.5rem;
+    color: var(--text-color-light);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+  }
 
-      $item.checked = HSThemeAppearance.getAppearance() === "dark";
-    });
+  :global(.dark) .mobile-nav-link {
+    color: var(--text-color-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
-    window.addEventListener("on-hs-appearance-change", (e) => {
-      $switchableThemes.forEach(($item) => {
-        $item.checked = e.detail === "dark";
-      });
-    });
-  });
-</script>
-<!--Import the necessary Collapse and Overlay plugins-->
-<!--https://preline.co/plugins/html/collapse.html-->
-<!--https://preline.co/plugins/html/overlay.html-->
+  .mobile-nav-link:hover {
+    color: var(--gold-accent);
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  
+  :global(.dark) .mobile-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Mobile dropdown styling */
+  .mobile-dropdown {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  :global(.dark) .mobile-dropdown {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Mobile submenu animation */
+  #mobile-services-submenu {
+    max-height: 0;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+    opacity: 0;
+  }
+  
+  #mobile-services-submenu.expanded {
+    max-height: 500px;
+    transition: max-height 0.5s ease-in, opacity 0.3s ease-in;
+    opacity: 1;
+  }
+
+  /* Navbar container - extended to be full width */
+  .navbar-container {
+    width: 100%;
+    max-width: none;
+  }
+</style>
+
 <script>
-  import "@preline/collapse/index.js";
-  import "@preline/overlay/index.js";
+  document.addEventListener('DOMContentLoaded', function() {
+    // DOM elements
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerIcon = mobileMenuButton?.querySelector('svg:nth-child(1)');
+    const closeIcon = mobileMenuButton?.querySelector('svg:nth-child(2)');
+    const mobileServicesButton = document.getElementById('mobile-services-button');
+    const mobileServicesSubmenu = document.getElementById('mobile-services-submenu');
+    const mobileServicesChevron = document.getElementById('mobile-services-chevron');
+
+    // Toggle mobile menu
+    function toggleMobileMenu() {
+      const expanded = mobileMenuButton?.getAttribute('aria-expanded') === 'true';
+      
+      mobileMenuButton?.setAttribute('aria-expanded', (!expanded).toString());
+      mobileMenu?.classList.toggle('hidden', expanded);
+      
+      if (hamburgerIcon && closeIcon) {
+        hamburgerIcon.classList.toggle('hidden', !expanded);
+        closeIcon.classList.toggle('hidden', expanded);
+      }
+    }
+
+    // Services dropdown toggle
+    if (mobileServicesButton && mobileServicesSubmenu && mobileServicesChevron) {
+      mobileServicesButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Toggle submenu
+        mobileServicesSubmenu.classList.toggle('hidden');
+        mobileServicesSubmenu.classList.toggle('expanded');
+        
+        // Rotate chevron
+        mobileServicesChevron.classList.toggle('rotate-90');
+      });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+      const target = event.target as Node;
+      const isMenuButton = mobileMenuButton?.contains(target);
+      const isMenuContent = mobileMenu?.contains(target);
+      const isMenuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+      
+      if (isMenuOpen && !isMenuButton && !isMenuContent) {
+        toggleMobileMenu();
+      }
+    });
+
+    // Event listeners
+    mobileMenuButton?.addEventListener('click', toggleMobileMenu);
+  });
 </script>

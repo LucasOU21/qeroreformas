@@ -19,60 +19,125 @@ interface Props {
 }
 // Define props from Astro
 const { title, subTitle, src, alt, features } = Astro.props;
+
+// Filter out the "Compromiso con el medio ambiente" card if it exists
+const filteredFeatures = features ? features.filter(feature => 
+  feature.heading !== "Compromiso con el medio ambiente") : [];
+
+// Calculate how many features to show in the first row (3)
+const firstRowFeatures = filteredFeatures.slice(0, 3);
+const secondRowFeatures = filteredFeatures.slice(3, 6);
 ---
 
 <section
-  class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full"
+  class="mx-auto max-w-[85rem] px-4 py-8 sm:px-6 lg:px-8 lg:py-12 2xl:max-w-full"
 >
+  <!-- Section header with title and subtitle -->
+  <div class="mb-8 text-center lg:mb-12">
+    <h2
+      class="text-balance text-2xl font-bold text-[#000000] dark:text-[#000000] md:text-3xl lg:text-4xl font-georgia"
+    >
+      {title}
+    </h2>
+    {
+      subTitle && (
+        <p class="mx-auto mt-3 max-w-2xl text-pretty text-[#000000] dark:text-[#000000] text-base sm:text-lg font-poppins">
+          {subTitle}
+        </p>
+      )
+    }
+  </div>
 
-  <!-- Displaying the main content consisting of title, subtitle, and several `IconBlock` components -->
-  <div class="mt-5 grid gap-8 lg:mt-16 lg:grid-cols-3 lg:gap-12">
-    <!-- Block for title and subtitle -->
-    <div class="lg:col-span-3 md:mb-4 mt-4">
-      <!-- Rendering title -->
-      <h2
-        class="text-balance text-2xl font-bold text-neutral-800 dark:text-neutral-200 md:text-3xl"
-      >
-        {title}
-      </h2>
-      <!-- Rendering subtitle -->
-      {
-        subTitle && (
-          <p class="mt-2 text-pretty text-neutral-600 dark:text-neutral-400 md:mt-4">
-            {subTitle}
+  <!-- Feature image display (if provided) - optimized for mobile -->
+  {
+    src && alt && (
+      <div class="relative mb-10 overflow-hidden rounded-lg md:rounded-xl">
+        <Image
+          src={src}
+          alt={alt}
+          class="h-full w-full max-w-4xl object-cover object-center mx-auto"
+          draggable={"false"}
+          format={"png"}
+          loading={"eager"}
+        />
+      </div>
+    )
+  }
+
+  <!-- First row of features - 3 cards centered -->
+  <div class="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mb-8 mx-auto max-w-5xl">
+    {
+      firstRowFeatures.map((feature) => (
+        <div class="feature-card group rounded-xl border border-neutral-200 bg-[#F8F1E7] p-5 sm:p-6 transition-all duration-300 hover:border-[#FFD000] hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/80 dark:hover:border-[#FFD000]">
+          <div class="mb-4 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-[#FFD000]/20 text-[#FFD000] dark:bg-[#FFD000]/10 dark:text-[#FFD000]">
+            <Icon name={feature.svg} />
+          </div>
+          <h3 class="mb-2 text-base sm:text-lg font-semibold text-[#000000] dark:text-[#F8F1E7] font-georgia">
+            {feature.heading}
+          </h3>
+          <p class="text-sm sm:text-base text-[#000000] dark:text-[#F8F1E7] font-poppins">
+            {feature.content}
           </p>
-        )
-      }
-    </div>
+        </div>
+      ))
+    }
+  </div>
 
-    <!-- Block to display the IconBlock components -->
-    <div class="lg:col-span-3">
-      <div class="grid gap-8 sm:grid-cols-2 xl:grid-cols-4 md:gap-12">
-        <!-- Injecting IconBlock components with different properties -->
-        { features &&
-          features.map((feature) => (
-            <IconBlock heading={feature.heading} content={feature.content}>
-              <Icon name={feature.svg} />
-            </IconBlock>
+  <!-- Second row of features - remaining cards centered -->
+  {
+    secondRowFeatures.length > 0 && (
+      <div class="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto max-w-5xl">
+        {
+          secondRowFeatures.map((feature) => (
+            <div class="feature-card group rounded-xl border border-neutral-200 bg-[#F8F1E7] p-5 sm:p-6 transition-all duration-300 hover:border-[#FFD000] hover:shadow-md dark:border-neutral-700 dark:bg-neutral-800/80 dark:hover:border-[#FFD000]">
+              <div class="mb-4 inline-flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-lg bg-[#FFD000]/20 text-[#FFD000] dark:bg-[#FFD000]/10 dark:text-[#FFD000]">
+                <Icon name={feature.svg} />
+              </div>
+              <h3 class="mb-2 text-base sm:text-lg font-semibold text-[#000000] dark:text-[#F8F1E7] font-georgia">
+                {feature.heading}
+              </h3>
+              <p class="text-sm sm:text-base text-[#000000] dark:text-[#F8F1E7] font-poppins">
+                {feature.content}
+              </p>
+            </div>
           ))
         }
       </div>
-    </div>
-  </div>
-
-    <!-- Block to display the feature image -->
-    <div class="relative mb-6 overflow-hidden md:mb-8">
-      {
-        src && alt && (
-          <Image
-            src={src}
-            alt={alt}
-            class="h-full w-full max-w-4xl object-cover object-center mx-auto my-6"
-            draggable={"false"}
-            format={"png"}
-            loading={"eager"}
-          />
-        )
-      }
-    </div>
+    )
+  }
 </section>
+
+<style>
+  /* Import Google fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+  .font-georgia {
+    font-family: 'Georgia', serif;
+  }
+  
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Improved mobile styling */
+  @media (max-width: 640px) {
+    .feature-card {
+      border-radius: 0.75rem;
+      margin-bottom: 0.75rem;
+      padding: 1.25rem;
+    }
+    
+    /* Better contrast for mobile dark mode */
+    :global(.dark) .feature-card {
+      background-color: rgba(30, 41, 59, 0.8); /* slate-800 with opacity */
+      border-color: rgba(71, 85, 105, 0.5); /* slate-600 with opacity */
+    }
+  }
+</style>

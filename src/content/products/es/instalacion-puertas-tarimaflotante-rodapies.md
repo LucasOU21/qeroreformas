@@ -25,9 +25,9 @@ longDescription:
 descriptionList:
   - title: "Detalle"
     subTitle:
-      - parrafo: "✔ Instalamos puertas corredizas, puertas de seguridad y puertas interiores con precisión."
-      - parrafo: "✔ Colocación de tarima flotante y rodapiés para un acabado elegante y resistente." 
-      - parrafo: "✔ Sistemas de puertas corredizas." 
+      - parrafo: "Instalamos puertas corredizas, puertas de seguridad y puertas interiores con precisión."
+      - parrafo: "Colocación de tarima flotante y rodapiés para un acabado elegante y resistente." 
+      - parrafo: "Sistemas de puertas corredizas." 
 specificationsLeft:
   - title: " "
     subTitle: "@/images/puertas.jpg"
