@@ -140,17 +140,17 @@ const pageTitle: string =
   structuredData={{
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": "https://qeroreformas.com/faqs",
-    url: "https://qeroreformas.com/faqs",
-    name: "Presupuestos | Qero Reformas",
+    "@id": "https://Kaliareformas.com/faqs",
+    url: "https://Kaliareformas.com/faqs",
+    name: "Presupuestos | Kalia Reformas",
     description:
       "¿Tiene alguna pregunta o quiere hablar de un proyecto? Póngase en contacto con nosotros y déjenos elaborar la solución perfecta utilizando nuestras herramientas y servicios.",
     isPartOf: {
       "@type": "WebSite",
-      url: "https://qeroreformas.com",
-      name: "Qero Reformas",
+      url: "https://Kaliareformas.com",
+      name: "Kalia Reformas",
       description:
-        "Elegir a Qero Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
+        "Elegir a Kalia Reformas y Decoración significa optar por un servicio profesional, personalizado y de calidad con un enfoque en el ahorro y la eficiencia. Transformamos espacios con dedicación y pasión, asegurándonos de que tu hogar sea tan único como tú, y lo hacemos cuidando tu bolsillo. ¡Déjanos ayudarte a hacer realidad la cocina, los muebles y el hogar que siempre soñaste! Contáctanos y descubre por qué somos la mejor opción para tus reformas y proyectos en el hogar.",
     },
     inLanguage: "es-ES",
   }}
@@ -1301,6 +1301,19 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.disabled = true;
     submitButton.textContent = "Enviando...";
     
+    // Remove the old email
+    // Change recipient email to qeroreformas@gmail.com
+    templateParams.to_email = "qeroreformas@gmail.com";
+    
+    // Add a flag to prevent duplicate submissions
+    if (form.dataset.submitted === "true") {
+      console.log("Form already submitted, preventing duplicate submission");
+      return false;
+    }
+    
+    // Mark the form as submitted
+    form.dataset.submitted = "true";
+    
     emailjs.send("service_8t7pklm", "template_j3im9z6", templateParams)
       .then(function(response) {
         formPresupuesto.classList.add("hidden");
@@ -1314,6 +1327,8 @@ document.addEventListener('DOMContentLoaded', function() {
         alert("Ha ocurrido un error al enviar el correo. Por favor, inténtalo de nuevo más tarde.");
         submitButton.disabled = false;
         submitButton.textContent = "Enviar";
+        // Reset the submission flag on error so they can try again
+        form.dataset.submitted = "false";
       });
   });
 
