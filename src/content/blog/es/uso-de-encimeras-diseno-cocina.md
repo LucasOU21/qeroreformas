@@ -31,6 +31,6 @@ contents: [
         "Colores oscuros: Tonos como el negro o el gris antracita están ganando popularidad, especialmente en combinación con muebles claros.",
         "Sostenibilidad: Materiales reciclados o de origen responsable están siendo cada vez más demandados por consumidores conscientes del medio ambiente.",
         "Conclusión",
-        "Las encimeras no son solo un elemento funcional en la cocina, sino también una pieza clave en el diseño y la decoración del espacio. Elegir el material, el color y el diseño adecuados puede marcar la diferencia entre una cocina convencional y una que sea realmente especial. En Qero Reformas y Decoración, estamos aquí para ayudarte a encontrar la encimera perfecta para tu cocina y lograr un diseño que combine estilo y funcionalidad a la perfección."
+        "Las encimeras no son solo un elemento funcional en la cocina, sino también una pieza clave en el diseño y la decoración del espacio. Elegir el material, el color y el diseño adecuados puede marcar la diferencia entre una cocina convencional y una que sea realmente especial. En Kalia Reformas y Decoración, estamos aquí para ayudarte a encontrar la encimera perfecta para tu cocina y lograr un diseño que combine estilo y funcionalidad a la perfección."
 ]
 ---
