@@ -58,6 +58,6 @@ contents: [
         "Elementos clave: Decoración personalizada, muebles vintage y acentos llamativos.",
         "Ideal para: Quienes quieren una cocina única y fuera de lo convencional.",
         "Conclusión",
-        "Cada estilo de cocina tiene su propia esencia y ofrece diferentes ventajas según las necesidades y preferencias de cada persona. En Qero Reformas y Decoración, te ayudamos a encontrar el estilo perfecto para tu cocina, asegurándote de que combine funcionalidad, belleza y tu toque personal. ¡Convierte tu cocina en un espacio que inspire cada día!",
+        "Cada estilo de cocina tiene su propia esencia y ofrece diferentes ventajas según las necesidades y preferencias de cada persona. En Kalia Reformas y Decoración, te ayudamos a encontrar el estilo perfecto para tu cocina, asegurándote de que combine funcionalidad, belleza y tu toque personal. ¡Convierte tu cocina en un espacio que inspire cada día!",
 ]
 ---

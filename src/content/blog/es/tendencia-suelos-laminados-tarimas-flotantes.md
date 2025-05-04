@@ -39,6 +39,6 @@ contents: [
         "Económicos: Son una alternativa más accesible que los suelos de madera maciza o piedra natural.",
         "Versatilidad: Se adaptan a cualquier estilo de decoración, desde el minimalista hasta el rústico.",
         "Conclusión",
-        "Los suelos laminados y las tarimas flotantes son una opción versátil, moderna y práctica que puede transformar el ambiente de tu hogar. Con una amplia variedad de diseños y tendencias actuales, es fácil encontrar el suelo perfecto para cada espacio. En Qero Reformas y Decoración, te ayudamos a seleccionar e instalar el suelo que mejor se adapte a tu estilo y necesidades, garantizando resultados impecables. ¡Haz que tus suelos hablen por ti!",
+        "Los suelos laminados y las tarimas flotantes son una opción versátil, moderna y práctica que puede transformar el ambiente de tu hogar. Con una amplia variedad de diseños y tendencias actuales, es fácil encontrar el suelo perfecto para cada espacio. En Kalia Reformas y Decoración, te ayudamos a seleccionar e instalar el suelo que mejor se adapte a tu estilo y necesidades, garantizando resultados impecables. ¡Haz que tus suelos hablen por ti!",
 ]
 ---

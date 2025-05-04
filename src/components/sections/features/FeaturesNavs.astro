@@ -23,6 +23,21 @@ interface Props {
   title?: string;
   tabs: Tab[];
 }
+
+// Function to add gold styling to "Kalia" in any text
+// This will wrap "Kalia" with a span that has the gold color
+function addGoldToKalia(text: string | undefined): string | undefined {
+  if (!text) return text;
+  return text.replace(/Kalia/g, '<span class="text-kalia-gold">Kalia</span>');
+}
+
+// Process the title and tab content to add gold styling to "Kalia"
+const processedTitle = title ? addGoldToKalia(title) : title;
+const processedTabs = tabs.map(tab => ({
+  ...tab,
+  heading: addGoldToKalia(tab.heading),
+  content: tab.content ? addGoldToKalia(tab.content) : tab.content
+}));
 ---
 
 <section
@@ -38,7 +53,7 @@ interface Props {
           class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 sm:text-3xl font-georgia"
         >
           <!-- About Fragment: https://docs.astro.build/en/basics/astro-syntax/#fragments -->
-          <Fragment set:html={title} />
+          <Fragment set:html={processedTitle} />
         </h2>
         
         <!-- Tab navigation - use the attribute 'first' in the first TabNav for the component to work -->
@@ -48,7 +63,7 @@ interface Props {
           role="tablist"
         >
           {
-            tabs.map((tab, index) => (
+            processedTabs.map((tab, index) => (
               <TabNav
                 id={`tabs-with-card-item-${index + 1}`}
                 dataTab={`#tabs-with-card-${index + 1}`}
@@ -69,7 +84,7 @@ interface Props {
         <div class="relative">
           <div>
             {
-              tabs.map((tab, index) => (
+              processedTabs.map((tab, index) => (
                 <TabContent
                   id={`tabs-with-card-${index + 1}`}
                   aria={`tabs-with-card-item-${index + 1}`}
@@ -112,6 +127,12 @@ interface Props {
   
   .font-poppins {
     font-family: 'Poppins', sans-serif;
+  }
+
+  /* Add the custom class for Kalia gold text - toned down for subtlety */
+  :global(.text-kalia-gold) {
+    color: #D4AF37; /* Changed to a more subdued, classic gold */
+    font-weight: 600; /* Make it slightly bold for emphasis */
   }
 
   nav[role="tablist"] {
