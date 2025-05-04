@@ -1072,237 +1072,253 @@ twoAfterBtn.addEventListener("click", () => {
   })
 
 // Add this to the end of your calculadora.astro file inside a <script> tag
-  document.addEventListener('DOMContentLoaded', function() {
-  // Find form elements
-  // Find form elements
-// Find form elements
+  
+ 
+
+// Add this validation logic to your JavaScript section
+
+// Form validation setup
 document.addEventListener('DOMContentLoaded', function() {
-  // Find form elements
   const form = document.getElementById('formPresupuesto');
-  const emailField = document.getElementById('email');
+  const nombreField = document.getElementById('nombre');
   const phoneField = document.getElementById('telefono');
   const postalCodeField = document.getElementById('codigopostal');
-  const nameField = document.getElementById('nombre');
+  const emailField = document.getElementById('email');
   const submitButton = document.getElementById('enviarMail');
+  
+  // Track if fields have been interacted with
+  const fieldInteracted = {
+    nombre: false,
+    telefono: false,
+    codigopostal: false,
+    email: false
+  };
 
-  if (!form || !emailField || !phoneField || !postalCodeField || !nameField || !submitButton) {
-    console.warn('Form elements not found');
-    return;
+  if (!form) return;
+
+  // Helper function to validate postal code (Spanish format)
+  function isValidSpanishPostalCode(code) {
+    const regex = /^\d{5}$/;
+    return regex.test(code);
   }
 
-  // Make phone field optional by removing required attribute
-  phoneField.removeAttribute('required');
-  
-  // Create error message elements
-  const errorContainer = document.createElement('div');
-  errorContainer.className = 'validation-errors text-sm text-red-500 my-2';
-  form.insertBefore(errorContainer, submitButton.parentNode);
+  // Helper function to validate email (optional field)
+  function isValidEmail(email) {
+    if (!email) return true; // Email is optional
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
 
-  // Remove pattern attribute from phone field to disable browser validation
-  phoneField.removeAttribute('pattern');
-  
-  // Override form submission
-  form.addEventListener('submit', function(e) {
-    // Clear any previous error messages
-    errorContainer.innerHTML = '';
-    const errors = [];
+  // Handle phone number - only allow up to 9 digits, but no validation
+  if (phoneField) {
+    phoneField.removeAttribute('pattern');
     
-    // Check required fields
-    if (nameField.value.trim() === '') {
-      errors.push('Por favor, introduce tu nombre');
-    }
+    phoneField.addEventListener('input', function(e) {
+      // Only restrict to 9 digits maximum, but allow any input
+      if (this.value.length > 9) {
+        this.value = this.value.substring(0, 9);
+      }
+      validateForm();
+    });
     
-    // Only validate phone if it has content (it's optional)
-    const phoneDigits = phoneField.value.replace(/\D/g, '');
-    if (phoneDigits.length > 0 && phoneDigits.length !== 9) {
-      errors.push('Si proporcionas un teléfono, debe tener 9 dígitos');
-    }
+    phoneField.addEventListener('blur', function() {
+      fieldInteracted.telefono = true;
+      validateForm();
+    });
+  }
+
+  if (postalCodeField) {
+    postalCodeField.addEventListener('input', function(e) {
+      // Keep only digits and limit to 5 characters
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length > 5) {
+        value = value.substring(0, 5);
+      }
+      e.target.value = value;
+      validateForm();
+    });
     
-    if (postalCodeField.value.replace(/\D/g, '').length !== 5) {
-      errors.push('Por favor, introduce un código postal de 5 dígitos');
-    }
+    postalCodeField.addEventListener('blur', function() {
+      fieldInteracted.codigopostal = true;
+      validateForm();
+    });
+  }
+
+  if (emailField) {
+    emailField.addEventListener('input', validateForm);
+    emailField.addEventListener('blur', function() {
+      fieldInteracted.email = true;
+      validateForm();
+    });
+  }
+
+  if (nombreField) {
+    nombreField.addEventListener('input', validateForm);
+    nombreField.addEventListener('blur', function() {
+      fieldInteracted.nombre = true;
+      validateForm();
+    });
+  }
+
+  // Validate the entire form
+  function validateForm() {
+    let isValid = true;
     
-    // Email is optional, but validate if provided
-    if (emailField.value.trim() !== '') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailField.value)) {
-        errors.push('Por favor, introduce un email válido');
+    // Only validate fields that have been interacted with or when form is submitted
+    
+    // Required field validations
+    if (fieldInteracted.nombre) {
+      if (!nombreField.value.trim()) {
+        isValid = false;
+        highlightInvalid(nombreField);
+      } else {
+        highlightValid(nombreField);
       }
     }
-    
-    // Display error messages
-    if (errors.length > 0) {
-      errors.forEach(error => {
-        const errorElement = document.createElement('p');
-        errorElement.textContent = error;
-        errorContainer.appendChild(errorElement);
-      });
+
+    // No validation for phone number - always considered valid
+    highlightValid(phoneField);
+
+    if (fieldInteracted.codigopostal) {
+      if (!isValidSpanishPostalCode(postalCodeField.value)) {
+        isValid = false;
+        highlightInvalid(postalCodeField);
+      } else {
+        highlightValid(postalCodeField);
+      }
+    }
+
+    // Email is optional but must be valid if provided
+    if (fieldInteracted.email && emailField.value.trim()) {
+      if (!isValidEmail(emailField.value)) {
+        isValid = false;
+        highlightInvalid(emailField);
+      } else {
+        highlightValid(emailField);
+      }
+    } else {
+      highlightValid(emailField);
+    }
+
+    // Check if form should be submittable (all required fields have values)
+    const formSubmittable = 
+      nombreField.value.trim() && 
+      phoneField.value.trim() && 
+      isValidSpanishPostalCode(postalCodeField.value) &&
+      (emailField.value.trim() === "" || isValidEmail(emailField.value));
       
-      // Prevent form submission
-      e.preventDefault();
+    // Update submit button state
+    submitButton.disabled = !formSubmittable;
+    submitButton.classList.toggle('opacity-50', !formSubmittable);
+    submitButton.classList.toggle('cursor-not-allowed', !formSubmittable);
+    
+    return isValid;
+  }
+
+  // Highlight functions
+  function highlightInvalid(field) {
+    field.classList.add('border-red-500');
+    field.classList.add('focus:border-red-500');
+    field.classList.add('focus:ring-red-500');
+    field.classList.remove('border-gray-300');
+    field.classList.remove('focus:border-blue-500');
+    field.classList.remove('focus:ring-blue-500');
+    field.classList.remove('dark:border-gray-600');
+  }
+
+  function highlightValid(field) {
+    field.classList.remove('border-red-500');
+    field.classList.remove('focus:border-red-500');
+    field.classList.remove('focus:ring-red-500');
+    field.classList.add('border-gray-300');
+    field.classList.add('focus:border-blue-500');
+    field.classList.add('focus:ring-blue-500');
+    field.classList.add('dark:border-gray-600');
+  }
+
+  // Form submission handling
+  form.addEventListener('submit', function(e) {
+    // Prevent default submission and validate
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      // Show error message if needed
+      alert('Por favor, revisa los campos marcados en rojo');
       return false;
     }
-  });
 
-  // Format input handlers - just strip non-numeric characters
-  phoneField.addEventListener('input', function(e) {
-    // Remove non-numeric characters
-    let value = e.target.value.replace(/\D/g, '');
-    
-    // Limit to 9 digits
-    if (value.length > 9) {
-      value = value.substring(0, 9);
+    // If all validations pass, proceed with your existing emailjs logic
+    let productListContainer = document.getElementById("productListContainer");
+    const newProductList = productListContainer.cloneNode(true);
+    newProductList.classList.remove("hidden");
+    let textoCorreo = "";
+    let totalElement = newProductList.querySelector("#totalPresupuesto");
+    let total = totalElement ? totalElement.value : "0";
+    let instalacion = catI === "premium" ? "Premium" : "Estándar";
+
+    try {
+      let productos = newProductList.querySelectorAll("#productList li");
+      if (productos.length === 0) throw new Error("No se encontraron productos en la lista.");
+
+      productos.forEach((producto, i) => {
+        try {
+          let nombre = producto.querySelector("p.nombreProducto")?.textContent.trim() || "Producto sin nombre";
+          let precioTexto = producto.querySelector(".precioProducto")?.textContent.trim() || "Precio no disponible";
+          let tipoUnidad = producto.querySelector(".tipoUnidad")?.textContent.trim() || "Unidad no disponible";
+          let inputCantidad = producto.querySelector("input[type='number']");
+          let cantidad = inputCantidad ? parseFloat(inputCantidad.value, 10) : 0;
+          
+          // Solo incluir productos que tengan al menos 1 unidad seleccionada
+          if (cantidad > 0) {
+            textoCorreo += `<tr><td>${i + 1}</td><td>${nombre}</td><td>${tipoUnidad}</td><td>${cantidad}</td><td>${precioTexto} €</td><td>${(parseFloat(precioTexto) * parseFloat(cantidad)).toFixed(2)} €</td></tr>`;
+          }
+        } catch (error) {
+          console.error(`Error al procesar un producto: ${error.message}`);
+        }
+      });
+    } catch (error) {
+      console.error(`Error al obtener la lista de productos: ${error.message}`);
+      alert("Error al generar el listado de productos.");
+      return false;
     }
     
-    // Update input value
-    e.target.value = value;
-  });
+    const formData = new FormData(this); 
+    const data = Object.fromEntries(formData.entries());
 
-  postalCodeField.addEventListener('input', function(e) {
-    // Remove non-numeric characters
-    let value = e.target.value.replace(/\D/g, '');
+    let templateParams = {
+      cliente: data.nombre,
+      telefono: data.telefono,
+      fecha: new Date().toLocaleDateString(),
+      productos: textoCorreo,
+      costodirecto: parseFloat(total).toFixed(2),
+      costofinal: parseFloat(total).toFixed(2),
+      email: data.email || 'Sin correo',
+      instalacion,
+      codigopostal: data.codigopostal
+    };
+
+    // Show loading indicator
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
     
-    // Limit to 5 digits
-    if (value.length > 5) {
-      value = value.substring(0, 5);
-    }
-    
-    // Update input value
-    e.target.value = value;
+    emailjs.send("service_8t7pklm", "template_j3im9z6", templateParams)
+      .then(function(response) {
+        formPresupuesto.classList.add("hidden");
+        finalMessage.classList.remove("hidden");
+        finalMessage.classList.add("flex");
+        threeStepStatus.classList.remove("hidden");
+        reset.classList.remove("hidden");
+        console.log("Correo enviado", response);
+      }, function(error) {
+        console.error("Error", error);
+        alert("Ha ocurrido un error al enviar el correo. Por favor, inténtalo de nuevo más tarde.");
+        submitButton.disabled = false;
+        submitButton.textContent = "Enviar";
+      });
   });
-});
 
-// Format input handlers
-phoneField.addEventListener('input', function(e) {
-  // Remove non-numeric characters
-  let value = e.target.value.replace(/\D/g, '');
-  
-  // Limit to 9 digits
-  if (value.length > 9) {
-    value = value.substring(0, 9);
-  }
-  
-  // Update input value
-  e.target.value = value;
-  
-  // Check if valid (9 digits) and update styling
-  if (value.length === 9) {
-    phoneField.classList.remove('border-red-500');
-    phoneField.classList.add('border-green-500');
-  } else {
-    phoneField.classList.remove('border-green-500');
-  }
-  
-  updateSubmitButton();
-});
-
-postalCodeField.addEventListener('input', function(e) {
-  // Remove non-numeric characters
-  let value = e.target.value.replace(/\D/g, '');
-  
-  // Limit to 5 digits
-  if (value.length > 5) {
-    value = value.substring(0, 5);
-  }
-  
-  // Update input value
-  e.target.value = value;
-  
-  // Check if valid (5 digits) and update styling
-  if (value.length === 5) {
-    postalCodeField.classList.remove('border-red-500');
-    postalCodeField.classList.add('border-green-500');
-  } else {
-    postalCodeField.classList.remove('border-green-500');
-  }
-  
-  updateSubmitButton();
-});
-
-// Handle name input
-nameField.addEventListener('input', function() {
-  if (nameField.value.trim() !== '') {
-    nameField.classList.remove('border-red-500');
-    nameField.classList.add('border-green-500');
-  } else {
-    nameField.classList.remove('border-green-500');
-  }
-  
-  updateSubmitButton();
-});
-
-// Handle email input
-emailField.addEventListener('input', function() {
-  if (validateEmail(emailField.value)) {
-    emailField.classList.remove('border-red-500');
-    if (emailField.value.trim() !== '') {
-      emailField.classList.add('border-green-500');
-    }
-  } else {
-    emailField.classList.remove('border-green-500');
-  }
-  
-  updateSubmitButton();
-});
-
-// Enable/disable submit button based on form validity
-function updateSubmitButton() {
-  // Check for required fields
-  const phoneValid = phoneField.value.length === 9;
-  const postalCodeValid = postalCodeField.value.length === 5;
-  const nameValid = nameField.value.trim() !== '';
-  const emailValid = validateEmail(emailField.value);
-  
-  const formIsValid = phoneValid && postalCodeValid && nameValid && emailValid;
-  
-  submitButton.disabled = !formIsValid;
-  submitButton.classList.toggle('opacity-50', !formIsValid);
-}
-
-// Override form submission
-form.addEventListener('submit', function(e) {
-  // Clear any previous error messages
-  errorContainer.innerHTML = '';
-  
-  const errors = [];
-  
-  // Check required fields
-  if (nameField.value.trim() === '') {
-    errors.push('Por favor, introduce tu nombre');
-    nameField.classList.add('border-red-500');
-  }
-  
-  if (phoneField.value.length !== 9) {
-    errors.push('Por favor, introduce un número de teléfono de 9 dígitos');
-    phoneField.classList.add('border-red-500');
-  }
-  
-  if (postalCodeField.value.length !== 5) {
-    errors.push('Por favor, introduce un código postal de 5 dígitos');
-    postalCodeField.classList.add('border-red-500');
-  }
-  
-  if (emailField.value.trim() !== '' && !validateEmail(emailField.value)) {
-    errors.push('Por favor, introduce un email válido');
-    emailField.classList.add('border-red-500');
-  }
-  
-  // Display error messages
-  errors.forEach(error => {
-    const errorElement = document.createElement('p');
-    errorElement.textContent = error;
-    errorContainer.appendChild(errorElement);
-  });
-  
-  // Prevent form submission if there are errors
-  if (errors.length > 0) {
-    e.preventDefault();
-    return false;
-  }
-});
-
-// Initial button state
-updateSubmitButton();
+  // Initial validation
+  validateForm();
 });
 
 </script>

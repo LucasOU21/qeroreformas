@@ -24,6 +24,11 @@ interface Props {
     <Meta meta={meta} structuredData={structuredData} />
     <!-- Define the title of the page -->
     <title>{title}</title>
+    
+    <!-- Favicon links -->
+    <link rel="icon" href="/Kaliaicon256x256.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/Kaliaicon256x256.ico" type="image/x-icon" />
+    
     <script is:inline>
       // Script to handle dark mode. It will check if the theme is stored in localStorage or if dark theme is preferred by system settings
       if (
